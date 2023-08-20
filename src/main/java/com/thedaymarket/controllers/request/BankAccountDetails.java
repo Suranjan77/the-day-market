@@ -1,3 +1,6 @@
 package com.thedaymarket.controllers.request;
 
-public record BankAccountDetails(String accountName, String accountNumber, String sortCode) {}
+import jakarta.validation.constraints.NotNull;
+
+public record BankAccountDetails(
+    @NotNull String accountName, @NotNull String accountNumber, @NotNull String sortCode) {}

@@ -1,9 +1,7 @@
 package com.thedaymarket.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import lombok.Data;
@@ -11,12 +9,14 @@ import lombok.Data;
 @Data
 @Entity
 public class Auction extends BaseEntity {
+  private String title;
   private String description;
 
-  private BigDecimal startingPrice;
+  private BigDecimal minAskPrice;
 
-  // For Dutch auction
-  private BigDecimal decrementFactor;
+  // Percentage
+  private Double decrementFactor;
+
   private Long decrementSeconds;
 
   @Enumerated(EnumType.STRING)
@@ -28,6 +28,8 @@ public class Auction extends BaseEntity {
   private AuctionStatus status;
 
   private LocalDateTime scheduledDateTime;
+
+  @ManyToOne private User seller;
 
   @ManyToOne private Market assignedMarket;
 

@@ -1,3 +1,5 @@
 package com.thedaymarket.controllers.request;
 
-public record CreateCategoryRequest(String tag) {}
+import jakarta.validation.constraints.NotNull;
+
+public record CreateCategoryRequest(@NotNull String tag) {}

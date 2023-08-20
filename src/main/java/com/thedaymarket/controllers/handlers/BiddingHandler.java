@@ -1,6 +1,8 @@
 package com.thedaymarket.controllers.handlers;
 
 import com.thedaymarket.controllers.request.BidRequest;
+import com.thedaymarket.utils.ExceptionUtils;
+import com.thedaymarket.utils.RESTUtils;
 import jakarta.servlet.ServletException;
 import java.io.IOException;
 import java.time.Duration;
@@ -23,22 +25,15 @@ public class BiddingHandler {
       SSE_CLIENTS_BY_AUCTION_ID = new ConcurrentHashMap<>();
 
   public ServerResponse streamBids(ServerRequest req) {
-    String auctionId = req.pathVariable("auctionId");
-    // todo: validate aucitonId.
-    if (StringUtils.hasLength(auctionId)) {
-      // todo: Check live or dead auction, and send SSE for live only.
-      return ServerResponse.sse(
-          builder -> registerClient(Long.parseLong(auctionId), builder), Duration.ofSeconds(30L));
-    } else {
-      throw new ServerWebInputException("Auction id is required.");
-    }
+    var auctionId = RESTUtils.getPathVariable(req, "auctionId");
+
+    // todo: Check live or dead auction, and send SSE for live only.
+    return ServerResponse.sse(
+        builder -> registerClient(Long.parseLong(auctionId), builder), Duration.ofSeconds(30L));
   }
 
   public ServerResponse addBid(ServerRequest req) {
-    var auctionId = req.pathVariable("auctionId");
-    if (!StringUtils.hasLength(auctionId)) {
-      throw new ServerWebInputException("AuctionId is required.");
-    }
+    var auctionId = RESTUtils.getPathVariable(req, "auctionId");
     var subscribers = SSE_CLIENTS_BY_AUCTION_ID.get(Long.parseLong(auctionId));
 
     try {

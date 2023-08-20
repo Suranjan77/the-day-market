@@ -44,6 +44,7 @@ public class RoutingConfiguration {
   public RouterFunction<ServerResponse> auctionRouter() {
     return route()
         .GET("/auctions/{id}", auctionHandler::getAuction)
+        .GET("/auctions/today", auctionHandler::getTodayAuctions)
         .GET("/auctions", auctionHandler::searchAuction)
         .build();
   }
@@ -76,6 +77,7 @@ public class RoutingConfiguration {
   public RouterFunction<ServerResponse> sellerRouter() {
     return route()
         .GET("/sellers/{id}/auctions", sellerHandler::getAuctions)
+        .GET("/sellers/{id}/auctions/today", sellerHandler::getTodayAuction)
         .POST("/sellers/{id}/auctions", ACCEPT_JSON, sellerHandler::createAuction)
         .POST("/sellers/{id}/auctions/{auctionId}/image", ACCEPT_JSON, sellerHandler::uploadPicture)
         .PATCH(
