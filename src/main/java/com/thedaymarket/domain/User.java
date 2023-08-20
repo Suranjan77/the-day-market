@@ -9,7 +9,7 @@ import org.hibernate.annotations.NaturalId;
 
 @Data
 @Entity
-public class User extends Base {
+public class User extends BaseEntity {
   private String role;
   private String firstName;
   private String lastName;

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: headerFragment}">
+    <title id="pageTitle">Create Auction | The-day-market</title>
+</head>
+<body>
+<!-- listing item section  -->
+<main class="list-item">
+    <!-- listing item wrapper  -->
+    <section class="list-item-wrapper">
+        <!-- hero-logo section  -->
+        <section class="list-item-logo">
+            <img th:src="@{/images/logoicon.png}" alt="logo"/>
+            <p>List an item</p>
+        </section>
+        <!-- form for listing item -->
+        <section class="list-item-form">
+            <form action="#">
+                <!-- listing the category of items -->
+                <label for="item-category">Category</label>
+                <select name="category" id="item-category">
+                    <option value="footwears">Footwears</option>
+                </select>
+                <!-- auction title  -->
+                <label for="auctionTitle">Auction title</label>
+                <input
+                        type="text"
+                        name="auctionTitle"
+                        placeholder="Enter auction title"
+                        id="auctionTitle"
+                />
+                <!-- thumbanil image for auction  -->
+                <label for="thumbnailImage">Upload thumbnail image</label>
+                <input type="file" name="thumbnailImage" id="thumbnailImage"/>
+                <!-- type of auction for the concerned item  -->
+                <label for="auction-type">Auction type</label>
+                <select name="auction-type" id="auction-type">
+                    <option value="englishAuction">English Auction</option>
+                    <option value="dutchAuction">Dutch Auction</option>
+                    <option value="vickreyAuction">Vickrey Auction</option>
+                </select>
+                <!-- description of auction  -->
+                <label for="auction-description"> Auction description </label>
+                <textarea
+                        name="auctionDescription"
+                        id="auction-description"
+                        cols="30"
+                        rows="5"
+                        maxlength="200"
+                ></textarea>
+                <!-- buttons for the listing the items -->
+                <section class="button">
+                    <button>Save as draft</button>
+                    <button>Continue</button>
+                </section>
+            </form>
+        </section>
+    </section>
+</main>
+</body>
+</html>

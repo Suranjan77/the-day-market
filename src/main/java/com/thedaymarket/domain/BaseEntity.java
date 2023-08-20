@@ -11,7 +11,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 @Data
 @MappedSuperclass
-public class Base {
+public class BaseEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

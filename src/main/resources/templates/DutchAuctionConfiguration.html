@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: headerFragment}">
+    <title id="pageTitle">Dutch Auction Configuration | The-day-market</title>
+</head>
+<body>
+<!-- Dutch Auction configuration -->
+<main class="auction-configuration">
+    <section class="auction-configuration-wrapper">
+        <section class="hero-section">
+            <img th:src="@{/images/logoicon.png}" alt="logoicon"/>
+            <p>Auction Title</p>
+        </section>
+        <section class="auction-form">
+            <form action="#">
+                <h3>Dutch Auction</h3>
+                <label for="minimumBidAmount">Starting bid amount</label>
+                <input
+                        type="number"
+                        name="minimumBidAmount"
+                        id="minimumBidAmount"
+                />
+                <label for="itemCount">Item count</label>
+                <input type="number" name="itemCount" id="itemCount"/>
+                <label for="lowerPriceOnSeconds">Lower price on (seconds)</label>
+                <input
+                        type="number"
+                        name="lowerPriceOnSeconds"
+                        id="lowerPriceOnSeconds"
+                />
+                <label for="lowerPricebyPoints">Lower price by (points)</label>
+                <input
+                        type="number"
+                        name="lowerPricebyPoints"
+                        id="lowerPricebyPoints"
+                />
+                <section class="submit-button">
+                    <button>Save as draft</button>
+                    <button>Publish</button>
+                </section>
+            </form>
+        </section>
+    </section>
+</main>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: headerFragment}">
+    <title id="pageTitle">Dutch Auction | The-day-market</title>
+</head>
+<body>
+
+<main class="auction-bid">
+    <section class="auction-bid-wrapper">
+        <!-- navigation for dashboard,market and my bids -->
+        <section th:replace="~{fragments/pageNav :: pageNavigation('')}">
+        </section>
+        <!-- section for auction type display  -->
+        <section class="auction-type">
+            <h4>DUTCH Auction</h4>
+        </section>
+        <!-- display of the bid placement including items details and bid placed information  -->
+        <section class="bid-display">
+            <!-- div with the details of the items for bidding -->
+            <div class="bid-category">
+                <div class="category">
+                    <h5>Jewellery > Gold</h5>
+                </div>
+                <div class="items-details">
+                    <!-- description of items listed for auction  -->
+                    <div class="auction-description">
+                        <h5>Auction Title</h5>
+                        <div class="product-details">
+                            <img src="/images/jewellery/gold.jpg" alt="jordan"/>
+                            <p>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-o"></i>
+                                <span> (56 Reviews) </span>
+                            </p>
+                            <p>
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                Voluptate temporibus iusto magni culpa quia officiis qui,
+                                pariatur alias omnis beatae quis accusamus perspiciatis
+                                consequatur recusandae atque excepturi mollitia earum quam?
+                            </p>
+                        </div>
+                    </div>
+                    <!-- div for the entry of bid amount  -->
+                    <div class="bid-amount">
+                        <div class="min-amount">
+                            <h5>Reverse Timer</h5>
+                            <h5>20:10:30</h5>
+                        </div>
+                        <form action="#">
+                            <input
+                                    type="number"
+                                    name="bidAmount"
+                                    placeholder="Bid Amount"
+                                    value="400"
+                                    id="bidAmount"
+                                    disabled
+                            />
+                            <button type="submit">Place a bid</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- div with the details of the bidding placed information  -->
+            <div class="bid-details">
+                <div class="bid-remaining">
+                    <h5>Bids</h5>
+                    <h5>4 items remaining</h5>
+                </div>
+                <!-- listing of the bidded amout with username, time and bids -->
+                <div class="bid-listing">
+                    <div class="list_wrapper">
+                        <div class="list">
+                            <div class="list-username">
+                                <p>7***7</p>
+                            </div>
+                            <div class="list-bid-time">
+                                <p>01:25:40</p>
+                            </div>
+                            <div class="list-bid-count">
+                                <p>92 bids</p>
+                            </div>
+                        </div>
+                        <div class="list">
+                            <div class="list-username">
+                                <p>7***7</p>
+                            </div>
+                            <div class="list-bid-time">
+                                <p>01:25:40</p>
+                            </div>
+                            <div class="list-bid-count">
+                                <p>40 bids</p>
+                            </div>
+                        </div>
+                        <div class="list">
+                            <div class="list-username">
+                                <p>hr**r</p>
+                            </div>
+                            <div class="list-bid-time">
+                                <p>01:25:40</p>
+                            </div>
+                            <div class="list-bid-count">
+                                <p>20 bids</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div th:replace="~{fragments/pagination :: page(id)}"></div>
+                </div>
+            </div>
+        </section>
+    </section>
+</main>
+</body>
+</html>

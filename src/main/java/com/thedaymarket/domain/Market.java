@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Data
 @Entity
-public class Market extends Base {
+public class Market extends BaseEntity {
   private Long activeAuctions;
   private Long totalAuctions;
 

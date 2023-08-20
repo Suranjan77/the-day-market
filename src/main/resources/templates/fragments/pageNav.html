@@ -1,0 +1,20 @@
+<section class="page-nav" th:fragment="pageNavigation(role)">
+    <section class="dashboard">
+        <a th:href="${role == 'buyer'} ? '/web/buyer-dashboard' : '/web/seller-dashboard'">
+            <i class="fa fa-dashboard"></i>
+            <span>Dashboard</span>
+        </a>
+    </section>
+    <section class="market">
+        <a th:href="@{/web/market}">
+            <i class="fa fa-building"></i>
+            <span>Market</span>
+        </a>
+    </section>
+    <section class="mybid">
+        <a th:href="@{/web/my-bids}">
+            <i class="fa fa-hand-stop-o"></i>
+            <span>My Bids</span>
+        </a>
+    </section>
+</section>

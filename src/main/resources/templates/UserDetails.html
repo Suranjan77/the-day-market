@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: headerFragment}">
+    <title id="pageTitle">User Details | The-day-market</title>
+</head>
+<body>
+<main class="signupAuthentication">
+    <!-- sign up Authenticate wrapper -->
+    <section class="signupAuthentication-wrapper">
+        <section class="signupAuth-logo">
+            <img th:src="@{/images/logoicon.png}" alt="logo"/>
+            <p>Add more details displayName</p>
+        </section>
+        <!-- form section  -->
+        <section class="signupAuth-form">
+            <form action="#">
+                <!-- role selection section  -->
+                <section class="signupAuth-role">
+                    <!-- div for selecting buyer or seller role -->
+                    <div class="role">
+                        <label for="user-role">I want to</label><br/>
+                        <select name="role" id="user-role">
+                            <option value="Buy">Buy</option>
+                            <option value="Sell">Sell</option>
+                        </select>
+                    </div>
+                    <!-- div for choosing id photo  -->
+                    <div class="photo-id" id="photo-id">
+                        <label for="photo-id">Add a photo ID</label><br/>
+                        <input type="file" name="photoID" id="photo" required/>
+                    </div>
+                </section>
+                <!-- section for address information  -->
+                <section class="signupAuth-address">
+                    <label for="address">Address</label>
+                    <!-- section for postcode and town information  -->
+                    <section class="address-top" id="address">
+                        <input
+                                type="text"
+                                name="postCode"
+                                placeholder="Post code"
+                                required
+                                id="postcode"
+                        />
+                        <input
+                                type="text"
+                                name="town"
+                                placeholder="Town"
+                                required
+                                id="town"
+                        />
+                    </section>
+                    <!-- input field for streetname  -->
+                    <input
+                            type="text"
+                            name="streetName"
+                            placeholder="Street name"
+                            id="streetname"
+                            required
+                    />
+                </section>
+                <!-- section for introduction information  -->
+                <section class="introduction">
+                    <label for="userIntroduction" id="introduction">Introduce yourself</label><br/>
+                    <textarea
+                            name="introduction"
+                            id="userIntroduction"
+                            cols="30"
+                            rows="7"
+                            maxlength="200"
+                    ></textarea>
+                </section>
+                <!-- submit button section  -->
+                <section class="submit">
+                    <input type="submit" value="Save" class="submit-button"/>
+                </section>
+            </form>
+        </section>
+    </section>
+</main>
+</body>
+</html>

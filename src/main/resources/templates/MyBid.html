@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: headerFragment}">
+    <title id="pageTitle">My Bids | The-day-market</title>
+</head>
+<body>
+<header th:insert="~{fragments/header :: header(true)}"></header>
+<main class="auction-bid">
+    <section class="auction-bid-wrapper">
+        <section th:replace="~{fragments/pageNav :: pageNavigation('')}">
+        </section>
+        <section class="mybid-wrapper">
+            <section class="mybid-header">
+                <h3>Your Bids</h3>
+            </section>
+            <section class="mybid-detailings">
+                <section class="sorting">
+                    <select name="sortBy" id="bid-sorting">
+                        <option value="">Sort By</option>
+                    </select>
+                </section>
+                <div class="individual-bids">
+                    <div class="image-result">
+                        <p>
+                            <i class="fa fa-circle"></i>
+                            <span>You won</span>
+                        </p>
+                        <img src="/images/jewellery/gold.jpg" alt="selected-product"/>
+                    </div>
+                    <div class="items-details">
+                        <h4>List #1</h4>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit
+                            repellat adipisci eaque provident nemo corporis a sint, iste
+                            rerum aliquam exercitationem voluptatum maxime ad tenetur
+                            alias labore eos reprehenderit! Rem!
+                        </p>
+                    </div>
+                    <div class="user-bids">
+                        <div class="your-bids">
+                            <h5>Your Bid</h5>
+                            <span> 200 </span>
+                        </div>
+
+                        <div class="your-bids">
+                            <h5>Winning Bid</h5>
+                            <span> 250 </span>
+                        </div>
+                        <p>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-o"></i>
+                        </p>
+                    </div>
+                </div>
+                <div class="individual-bids">
+                    <div class="image-result">
+                        <!-- <p>
+                          <i class="fa fa-circle"></i>
+                          <span>You won</span>
+                        </p> -->
+                        <img src="/images/jewellery/gold.jpg" alt="selected-product"/>
+                    </div>
+                    <div class="items-details">
+                        <h4>List #1</h4>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit
+                            repellat adipisci eaque provident nemo corporis a sint, iste
+                            rerum aliquam exercitationem voluptatum maxime ad tenetur
+                            alias labore eos reprehenderit! Rem!
+                        </p>
+                    </div>
+                    <div class="user-bids">
+                        <div class="your-bids">
+                            <h5>Your Bid</h5>
+                            <span> 200 </span>
+                        </div>
+
+                        <div class="your-bids">
+                            <h5>Winning Bid</h5>
+                            <span> 250 </span>
+                        </div>
+                        <p>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-o"></i>
+                        </p>
+                    </div>
+                </div>
+                <div class="individual-bids">
+                    <div class="image-result">
+                        <p>
+                            <i class="fa fa-circle"></i>
+                            <span>Live</span>
+                        </p>
+                        <img src="/images/jewellery/gold.jpg" alt="selected-product"/>
+                    </div>
+                    <div class="items-details">
+                        <h4>List #1</h4>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit
+                            repellat adipisci eaque provident nemo corporis a sint, iste
+                            rerum aliquam exercitationem voluptatum maxime ad tenetur
+                            alias labore eos reprehenderit! Rem!
+                        </p>
+                    </div>
+                    <div class="user-bids">
+                        <div class="your-bids">
+                            <h5>Your Bid</h5>
+                            <span> 200 </span>
+                        </div>
+
+                        <div class="your-bids">
+                            <h5>Winning Bid</h5>
+                            <span> --- </span>
+                        </div>
+                    </div>
+                </div>
+                <div th:replace="~{fragments/pagination :: page(id)}"></div>
+            </section>
+        </section>
+    </section>
+</main>
+</body>
+</html>

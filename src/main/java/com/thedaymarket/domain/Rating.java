@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Data
 @Entity
-public class Rating extends Base {
+public class Rating extends BaseEntity {
   private Float stars;
 
   @Enumerated(EnumType.STRING)

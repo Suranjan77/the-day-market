@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: headerFragment}">
+    <title id="pageTitle">Login | The-day-market</title>
+</head>
+<body>
+<!-- login form wrapper -->
+<main class="login">
+    <section class="login-wrapper">
+        <!-- login logo section -->
+        <section class="login-logo">
+            <img th:src="@{/images/logoicon.png}" alt="logo"/>
+            <p>Sign in to your account</p>
+        </section>
+        <!-- login form section -->
+        <section class="login-form">
+            <form action="#">
+                <label for="email">Email Address</label><br/>
+                <input
+                        type="email"
+                        name="email"
+                        placeholder="Enter your email"
+                        id="email"
+                        required
+                /><br/>
+                <section class="form-password">
+                    <label for="password">Password</label>
+                    <a href="#">Forgot Password?</a>
+                </section>
+                <input
+                        type="password"
+                        name="password"
+                        placeholder="Enter your password"
+                        id="password"
+                        required
+                /><br/>
+                <input type="submit" value="Sign in" class="submit-button"/>
+                <p class="new-account">
+                    Need an account? <a th:href="@{/web/signup}">Register</a>
+                </p>
+            </form>
+        </section>
+    </section>
+</main>
+</body>
+</html>

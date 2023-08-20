@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Entity
 @Data
-public class Category extends Base {
+public class Category extends BaseEntity {
   private String tag;
 
   @ManyToOne

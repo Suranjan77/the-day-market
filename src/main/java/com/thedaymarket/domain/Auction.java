@@ -10,10 +10,14 @@ import lombok.Data;
 
 @Data
 @Entity
-public class Auction extends Base {
-  private LocalDateTime postedAt;
+public class Auction extends BaseEntity {
   private String description;
-  private BigDecimal price;
+
+  private BigDecimal startingPrice;
+
+  // For Dutch auction
+  private BigDecimal decrementFactor;
+  private Long decrementSeconds;
 
   @Enumerated(EnumType.STRING)
   private AuctionType type;
@@ -23,7 +27,9 @@ public class Auction extends Base {
   @Enumerated(EnumType.STRING)
   private AuctionStatus status;
 
-  @ManyToOne private Market market;
+  private LocalDateTime scheduledDateTime;
+
+  @ManyToOne private Market assignedMarket;
 
   @ManyToOne private Category category;
 }

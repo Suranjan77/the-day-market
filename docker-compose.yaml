@@ -1,0 +1,32 @@
+version: '3'
+services:
+  mysql:
+    image: mysql:8
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    environment:
+      MYSQL_ROOT_PASSWORD: services
+      TZ: UTC
+    ports:
+      - "3306:3306"
+  minio:
+    image: 'bitnami/minio:latest'
+    volumes:
+      - ./data/miniostorage:/data
+    environment:
+      MINIO_ROOT_USER: rootstorageuser
+      MINIO_ROOT_PASSWORD: rootstoragesecret
+    ports:
+      - '9000:9000'
+      - '9001:9001'
+#  elasticsearch:
+#    image: bitnami/elasticsearch:latest
+#    volumes:
+#      - ./data/elasticsearch:/elasticsearch/data
+#    environment:
+#      ELASTICSEARCH_EXTRA_FLAGS: "discovery.type=single-node"
+#      ELASTICSEARCH_DATA_DIR_LIST: /elasticsearch/data
+#    ports:
+#      - "9200:9200"
+#      - "9300:9300"

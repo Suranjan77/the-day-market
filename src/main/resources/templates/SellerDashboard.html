@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: headerFragment}">
+    <title id="pageTitle">Dashboard | The-day-market</title>
+</head>
+<body>
+<header th:insert="~{fragments/header :: header(false)}"></header>
+<main class="dashboard-page">
+    <section class="dashboard-wrapper">
+        <!-- top navigation  -->
+        <section th:replace="~{fragments/pageNav :: pageNavigation('')}">
+        </section>
+        <!-- details of the seller dashboard -->
+        <section class="dashboard-details">
+            <!-- top section of the seller dashboard having reputation and live metrics  -->
+            <section class="details-top">
+                <section class="reputation">
+                    <h4>Reputation</h4>
+                    <div class="reputation-lists">
+                        <div class="individual-list">
+                            <h5>Sunday</h5>
+                            <h5>92</h5>
+                            <h5>
+                                <i class="fa fa-chevron-up"></i>
+                            </h5>
+                        </div>
+                    </div>
+                </section>
+                <section class="live-metrics">
+                    <h4>Live Metrics</h4>
+                    <section class="bids">
+                        <h4>Bids</h4>
+                        <div class="bids-lists">
+                            <div class="individual-bid-list">
+                                <h5>List#1</h5>
+                                <h5>92 Bids</h5>
+                                <h5>max 200</h5>
+                            </div>
+                        </div>
+                        <div th:replace="~{fragments/pagination :: page(id)}"></div>
+                    </section>
+                    <section class="views">
+                        <h4>Views</h4>
+                        <div class="view-lists">
+                            <div class="individual-view-list">
+                                <h5>List#1</h5>
+                                <h5>92 Views</h5>
+                            </div>
+                        </div>
+                        <div th:replace="~{fragments/pagination :: page(id)}"></div>
+                    </section>
+                </section>
+            </section>
+            <!-- bottom section displaying total bids, sales and view  -->
+            <section class="details-bottom">
+                <h4>Listing Statistics</h4>
+                <section class="statistics-details">
+                    <!-- section for total bids and sales  -->
+                    <section class="statistics-details-top">
+                        <!-- section for total bids  -->
+                        <section class="total-bids">
+                            <h4>Total Bids</h4>
+                            <div class="bids-lists">
+                                <div class="individual-bid-list">
+                                    <h5>List#1</h5>
+                                    <h5>92 Bids</h5>
+                                    <h5>max 200</h5>
+                                </div>
+                            </div>
+                            <div th:replace="~{fragments/pagination :: page(id)}"></div>
+                        </section>
+                        <!-- section for total sales  -->
+                        <section class="total-sales">
+                            <h4>Total Sales</h4>
+                            <div class="sales-lists">
+                                <div class="individual-sales-list">
+                                    <h5>List#1</h5>
+                                    <h5>92 items</h5>
+                                    <h5>200 points</h5>
+                                </div>
+                            </div>
+                            <div th:replace="~{fragments/pagination :: page(id)}"></div>
+                        </section>
+                        <section class="statistics-details-bottom">
+                            <!-- section for the total views  -->
+                            <section class="views">
+                                <h4>Views</h4>
+                                <div class="view-lists">
+                                    <div class="individual-view-list">
+                                        <h5>List#1</h5>
+                                        <h5>92 Views</h5>
+                                    </div>
+                                </div>
+                                <div th:replace="~{fragments/pagination :: page(id)}"></div>
+                            </section>
+                        </section>
+                    </section>
+                </section>
+            </section>
+        </section>
+    </section>
+</main>
+</body>
+</html>

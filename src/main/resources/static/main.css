@@ -1,0 +1,1797 @@
+@import url("https://fonts.googleapis.com/css2?family=Istok+Web:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Istok Web", sans-serif;
+}
+
+.login {
+  margin: auto;
+  padding: 32px 16px;
+  background-color: #1b3034;
+  min-height: 100vh;
+}
+.login .login-wrapper {
+  margin: auto;
+  max-width: -moz-max-content;
+  max-width: max-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  padding: 40px;
+  background-color: #1b3034;
+  border-radius: 8px;
+}
+.login .login-wrapper .login-logo {
+  text-align: center;
+}
+.login .login-wrapper .login-logo p {
+  color: #f2e4c0;
+  font-weight: 700;
+  font-size: 18px;
+}
+.login .login-wrapper .login-form {
+  border: 1px solid black;
+  background-color: #ffffff;
+  border-radius: 8px;
+}
+.login .login-wrapper .login-form form {
+  display: inherit;
+  padding: 24px;
+  width: 400px;
+  transition: 300ms ease;
+}
+.login .login-wrapper .login-form form a {
+  text-decoration: none;
+}
+.login .login-wrapper .login-form form label {
+  font-weight: 400;
+}
+.login .login-wrapper .login-form form input {
+  width: 100%;
+  font-size: 16px;
+  padding: 8px 8px;
+  margin-bottom: 18px;
+  outline: none;
+}
+.login .login-wrapper .login-form form .form-password {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  row-gap: 32px;
+}
+.login .login-wrapper .login-form form .form-password a {
+  text-align: right;
+}
+.login .login-wrapper .login-form form .submit-button {
+  background-color: #2e816e;
+  border: 2px solid #2e816e;
+  outline: none;
+  cursor: pointer;
+  color: #ffffff;
+  font-weight: 600;
+  padding: 8px 15px;
+  border-radius: 5px;
+  font-size: 15px;
+  transition: 300ms ease;
+}
+.login .login-wrapper .login-form form .submit-button:hover {
+  background-color: #ffffff;
+  color: #2e816e;
+}
+.login .login-wrapper .login-form form .new-account {
+  text-align: center;
+  font-weight: 600;
+}
+
+@media (max-width: 576px) {
+  .login .login-wrapper .login-form form {
+    width: 300px;
+  }
+}
+.signup {
+  margin: auto;
+  background-color: #1b3034;
+  min-height: 100vh;
+}
+.signup .signup-wrapper {
+  margin: auto;
+  max-width: -moz-max-content;
+  max-width: max-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 30px 40px;
+  background-color: #1b3034;
+  border-radius: 8px;
+}
+.signup .signup-wrapper .signup-logo {
+  text-align: center;
+}
+.signup .signup-wrapper .signup-logo p {
+  color: #f2e4c0;
+  font-weight: 700;
+  font-size: 18px;
+}
+.signup .signup-wrapper .signup-form {
+  border: 1px solid black;
+  background-color: #ffffff;
+  border-radius: 8px;
+}
+.signup .signup-wrapper .signup-form form {
+  display: inherit;
+  padding: 20px 24px;
+  width: 450px;
+  transition: 300ms ease;
+}
+.signup .signup-wrapper .signup-form form a {
+  text-decoration: none;
+}
+.signup .signup-wrapper .signup-form form label {
+  font-weight: 400;
+}
+.signup .signup-wrapper .signup-form form input {
+  width: 100%;
+  font-size: 16px;
+  padding: 8px 8px;
+  margin-bottom: 18px;
+  outline: none;
+}
+.signup .signup-wrapper .signup-form form #terms-acceptance {
+  width: 10%;
+  text-align: left;
+}
+.signup .signup-wrapper .signup-form form .submit-button {
+  background-color: #2e816e;
+  border: 2px solid #2e816e;
+  outline: none;
+  cursor: pointer;
+  color: #ffffff;
+  font-weight: 600;
+  padding: 8px 15px;
+  border-radius: 5px;
+  font-size: 15px;
+  transition: 300ms ease;
+  margin-bottom: 0;
+  width: 100%;
+}
+.signup .signup-wrapper .signup-form form .submit-button a {
+  color: inherit;
+}
+.signup .signup-wrapper .signup-form form .submit-button:hover {
+  background-color: #ffffff;
+  color: #2e816e;
+}
+
+@media (max-width: 576px) {
+  .signup .signup-wrapper .signup-form form {
+    width: 300px;
+  }
+}
+.signupAuthentication {
+  background-color: #1b3034;
+  padding: 16px;
+  min-height: 100vh;
+}
+.signupAuthentication .signupAuthentication-wrapper .signupAuth-logo {
+  text-align: center;
+  margin-bottom: 10px;
+}
+.signupAuthentication .signupAuthentication-wrapper .signupAuth-logo p {
+  color: #f2e4c0;
+  font-weight: 700;
+  font-size: 18px;
+}
+.signupAuthentication .signupAuthentication-wrapper .signupAuth-form {
+  margin: auto;
+  min-width: 280px;
+  max-width: 800px;
+}
+.signupAuthentication .signupAuthentication-wrapper .signupAuth-form form {
+  background-color: #ffffff;
+  padding: 20px 24px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  width: 100%;
+}
+.signupAuthentication .signupAuthentication-wrapper .signupAuth-form form .signupAuth-role {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  text-align: left;
+  gap: 24px;
+}
+.signupAuthentication .signupAuthentication-wrapper .signupAuth-form form .signupAuth-role .role {
+  width: 35%;
+}
+.signupAuthentication .signupAuthentication-wrapper .signupAuth-form form .signupAuth-role .role label {
+  text-align: left;
+}
+.signupAuthentication .signupAuthentication-wrapper .signupAuth-form form .signupAuth-role .role select {
+  width: 100%;
+  padding: 6px 8px;
+  outline: none;
+}
+.signupAuthentication .signupAuthentication-wrapper .signupAuth-form form .signupAuth-role .role select option {
+  font-size: 16px;
+  padding: 10px 8px;
+}
+.signupAuthentication .signupAuthentication-wrapper .signupAuth-form form .signupAuth-role .photo-id {
+  width: 60%;
+}
+.signupAuthentication .signupAuthentication-wrapper .signupAuth-form form .signupAuth-role .photo-id input {
+  padding: 6px 8px;
+  outline: none;
+}
+.signupAuthentication .signupAuthentication-wrapper .signupAuth-form form .signupAuth-address {
+  display: flex;
+  flex-direction: column;
+}
+.signupAuthentication .signupAuthentication-wrapper .signupAuth-form form .signupAuth-address input {
+  padding: 6px 8px;
+  outline: none;
+}
+.signupAuthentication .signupAuthentication-wrapper .signupAuth-form form .signupAuth-address .address-top {
+  display: inherit;
+  align-items: flex-start;
+  justify-content: space-between;
+  text-align: left;
+  gap: 24px;
+  margin-bottom: 16px;
+}
+.signupAuthentication .signupAuthentication-wrapper .signupAuth-form form .signupAuth-address .address-top #postcode {
+  width: 35%;
+}
+.signupAuthentication .signupAuthentication-wrapper .signupAuth-form form .signupAuth-address .address-top #town {
+  width: 60%;
+}
+.signupAuthentication .signupAuthentication-wrapper .signupAuth-form form .introduction {
+  width: 100%;
+}
+.signupAuthentication .signupAuthentication-wrapper .signupAuth-form form .introduction textarea {
+  width: 100%;
+  padding: 6px 8px;
+  outline: none;
+}
+.signupAuthentication .signupAuthentication-wrapper .signupAuth-form form .submit {
+  text-align: center;
+}
+.signupAuthentication .signupAuthentication-wrapper .signupAuth-form form .submit-button {
+  background-color: #2e816e;
+  border: 1px solid #2e816e;
+  outline: none;
+  cursor: pointer;
+  color: #ffffff;
+  font-weight: 600;
+  padding: 6px 15px;
+  border-radius: 5px;
+  font-size: 14px;
+  transition: 300ms ease;
+  width: 30%;
+}
+.signupAuthentication .signupAuthentication-wrapper .signupAuth-form form .submit-button:hover {
+  background-color: #ffffff;
+  color: #2e816e;
+}
+
+@media (min-width: 300px) and (max-width: 576px) {
+  .signupAuthentication {
+    padding: 10px;
+  }
+  .signupAuthentication .signupAuthentication-wrapper .signupAuth-form form {
+    width: 100%;
+    gap: 8px;
+  }
+  .signupAuthentication .signupAuthentication-wrapper .signupAuth-form form .signupAuth-role {
+    flex-direction: column;
+    width: 100%;
+    gap: 8px;
+  }
+  .signupAuthentication .signupAuthentication-wrapper .signupAuth-form form .signupAuth-role .role {
+    width: 100%;
+  }
+  .signupAuthentication .signupAuthentication-wrapper .signupAuth-form form .signupAuth-role .role select {
+    width: 100%;
+  }
+  .signupAuthentication .signupAuthentication-wrapper .signupAuth-form form .signupAuth-role .photo-id {
+    width: 100%;
+  }
+  .signupAuthentication .signupAuthentication-wrapper .signupAuth-form form .signupAuth-address {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .signupAuthentication .signupAuthentication-wrapper .signupAuth-form form .signupAuth-address .address-top {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 0;
+  }
+  .signupAuthentication .signupAuthentication-wrapper .signupAuth-form form .signupAuth-address .address-top #postcode,
+  .signupAuthentication .signupAuthentication-wrapper .signupAuth-form form .signupAuth-address .address-top #town {
+    width: 100%;
+  }
+  .signupAuthentication .signupAuthentication-wrapper .signupAuth-form form .signupAuth-address .address-top #streetname {
+    margin-top: 8px;
+  }
+  .signupAuthentication .signupAuthentication-wrapper .signupAuth-form form .submit-button {
+    width: 100%;
+  }
+}
+.list-item {
+  min-height: 100vh;
+  background-color: #1b3034;
+  padding: 24px 16px;
+}
+.list-item .list-item-wrapper {
+  margin: auto;
+  min-width: 280px;
+  max-width: 800px;
+}
+.list-item .list-item-wrapper .list-item-logo {
+  text-align: center;
+  margin-bottom: 16px;
+}
+.list-item .list-item-wrapper .list-item-logo p {
+  color: #f2e4c0;
+  font-weight: 700;
+  font-size: 18px;
+}
+.list-item .list-item-wrapper .list-item-form form {
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 24px;
+  border-radius: 8px;
+}
+.list-item .list-item-wrapper .list-item-form form label {
+  font-weight: 400;
+  font-size: 18px;
+}
+.list-item .list-item-wrapper .list-item-form form select,
+.list-item .list-item-wrapper .list-item-form form textarea,
+.list-item .list-item-wrapper .list-item-form form input {
+  margin-bottom: 10px;
+  padding: 8px 10px;
+  width: 50%;
+  font-size: 16px;
+  outline: none;
+}
+.list-item .list-item-wrapper .list-item-form form select {
+  cursor: pointer;
+}
+.list-item .list-item-wrapper .list-item-form form select option {
+  font-size: 17px;
+  padding: 8px;
+}
+.list-item .list-item-wrapper .list-item-form form textarea {
+  width: 100%;
+}
+.list-item .list-item-wrapper .list-item-form form .button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+}
+.list-item .list-item-wrapper .list-item-form form .button button {
+  background-color: #2e816e;
+  border: 2px solid #2e816e;
+  outline: none;
+  cursor: pointer;
+  color: #ffffff;
+  font-weight: 600;
+  padding: 8px 15px;
+  border-radius: 5px;
+  font-size: 14px;
+  transition: 300ms ease;
+  width: 25%;
+}
+.list-item .list-item-wrapper .list-item-form form .button button:hover {
+  background-color: #ffffff;
+  color: #2e816e;
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+  .list-item .list-item-wrapper .list-item-form form input,
+  .list-item .list-item-wrapper .list-item-form form select,
+  .list-item .list-item-wrapper .list-item-form form textarea {
+    width: 100%;
+  }
+  .list-item .list-item-wrapper .list-item-form form .button button {
+    width: 50%;
+  }
+}
+header {
+  padding: 6px 16px;
+  margin: auto;
+  background-color: #1b3034;
+  position: sticky;
+  top: 0;
+  z-index: 3;
+}
+header nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: auto;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+header nav .nav-logo {
+  text-align: left;
+  margin-left: -16px;
+}
+header nav .nav-logo img {
+  height: 55px;
+  cursor: pointer;
+}
+header nav .nav-search form {
+  min-width: 400px;
+  max-width: 500px;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+header nav .nav-search form input {
+  padding: 8px 16px;
+  width: 90%;
+  outline: none;
+  border-radius: 25px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  font-size: 16px;
+  border: none;
+}
+header nav .nav-search form button {
+  position: absolute;
+  height: 105%;
+  padding: 8px 18px;
+  right: 15px;
+  border-radius: 25px;
+  text-align: center;
+  background-color: #2e816e;
+  outline: none;
+  border: 1px solid #2e816e;
+  cursor: pointer;
+}
+header nav .nav-search form button i {
+  color: #ffffff;
+  font-size: 18px;
+}
+header nav .nav-user-details {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-weight: 600;
+  padding-right: 16px;
+}
+header nav .nav-user-details p {
+  color: #f2e4c0;
+}
+header nav .nav-user-details i {
+  color: #f2e4c0;
+  cursor: pointer;
+}
+header nav .nav-user-details .user-details {
+  cursor: pointer;
+  position: relative;
+}
+header nav .nav-user-details .user-details .user-edit {
+  position: absolute;
+  right: -25px;
+  display: flex;
+  flex-direction: column;
+  top: 22px;
+  background-color: #1b3034;
+  border-radius: 5px;
+  width: 150px;
+  padding: 8px;
+  display: none;
+}
+header nav .nav-user-details .user-details .user-edit button {
+  width: 100%;
+  padding: 6px 0px;
+  font-weight: 600;
+  cursor: pointer;
+  background: transparent;
+  color: #f2e4c0;
+  border: none;
+  outline: none;
+  transition: 300ms ease;
+  border-radius: 5px;
+}
+header nav .nav-user-details .user-details .user-edit button:hover {
+  background-color: #2e816e;
+}
+header nav .nav-user-details .user-details:hover .user-edit {
+  display: block;
+}
+
+.auction-configuration {
+  background-color: #1b3034;
+  min-height: 100vh;
+}
+.auction-configuration .auction-configuration-wrapper {
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-width: 280px;
+  max-width: 400px;
+  margin: auto;
+}
+.auction-configuration .auction-configuration-wrapper .hero-section {
+  text-align: center;
+}
+.auction-configuration .auction-configuration-wrapper .hero-section p {
+  color: #f2e4c0;
+  font-weight: 700;
+  font-size: 18px;
+}
+.auction-configuration .auction-configuration-wrapper .auction-form {
+  margin: auto;
+  width: 100%;
+}
+.auction-configuration .auction-configuration-wrapper .auction-form form {
+  background-color: #ffffff;
+  padding: 20px 24px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.auction-configuration .auction-configuration-wrapper .auction-form form label {
+  font-weight: 400;
+}
+.auction-configuration .auction-configuration-wrapper .auction-form form h3,
+.auction-configuration .auction-configuration-wrapper .auction-form form input {
+  margin-bottom: 10px;
+}
+.auction-configuration .auction-configuration-wrapper .auction-form form input {
+  padding: 6px 8px;
+  outline: none;
+}
+.auction-configuration .auction-configuration-wrapper .auction-form form .submit-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 10px;
+}
+.auction-configuration .auction-configuration-wrapper .auction-form form .submit-button button {
+  background-color: #2e816e;
+  border: 1px solid #2e816e;
+  outline: none;
+  cursor: pointer;
+  color: #ffffff;
+  font-weight: 600;
+  padding: 6px 15px;
+  border-radius: 5px;
+  font-size: 14px;
+  transition: 300ms ease;
+  width: 45%;
+}
+.auction-configuration .auction-configuration-wrapper .auction-form form .submit-button button:hover {
+  background-color: #ffffff;
+  color: #2e816e;
+}
+
+.auction-bid {
+  max-width: 2100px;
+  margin: 0 auto;
+  padding-bottom: 24px;
+}
+.auction-bid .auction-bid-wrapper .page-nav {
+  border-bottom: 2px solid #acacac;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding: 16px 16px 0px 16px;
+  min-width: -moz-max-content;
+  min-width: max-content;
+  max-width: 700px;
+  margin: auto;
+}
+.auction-bid .auction-bid-wrapper .page-nav .dashboard,
+.auction-bid .auction-bid-wrapper .page-nav .market,
+.auction-bid .auction-bid-wrapper .page-nav .mybid {
+  cursor: pointer;
+}
+.auction-bid .auction-bid-wrapper .page-nav .dashboard a,
+.auction-bid .auction-bid-wrapper .page-nav .market a,
+.auction-bid .auction-bid-wrapper .page-nav .mybid a {
+  text-decoration: none;
+  color: black;
+}
+.auction-bid .auction-bid-wrapper .page-nav .dashboard a span,
+.auction-bid .auction-bid-wrapper .page-nav .market a span,
+.auction-bid .auction-bid-wrapper .page-nav .mybid a span {
+  font-weight: 400;
+}
+.auction-bid .auction-bid-wrapper .page-nav .dashboard a:focus,
+.auction-bid .auction-bid-wrapper .page-nav .market a:focus,
+.auction-bid .auction-bid-wrapper .page-nav .mybid a:focus {
+  color: #2e816e;
+}
+.auction-bid .auction-bid-wrapper .auction-type {
+  padding: 8px 16px;
+  background-color: #87bd9d;
+  color: #ffffff;
+  width: -moz-max-content;
+  width: max-content;
+  margin: 10px 0px;
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+  text-align: left;
+}
+.auction-bid .auction-bid-wrapper .bid-display {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.auction-bid .auction-bid-wrapper .bid-display .bid-category {
+  flex: 1 1 45%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.auction-bid .auction-bid-wrapper .bid-display .bid-category .category {
+  flex: 1 1 40%;
+  padding: 16px;
+  padding-bottom: 8px;
+  height: -moz-max-content;
+  height: max-content;
+  border-bottom: 1px solid #acacac;
+}
+.auction-bid .auction-bid-wrapper .bid-display .bid-category .category h5 {
+  font-size: 17px;
+}
+.auction-bid .auction-bid-wrapper .bid-display .bid-category .items-details {
+  flex: 1 1 55%;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #acacac;
+}
+.auction-bid .auction-bid-wrapper .bid-display .bid-category .items-details .auction-description {
+  padding: 16px 24px 16px 16px;
+  padding-left: 0px;
+  margin-left: 20px;
+  border-bottom: 1px solid #acacac;
+}
+.auction-bid .auction-bid-wrapper .bid-display .bid-category .items-details .auction-description h5 {
+  font-size: 17px;
+  padding-bottom: 8px;
+}
+.auction-bid .auction-bid-wrapper .bid-display .bid-category .items-details .auction-description .product-details img {
+  width: 100%;
+}
+.auction-bid .auction-bid-wrapper .bid-display .bid-category .items-details .auction-description .product-details p {
+  text-align: justify;
+  width: 100%;
+}
+.auction-bid .auction-bid-wrapper .bid-display .bid-category .items-details .auction-description .product-details p span,
+.auction-bid .auction-bid-wrapper .bid-display .bid-category .items-details .auction-description .product-details p i {
+  font-weight: 600;
+}
+.auction-bid .auction-bid-wrapper .bid-display .bid-category .items-details .bid-amount {
+  padding: 16px;
+  padding-left: 0px;
+  margin-left: 20px;
+}
+.auction-bid .auction-bid-wrapper .bid-display .bid-category .items-details .bid-amount .min-amount {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.auction-bid .auction-bid-wrapper .bid-display .bid-category .items-details .bid-amount .min-amount h5 {
+  font-size: 17px;
+}
+.auction-bid .auction-bid-wrapper .bid-display .bid-category .items-details .bid-amount form {
+  padding-top: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.auction-bid .auction-bid-wrapper .bid-display .bid-category .items-details .bid-amount form input {
+  outline: none;
+  border: 1px solid #acacac;
+  padding: 8px;
+  text-align: center;
+  width: 45%;
+  border-radius: 5px;
+  font-weight: 600;
+}
+.auction-bid .auction-bid-wrapper .bid-display .bid-category .items-details .bid-amount form button {
+  background-color: #2e816e;
+  border: 1px solid #2e816e;
+  outline: none;
+  cursor: pointer;
+  color: #ffffff;
+  font-weight: 600;
+  padding: 8px 15px;
+  border-radius: 5px;
+  font-size: 15px;
+  transition: 300ms ease;
+  width: 50%;
+}
+.auction-bid .auction-bid-wrapper .bid-display .bid-category .items-details .bid-amount form button:hover {
+  background-color: #ffffff;
+  color: #2e816e;
+}
+.auction-bid .auction-bid-wrapper .bid-display .bid-details {
+  flex: 1 1 45%;
+  padding: 16px;
+  padding-right: 32px;
+  margin-top: 20px;
+}
+.auction-bid .auction-bid-wrapper .bid-display .bid-details .bid-remaining {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.auction-bid .auction-bid-wrapper .bid-display .bid-details .bid-remaining h5 {
+  font-size: 17px;
+  padding-bottom: 8px;
+}
+.auction-bid .auction-bid-wrapper .bid-display .bid-details .bid-listing {
+  border: 1px solid #acacac;
+  padding: 16px;
+  height: 480px;
+}
+.auction-bid .auction-bid-wrapper .bid-display .bid-details .bid-listing .list_wrapper {
+  height: 90%;
+}
+.auction-bid .auction-bid-wrapper .bid-display .bid-details .bid-listing .list_wrapper .list {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 6px;
+  border-bottom: 1px solid #acacac;
+}
+.auction-bid .auction-bid-wrapper .bid-display .bid-details .bid-listing .pagination {
+  border-top: 1px solid #acacac;
+  padding: 8px;
+  padding-bottom: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+.auction-bid .auction-bid-wrapper .bid-display .bid-details .bid-listing .pagination button {
+  background-color: transparent;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  color: #2e816e;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-weight: 600;
+  font-size: 16px;
+  transition: 300ms ease;
+}
+.auction-bid .auction-bid-wrapper .bid-display .bid-details .bid-listing .pagination button:hover {
+  color: #87bd9d;
+}
+.auction-bid .auction-bid-wrapper .bid-display .bid-details .bid-listing .pagination .next {
+  margin-left: 8px;
+}
+.auction-bid .auction-bid-wrapper .bid-display .bid-details .bid-listing .pagination h3 {
+  font-size: 20px;
+}
+
+@media (max-width: 1100px) {
+  .auction-bid .auction-bid-wrapper .bid-display .bid-category {
+    width: 100%;
+    padding: 16px;
+  }
+  .auction-bid .auction-bid-wrapper .bid-display .bid-details {
+    width: 100%;
+    padding: 16px;
+  }
+}
+@media (max-width: 725px) {
+  .auction-bid .auction-bid-wrapper .bid-display .bid-category {
+    width: 100%;
+    padding: 16px;
+  }
+  .auction-bid .auction-bid-wrapper .bid-display .bid-category .items-details {
+    width: 100%;
+  }
+  .auction-bid .auction-bid-wrapper .bid-display .bid-category .items-details .auction-description .product-details {
+    width: 100%;
+    max-width: 100%;
+  }
+  .auction-bid .auction-bid-wrapper .bid-display .bid-details {
+    width: 100%;
+    padding: 16px;
+  }
+}
+@media (min-width: 1500px) {
+  .auction-bid .auction-bid-wrapper .bid-display .bid-category {
+    width: 50%;
+    padding: 16px;
+  }
+  .auction-bid .auction-bid-wrapper .bid-display .bid-category .items-details {
+    width: 100%;
+  }
+  .auction-bid .auction-bid-wrapper .bid-display .bid-category .items-details .auction-description .product-details {
+    width: 100%;
+    max-width: 100%;
+  }
+  .auction-bid .auction-bid-wrapper .bid-display .bid-details {
+    width: 50%;
+    padding: 16px;
+  }
+}
+.auction-bid {
+  padding-bottom: 0px;
+}
+.auction-bid .auction-bid-wrapper .search-result-wrapper h5 {
+  padding: 8px 16px;
+  font-size: 18px;
+}
+.auction-bid .auction-bid-wrapper .search-result-wrapper .search-results {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+.auction-bid .auction-bid-wrapper .search-result-wrapper .search-results .categories h5 {
+  padding-top: 16px;
+  padding-bottom: 0px;
+  font-size: 15px;
+}
+.auction-bid .auction-bid-wrapper .search-result-wrapper .search-results .categories .categories-list {
+  border: 2px solid #acacac;
+  padding: 16px;
+  height: 650px;
+  width: 200px;
+}
+.auction-bid .auction-bid-wrapper .search-result-wrapper .search-results .categories .categories-list .individual-list {
+  display: flex;
+  gap: 24px;
+}
+.auction-bid .auction-bid-wrapper .search-result-wrapper .search-results .match-found {
+  padding: 16px;
+}
+.auction-bid .auction-bid-wrapper .search-result-wrapper .search-results .match-found .match-found-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid #acacac;
+}
+.auction-bid .auction-bid-wrapper .search-result-wrapper .search-results .match-found .match-found-header h5 {
+  padding: 0px;
+  font-size: 16px;
+}
+.auction-bid .auction-bid-wrapper .search-result-wrapper .search-results .match-found .match-found-header select {
+  border: none;
+  outline: none;
+  font-weight: 600;
+  font-size: 15px;
+}
+.auction-bid .auction-bid-wrapper .search-result-wrapper .search-results .match-found .match-found-header select option:hover {
+  background-color: #2e816e;
+}
+.auction-bid .auction-bid-wrapper .search-result-wrapper .search-results .match-found .match-found-items {
+  display: flex;
+  align-items: start;
+  flex-wrap: wrap;
+  padding: 16px;
+  gap: 18px;
+  overflow: hidden;
+}
+.auction-bid .auction-bid-wrapper .search-result-wrapper .search-results .match-found .match-found-items .individual-items {
+  cursor: pointer;
+  border-radius: 5px;
+  transition: 500ms ease;
+  flex: 0 1 230px;
+}
+.auction-bid .auction-bid-wrapper .search-result-wrapper .search-results .match-found .match-found-items .individual-items .image {
+  overflow: hidden;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+}
+.auction-bid .auction-bid-wrapper .search-result-wrapper .search-results .match-found .match-found-items .individual-items .image img {
+  width: 100%;
+  height: 100%;
+  transition: 500ms ease;
+}
+.auction-bid .auction-bid-wrapper .search-result-wrapper .search-results .match-found .match-found-items .individual-items .image img:hover {
+  transform: scale(1.5);
+}
+.auction-bid .auction-bid-wrapper .search-result-wrapper .search-results .match-found .match-found-items .individual-items .details {
+  padding: 8px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+.auction-bid .auction-bid-wrapper .search-result-wrapper .search-results .match-found .match-found-items .individual-items .details h5 {
+  padding: 0px;
+  color: #1b3034;
+  font-size: 16px;
+}
+.auction-bid .auction-bid-wrapper .search-result-wrapper .search-results .match-found .match-found-items .individual-items .details #auction-type {
+  color: #acacac;
+}
+.auction-bid .auction-bid-wrapper .search-result-wrapper .search-results .match-found .match-found-items .individual-items .details #bid-amount {
+  margin-top: 5px;
+}
+.auction-bid .auction-bid-wrapper .search-result-wrapper .search-results .match-found .match-found-items .individual-items .details #bid-amount span {
+  font-weight: bold;
+  color: #2e816e;
+  font-size: 18px;
+}
+.auction-bid .auction-bid-wrapper .search-result-wrapper .search-results .match-found .match-found-items .individual-items .details #bid-amount img {
+  height: 25px;
+  width: 30px;
+}
+.auction-bid .auction-bid-wrapper .search-result-wrapper .search-results .match-found .match-found-items .individual-items:hover {
+  box-shadow: 0 0 8px #9a9a9a;
+  box-shadow: 0 0 10px #bcbbbb;
+}
+.auction-bid .auction-bid-wrapper .search-result-wrapper .search-results .match-found .pagination {
+  padding: 8px;
+  padding-bottom: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+.auction-bid .auction-bid-wrapper .search-result-wrapper .search-results .match-found .pagination button {
+  background-color: transparent;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  color: #2e816e;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-weight: 600;
+  font-size: 16px;
+  transition: 300ms ease;
+}
+.auction-bid .auction-bid-wrapper .search-result-wrapper .search-results .match-found .pagination button:hover {
+  color: #87bd9d;
+}
+.auction-bid .auction-bid-wrapper .search-result-wrapper .search-results .match-found .pagination .next {
+  margin-left: 8px;
+}
+.auction-bid .auction-bid-wrapper .search-result-wrapper .search-results .match-found .pagination h3 {
+  font-size: 20px;
+}
+
+.buypoints {
+  margin: auto;
+  padding: 32px 16px;
+  background-color: #1b3034;
+  min-height: 100vh;
+}
+.buypoints .buypoints-wrapper {
+  margin: auto;
+  min-width: 280px;
+  max-width: 600px;
+}
+.buypoints .buypoints-wrapper .buypoints-hero {
+  text-align: center;
+  margin-bottom: 16px;
+}
+.buypoints .buypoints-wrapper .buypoints-hero p {
+  color: #f2e4c0;
+  font-weight: 700;
+  font-size: 18px;
+}
+.buypoints .buypoints-wrapper .buypoints-form {
+  border: 1px solid black;
+  background-color: #ffffff;
+  border-radius: 8px;
+  width: 100%;
+}
+.buypoints .buypoints-wrapper .buypoints-form form {
+  display: inherit;
+  padding: 24px;
+  transition: 300ms ease;
+}
+.buypoints .buypoints-wrapper .buypoints-form form a {
+  text-decoration: none;
+}
+.buypoints .buypoints-wrapper .buypoints-form form label {
+  font-weight: 400;
+}
+.buypoints .buypoints-wrapper .buypoints-form form input {
+  width: 100%;
+  font-size: 16px;
+  padding: 8px 8px;
+  margin-bottom: 18px;
+  outline: none;
+}
+.buypoints .buypoints-wrapper .buypoints-form form .current-points,
+.buypoints .buypoints-wrapper .buypoints-form form .total-amount {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid #2e816e;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  padding-bottom: 4px;
+}
+.buypoints .buypoints-wrapper .buypoints-form form .current-points h4:nth-child(2),
+.buypoints .buypoints-wrapper .buypoints-form form .total-amount h4:nth-child(2) {
+  color: #1b3034;
+  font-weight: 700;
+}
+.buypoints .buypoints-wrapper .buypoints-form form .card-validity {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.buypoints .buypoints-wrapper .buypoints-form form .button {
+  text-align: center;
+}
+.buypoints .buypoints-wrapper .buypoints-form form .button button {
+  background-color: #2e816e;
+  border: 1px solid #2e816e;
+  outline: none;
+  cursor: pointer;
+  color: #ffffff;
+  font-weight: 600;
+  padding: 10px 25px;
+  border-radius: 5px;
+  font-size: 14px;
+  transition: 300ms ease;
+}
+.buypoints .buypoints-wrapper .buypoints-form form .button button:hover {
+  background-color: #ffffff;
+  color: #2e816e;
+}
+
+@media (max-width: 560px) {
+  .buypoints .buypoints-wrapper .buypoints-form form .card-validity .cvv,
+  .buypoints .buypoints-wrapper .buypoints-form form .card-validity .expiry-date {
+    width: 100%;
+  }
+}
+.dashboard-page {
+  max-width: 1800px;
+  margin: 0 auto;
+}
+.dashboard-page .dashboard-wrapper .page-nav {
+  border-bottom: 2px solid #acacac;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding: 16px 16px 0px 16px;
+  min-width: -moz-max-content;
+  min-width: max-content;
+  max-width: 700px;
+  margin: auto;
+}
+.dashboard-page .dashboard-wrapper .page-nav .dashboard,
+.dashboard-page .dashboard-wrapper .page-nav .market,
+.dashboard-page .dashboard-wrapper .page-nav .mybid {
+  cursor: pointer;
+}
+.dashboard-page .dashboard-wrapper .page-nav .dashboard a,
+.dashboard-page .dashboard-wrapper .page-nav .market a,
+.dashboard-page .dashboard-wrapper .page-nav .mybid a {
+  text-decoration: none;
+  color: black;
+}
+.dashboard-page .dashboard-wrapper .page-nav .dashboard a span,
+.dashboard-page .dashboard-wrapper .page-nav .market a span,
+.dashboard-page .dashboard-wrapper .page-nav .mybid a span {
+  font-weight: 400;
+}
+.dashboard-page .dashboard-wrapper .page-nav .dashboard a:focus,
+.dashboard-page .dashboard-wrapper .page-nav .market a:focus,
+.dashboard-page .dashboard-wrapper .page-nav .mybid a:focus {
+  color: #2e816e;
+}
+.dashboard-page .dashboard-wrapper .dashboard-details {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.dashboard-page .dashboard-wrapper .dashboard-details .details-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.dashboard-page .dashboard-wrapper .dashboard-details .details-top .reputation {
+  flex: 1 1 45%;
+}
+.dashboard-page .dashboard-wrapper .dashboard-details .details-top .reputation h4 {
+  font-weight: 700;
+  font-size: 18px;
+}
+.dashboard-page .dashboard-wrapper .dashboard-details .details-top .reputation .reputation-lists {
+  border: 1px solid #acacac;
+  padding: 8px;
+}
+.dashboard-page .dashboard-wrapper .dashboard-details .details-top .reputation .reputation-lists .individual-list {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #acacac;
+  padding: 8px;
+}
+.dashboard-page .dashboard-wrapper .dashboard-details .details-top .reputation .reputation-lists .individual-list h5 {
+  font-weight: 500;
+  font-size: 16px;
+  flex: 1 1 50%;
+}
+.dashboard-page .dashboard-wrapper .dashboard-details .details-top .reputation .reputation-lists .individual-list h5:nth-child(2) {
+  text-align: center;
+}
+.dashboard-page .dashboard-wrapper .dashboard-details .details-top .reputation .reputation-lists .individual-list h5:nth-child(3) {
+  text-align: right;
+}
+.dashboard-page .dashboard-wrapper .dashboard-details .details-top .reputation .reputation-lists .individual-list h5 i {
+  color: #2e816e;
+}
+.dashboard-page .dashboard-wrapper .dashboard-details .details-top .live-metrics {
+  flex: 1 1 45%;
+}
+.dashboard-page .dashboard-wrapper .dashboard-details .details-top .live-metrics h4 {
+  font-weight: 700;
+  font-size: 18px;
+}
+.dashboard-page .dashboard-wrapper .dashboard-details .details-top .live-metrics .bids,
+.dashboard-page .dashboard-wrapper .dashboard-details .details-top .live-metrics .views {
+  border: 1px solid #acacac;
+  padding: 8px;
+}
+.dashboard-page .dashboard-wrapper .dashboard-details .details-top .live-metrics .bids h4,
+.dashboard-page .dashboard-wrapper .dashboard-details .details-top .live-metrics .views h4 {
+  padding: 8px;
+  font-weight: 700;
+  font-size: 17px;
+}
+.dashboard-page .dashboard-wrapper .dashboard-details .details-top .live-metrics .bids .bids-lists .individual-bid-list,
+.dashboard-page .dashboard-wrapper .dashboard-details .details-top .live-metrics .bids .bids-lists .individual-view-list,
+.dashboard-page .dashboard-wrapper .dashboard-details .details-top .live-metrics .bids .view-lists .individual-bid-list,
+.dashboard-page .dashboard-wrapper .dashboard-details .details-top .live-metrics .bids .view-lists .individual-view-list,
+.dashboard-page .dashboard-wrapper .dashboard-details .details-top .live-metrics .views .bids-lists .individual-bid-list,
+.dashboard-page .dashboard-wrapper .dashboard-details .details-top .live-metrics .views .bids-lists .individual-view-list,
+.dashboard-page .dashboard-wrapper .dashboard-details .details-top .live-metrics .views .view-lists .individual-bid-list,
+.dashboard-page .dashboard-wrapper .dashboard-details .details-top .live-metrics .views .view-lists .individual-view-list {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #acacac;
+  padding: 8px;
+}
+.dashboard-page .dashboard-wrapper .dashboard-details .details-top .live-metrics .bids .bids-lists .individual-bid-list h5,
+.dashboard-page .dashboard-wrapper .dashboard-details .details-top .live-metrics .bids .bids-lists .individual-view-list h5,
+.dashboard-page .dashboard-wrapper .dashboard-details .details-top .live-metrics .bids .view-lists .individual-bid-list h5,
+.dashboard-page .dashboard-wrapper .dashboard-details .details-top .live-metrics .bids .view-lists .individual-view-list h5,
+.dashboard-page .dashboard-wrapper .dashboard-details .details-top .live-metrics .views .bids-lists .individual-bid-list h5,
+.dashboard-page .dashboard-wrapper .dashboard-details .details-top .live-metrics .views .bids-lists .individual-view-list h5,
+.dashboard-page .dashboard-wrapper .dashboard-details .details-top .live-metrics .views .view-lists .individual-bid-list h5,
+.dashboard-page .dashboard-wrapper .dashboard-details .details-top .live-metrics .views .view-lists .individual-view-list h5 {
+  font-weight: 500;
+  font-size: 16px;
+}
+.dashboard-page .dashboard-wrapper .dashboard-details .details-top .live-metrics .bids .bids-lists .individual-bid-list h5:nth-child(1),
+.dashboard-page .dashboard-wrapper .dashboard-details .details-top .live-metrics .bids .bids-lists .individual-view-list h5:nth-child(1),
+.dashboard-page .dashboard-wrapper .dashboard-details .details-top .live-metrics .bids .view-lists .individual-bid-list h5:nth-child(1),
+.dashboard-page .dashboard-wrapper .dashboard-details .details-top .live-metrics .bids .view-lists .individual-view-list h5:nth-child(1),
+.dashboard-page .dashboard-wrapper .dashboard-details .details-top .live-metrics .views .bids-lists .individual-bid-list h5:nth-child(1),
+.dashboard-page .dashboard-wrapper .dashboard-details .details-top .live-metrics .views .bids-lists .individual-view-list h5:nth-child(1),
+.dashboard-page .dashboard-wrapper .dashboard-details .details-top .live-metrics .views .view-lists .individual-bid-list h5:nth-child(1),
+.dashboard-page .dashboard-wrapper .dashboard-details .details-top .live-metrics .views .view-lists .individual-view-list h5:nth-child(1) {
+  flex: 1 1 25%;
+}
+.dashboard-page .dashboard-wrapper .dashboard-details .details-top .live-metrics .bids .bids-lists .individual-bid-list h5:nth-child(2),
+.dashboard-page .dashboard-wrapper .dashboard-details .details-top .live-metrics .bids .bids-lists .individual-view-list h5:nth-child(2),
+.dashboard-page .dashboard-wrapper .dashboard-details .details-top .live-metrics .bids .view-lists .individual-bid-list h5:nth-child(2),
+.dashboard-page .dashboard-wrapper .dashboard-details .details-top .live-metrics .bids .view-lists .individual-view-list h5:nth-child(2),
+.dashboard-page .dashboard-wrapper .dashboard-details .details-top .live-metrics .views .bids-lists .individual-bid-list h5:nth-child(2),
+.dashboard-page .dashboard-wrapper .dashboard-details .details-top .live-metrics .views .bids-lists .individual-view-list h5:nth-child(2),
+.dashboard-page .dashboard-wrapper .dashboard-details .details-top .live-metrics .views .view-lists .individual-bid-list h5:nth-child(2),
+.dashboard-page .dashboard-wrapper .dashboard-details .details-top .live-metrics .views .view-lists .individual-view-list h5:nth-child(2) {
+  flex: 1 1 55%;
+  text-align: center;
+}
+.dashboard-page .dashboard-wrapper .dashboard-details .details-top .live-metrics .bids .bids-lists .individual-bid-list h5:nth-child(3),
+.dashboard-page .dashboard-wrapper .dashboard-details .details-top .live-metrics .bids .bids-lists .individual-view-list h5:nth-child(3),
+.dashboard-page .dashboard-wrapper .dashboard-details .details-top .live-metrics .bids .view-lists .individual-bid-list h5:nth-child(3),
+.dashboard-page .dashboard-wrapper .dashboard-details .details-top .live-metrics .bids .view-lists .individual-view-list h5:nth-child(3),
+.dashboard-page .dashboard-wrapper .dashboard-details .details-top .live-metrics .views .bids-lists .individual-bid-list h5:nth-child(3),
+.dashboard-page .dashboard-wrapper .dashboard-details .details-top .live-metrics .views .bids-lists .individual-view-list h5:nth-child(3),
+.dashboard-page .dashboard-wrapper .dashboard-details .details-top .live-metrics .views .view-lists .individual-bid-list h5:nth-child(3),
+.dashboard-page .dashboard-wrapper .dashboard-details .details-top .live-metrics .views .view-lists .individual-view-list h5:nth-child(3) {
+  flex: 1 1 20%;
+  text-align: justify;
+}
+.dashboard-page .dashboard-wrapper .dashboard-details .details-top .live-metrics .bids .pagination,
+.dashboard-page .dashboard-wrapper .dashboard-details .details-top .live-metrics .views .pagination {
+  border-top: 1px solid #acacac;
+  padding: 8px;
+  padding-bottom: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+.dashboard-page .dashboard-wrapper .dashboard-details .details-top .live-metrics .bids .pagination button,
+.dashboard-page .dashboard-wrapper .dashboard-details .details-top .live-metrics .views .pagination button {
+  background-color: transparent;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  color: #2e816e;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-weight: 600;
+  font-size: 16px;
+  transition: 300ms ease;
+}
+.dashboard-page .dashboard-wrapper .dashboard-details .details-top .live-metrics .bids .pagination button:hover,
+.dashboard-page .dashboard-wrapper .dashboard-details .details-top .live-metrics .views .pagination button:hover {
+  color: #87bd9d;
+}
+.dashboard-page .dashboard-wrapper .dashboard-details .details-top .live-metrics .bids .pagination .next,
+.dashboard-page .dashboard-wrapper .dashboard-details .details-top .live-metrics .views .pagination .next {
+  margin-left: 8px;
+}
+.dashboard-page .dashboard-wrapper .dashboard-details .details-top .live-metrics .bids .pagination h3,
+.dashboard-page .dashboard-wrapper .dashboard-details .details-top .live-metrics .views .pagination h3 {
+  font-size: 20px;
+}
+.dashboard-page .dashboard-wrapper .dashboard-details .details-bottom h4 {
+  font-weight: 700;
+  font-size: 18px;
+}
+.dashboard-page .dashboard-wrapper .dashboard-details .details-bottom .statistics-details .statistics-details-top {
+  border: 1px solid #acacac;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 8px;
+  flex-wrap: wrap;
+}
+.dashboard-page .dashboard-wrapper .dashboard-details .details-bottom .statistics-details .statistics-details-top .total-bids,
+.dashboard-page .dashboard-wrapper .dashboard-details .details-bottom .statistics-details .statistics-details-top .total-sales {
+  flex: 1 1 45%;
+}
+.dashboard-page .dashboard-wrapper .dashboard-details .details-bottom .statistics-details .statistics-details-top .total-bids h4,
+.dashboard-page .dashboard-wrapper .dashboard-details .details-bottom .statistics-details .statistics-details-top .total-sales h4 {
+  padding: 8px;
+  font-weight: 700;
+  font-size: 17px;
+}
+.dashboard-page .dashboard-wrapper .dashboard-details .details-bottom .statistics-details .statistics-details-top .total-bids .bids-lists .individual-bid-list,
+.dashboard-page .dashboard-wrapper .dashboard-details .details-bottom .statistics-details .statistics-details-top .total-bids .bids-lists .individual-sales-list,
+.dashboard-page .dashboard-wrapper .dashboard-details .details-bottom .statistics-details .statistics-details-top .total-bids .sales-lists .individual-bid-list,
+.dashboard-page .dashboard-wrapper .dashboard-details .details-bottom .statistics-details .statistics-details-top .total-bids .sales-lists .individual-sales-list,
+.dashboard-page .dashboard-wrapper .dashboard-details .details-bottom .statistics-details .statistics-details-top .total-sales .bids-lists .individual-bid-list,
+.dashboard-page .dashboard-wrapper .dashboard-details .details-bottom .statistics-details .statistics-details-top .total-sales .bids-lists .individual-sales-list,
+.dashboard-page .dashboard-wrapper .dashboard-details .details-bottom .statistics-details .statistics-details-top .total-sales .sales-lists .individual-bid-list,
+.dashboard-page .dashboard-wrapper .dashboard-details .details-bottom .statistics-details .statistics-details-top .total-sales .sales-lists .individual-sales-list {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #acacac;
+  padding: 8px;
+}
+.dashboard-page .dashboard-wrapper .dashboard-details .details-bottom .statistics-details .statistics-details-top .total-bids .bids-lists .individual-bid-list h5,
+.dashboard-page .dashboard-wrapper .dashboard-details .details-bottom .statistics-details .statistics-details-top .total-bids .bids-lists .individual-sales-list h5,
+.dashboard-page .dashboard-wrapper .dashboard-details .details-bottom .statistics-details .statistics-details-top .total-bids .sales-lists .individual-bid-list h5,
+.dashboard-page .dashboard-wrapper .dashboard-details .details-bottom .statistics-details .statistics-details-top .total-bids .sales-lists .individual-sales-list h5,
+.dashboard-page .dashboard-wrapper .dashboard-details .details-bottom .statistics-details .statistics-details-top .total-sales .bids-lists .individual-bid-list h5,
+.dashboard-page .dashboard-wrapper .dashboard-details .details-bottom .statistics-details .statistics-details-top .total-sales .bids-lists .individual-sales-list h5,
+.dashboard-page .dashboard-wrapper .dashboard-details .details-bottom .statistics-details .statistics-details-top .total-sales .sales-lists .individual-bid-list h5,
+.dashboard-page .dashboard-wrapper .dashboard-details .details-bottom .statistics-details .statistics-details-top .total-sales .sales-lists .individual-sales-list h5 {
+  font-weight: 500;
+  font-size: 16px;
+}
+.dashboard-page .dashboard-wrapper .dashboard-details .details-bottom .statistics-details .statistics-details-top .total-bids .bids-lists .individual-bid-list h5:nth-child(1),
+.dashboard-page .dashboard-wrapper .dashboard-details .details-bottom .statistics-details .statistics-details-top .total-bids .bids-lists .individual-sales-list h5:nth-child(1),
+.dashboard-page .dashboard-wrapper .dashboard-details .details-bottom .statistics-details .statistics-details-top .total-bids .sales-lists .individual-bid-list h5:nth-child(1),
+.dashboard-page .dashboard-wrapper .dashboard-details .details-bottom .statistics-details .statistics-details-top .total-bids .sales-lists .individual-sales-list h5:nth-child(1),
+.dashboard-page .dashboard-wrapper .dashboard-details .details-bottom .statistics-details .statistics-details-top .total-sales .bids-lists .individual-bid-list h5:nth-child(1),
+.dashboard-page .dashboard-wrapper .dashboard-details .details-bottom .statistics-details .statistics-details-top .total-sales .bids-lists .individual-sales-list h5:nth-child(1),
+.dashboard-page .dashboard-wrapper .dashboard-details .details-bottom .statistics-details .statistics-details-top .total-sales .sales-lists .individual-bid-list h5:nth-child(1),
+.dashboard-page .dashboard-wrapper .dashboard-details .details-bottom .statistics-details .statistics-details-top .total-sales .sales-lists .individual-sales-list h5:nth-child(1) {
+  flex: 1 1 25%;
+}
+.dashboard-page .dashboard-wrapper .dashboard-details .details-bottom .statistics-details .statistics-details-top .total-bids .bids-lists .individual-bid-list h5:nth-child(2),
+.dashboard-page .dashboard-wrapper .dashboard-details .details-bottom .statistics-details .statistics-details-top .total-bids .bids-lists .individual-sales-list h5:nth-child(2),
+.dashboard-page .dashboard-wrapper .dashboard-details .details-bottom .statistics-details .statistics-details-top .total-bids .sales-lists .individual-bid-list h5:nth-child(2),
+.dashboard-page .dashboard-wrapper .dashboard-details .details-bottom .statistics-details .statistics-details-top .total-bids .sales-lists .individual-sales-list h5:nth-child(2),
+.dashboard-page .dashboard-wrapper .dashboard-details .details-bottom .statistics-details .statistics-details-top .total-sales .bids-lists .individual-bid-list h5:nth-child(2),
+.dashboard-page .dashboard-wrapper .dashboard-details .details-bottom .statistics-details .statistics-details-top .total-sales .bids-lists .individual-sales-list h5:nth-child(2),
+.dashboard-page .dashboard-wrapper .dashboard-details .details-bottom .statistics-details .statistics-details-top .total-sales .sales-lists .individual-bid-list h5:nth-child(2),
+.dashboard-page .dashboard-wrapper .dashboard-details .details-bottom .statistics-details .statistics-details-top .total-sales .sales-lists .individual-sales-list h5:nth-child(2) {
+  flex: 1 1 55%;
+  text-align: center;
+}
+.dashboard-page .dashboard-wrapper .dashboard-details .details-bottom .statistics-details .statistics-details-top .total-bids .bids-lists .individual-bid-list h5:nth-child(3),
+.dashboard-page .dashboard-wrapper .dashboard-details .details-bottom .statistics-details .statistics-details-top .total-bids .bids-lists .individual-sales-list h5:nth-child(3),
+.dashboard-page .dashboard-wrapper .dashboard-details .details-bottom .statistics-details .statistics-details-top .total-bids .sales-lists .individual-bid-list h5:nth-child(3),
+.dashboard-page .dashboard-wrapper .dashboard-details .details-bottom .statistics-details .statistics-details-top .total-bids .sales-lists .individual-sales-list h5:nth-child(3),
+.dashboard-page .dashboard-wrapper .dashboard-details .details-bottom .statistics-details .statistics-details-top .total-sales .bids-lists .individual-bid-list h5:nth-child(3),
+.dashboard-page .dashboard-wrapper .dashboard-details .details-bottom .statistics-details .statistics-details-top .total-sales .bids-lists .individual-sales-list h5:nth-child(3),
+.dashboard-page .dashboard-wrapper .dashboard-details .details-bottom .statistics-details .statistics-details-top .total-sales .sales-lists .individual-bid-list h5:nth-child(3),
+.dashboard-page .dashboard-wrapper .dashboard-details .details-bottom .statistics-details .statistics-details-top .total-sales .sales-lists .individual-sales-list h5:nth-child(3) {
+  flex: 1 1 20%;
+  text-align: justify;
+}
+.dashboard-page .dashboard-wrapper .dashboard-details .details-bottom .statistics-details .statistics-details-top .total-bids .pagination,
+.dashboard-page .dashboard-wrapper .dashboard-details .details-bottom .statistics-details .statistics-details-top .total-sales .pagination {
+  border-top: 1px solid #acacac;
+  padding: 8px;
+  padding-bottom: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+.dashboard-page .dashboard-wrapper .dashboard-details .details-bottom .statistics-details .statistics-details-top .total-bids .pagination button,
+.dashboard-page .dashboard-wrapper .dashboard-details .details-bottom .statistics-details .statistics-details-top .total-sales .pagination button {
+  background-color: transparent;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  color: #2e816e;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-weight: 600;
+  font-size: 16px;
+  transition: 300ms ease;
+}
+.dashboard-page .dashboard-wrapper .dashboard-details .details-bottom .statistics-details .statistics-details-top .total-bids .pagination button:hover,
+.dashboard-page .dashboard-wrapper .dashboard-details .details-bottom .statistics-details .statistics-details-top .total-sales .pagination button:hover {
+  color: #87bd9d;
+}
+.dashboard-page .dashboard-wrapper .dashboard-details .details-bottom .statistics-details .statistics-details-top .total-bids .pagination .next,
+.dashboard-page .dashboard-wrapper .dashboard-details .details-bottom .statistics-details .statistics-details-top .total-sales .pagination .next {
+  margin-left: 8px;
+}
+.dashboard-page .dashboard-wrapper .dashboard-details .details-bottom .statistics-details .statistics-details-top .total-bids .pagination h3,
+.dashboard-page .dashboard-wrapper .dashboard-details .details-bottom .statistics-details .statistics-details-top .total-sales .pagination h3 {
+  font-size: 20px;
+}
+.dashboard-page .dashboard-wrapper .dashboard-details .details-bottom .statistics-details .statistics-details-bottom {
+  border: 1px solid #acacac;
+}
+.dashboard-page .dashboard-wrapper .dashboard-details .details-bottom .statistics-details .statistics-details-bottom .views {
+  padding: 8px;
+  width: 50%;
+}
+.dashboard-page .dashboard-wrapper .dashboard-details .details-bottom .statistics-details .statistics-details-bottom .views h4 {
+  padding: 8px;
+  font-weight: 700;
+  font-size: 18px;
+}
+.dashboard-page .dashboard-wrapper .dashboard-details .details-bottom .statistics-details .statistics-details-bottom .views .view-lists .individual-view-list {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #acacac;
+  padding: 8px;
+}
+.dashboard-page .dashboard-wrapper .dashboard-details .details-bottom .statistics-details .statistics-details-bottom .views .view-lists .individual-view-list h5 {
+  font-weight: 500;
+  font-size: 16px;
+  flex: 1 1 50%;
+}
+.dashboard-page .dashboard-wrapper .dashboard-details .details-bottom .statistics-details .statistics-details-bottom .views .pagination {
+  border-top: 1px solid #acacac;
+  padding: 8px;
+  padding-bottom: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+.dashboard-page .dashboard-wrapper .dashboard-details .details-bottom .statistics-details .statistics-details-bottom .views .pagination button {
+  background-color: transparent;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  color: #2e816e;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-weight: 600;
+  font-size: 16px;
+  transition: 300ms ease;
+}
+.dashboard-page .dashboard-wrapper .dashboard-details .details-bottom .statistics-details .statistics-details-bottom .views .pagination button:hover {
+  color: #87bd9d;
+}
+.dashboard-page .dashboard-wrapper .dashboard-details .details-bottom .statistics-details .statistics-details-bottom .views .pagination .next {
+  margin-left: 8px;
+}
+.dashboard-page .dashboard-wrapper .dashboard-details .details-bottom .statistics-details .statistics-details-bottom .views .pagination h3 {
+  font-size: 20px;
+}
+
+@media (max-width: 480px) {
+  .dashboard-page .dashboard-wrapper .dashboard-details .details-top .reputation .reputation-lists {
+    height: -moz-max-content;
+    height: max-content;
+  }
+  .dashboard-page .dashboard-wrapper .dashboard-details .details-bottom .statistics-details .statistics-details-bottom .views {
+    width: 100%;
+  }
+}
+header nav .user-activity {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+header nav .user-activity button {
+  background-color: transparent;
+  outline: none;
+  cursor: pointer;
+  border: none;
+  padding: 5px 10px;
+}
+header nav .user-activity button a {
+  color: #f2e4c0;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 16px;
+}
+header nav .user-activity .divider {
+  width: 3px;
+  height: 25px;
+  background-color: #f2e4c0;
+  border-radius: 5px;
+}
+
+.landing {
+  background-color: #1b3034;
+  min-height: 100vh;
+  max-width: 1800px;
+  margin: 0 auto;
+}
+.landing .landing-page-wrapper .hero-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 15px 32px;
+}
+.landing .landing-page-wrapper .hero-section .hero-description {
+  flex: 2 1 60%;
+}
+.landing .landing-page-wrapper .hero-section .hero-description h1 {
+  color: #f2e4c0;
+  font-size: 56px;
+}
+.landing .landing-page-wrapper .hero-section .hero-description h2 {
+  color: #f2e4c0;
+  font-size: 28px;
+  font-weight: 600;
+}
+.landing .landing-page-wrapper .hero-section .hero-description p {
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: 500;
+  margin-top: 20px;
+}
+.landing .landing-page-wrapper .hero-section .hero-description .hero-buttons {
+  display: flex;
+  gap: 16px;
+  margin-top: 20px;
+}
+.landing .landing-page-wrapper .hero-section .hero-description .hero-buttons button {
+  background-color: #2e816e;
+  border: 1px solid #2e816e;
+  outline: none;
+  cursor: pointer;
+  color: #ffffff;
+  font-weight: 600;
+  padding: 8px 15px;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: 300ms ease;
+  width: 20%;
+}
+.landing .landing-page-wrapper .hero-section .hero-description .hero-buttons button:hover {
+  background-color: #ffffff;
+  color: #2e816e;
+}
+.landing .landing-page-wrapper .hero-section .hero-image {
+  flex: 1 1 35%;
+  text-align: center;
+  max-width: 500px;
+  min-width: 280px;
+  max-height: 500px;
+}
+.landing .landing-page-wrapper .hero-section .hero-image img {
+  height: 100%;
+  width: 100%;
+}
+.landing .landing-page-wrapper .sell-information {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  padding: 15px 32px;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+.landing .landing-page-wrapper .sell-information .sell-image {
+  flex: 1 1 60%;
+  max-width: 600px;
+  min-width: 280px;
+  max-height: 600px;
+  min-height: 280px;
+}
+.landing .landing-page-wrapper .sell-information .sell-image img {
+  transform: scaleX(-1);
+  width: 100%;
+  height: 100%;
+}
+.landing .landing-page-wrapper .sell-information .sell-details {
+  flex: 1 1 35%;
+}
+.landing .landing-page-wrapper .sell-information .sell-details h3 {
+  font-size: 32px;
+  text-align: center;
+  color: #1b3034;
+}
+.landing .landing-page-wrapper .sell-information .sell-details p {
+  text-align: center;
+  font-size: 20px;
+  line-height: 1.5;
+}
+.landing .landing-page-wrapper .auction-information {
+  background-color: #f2e4c0;
+  padding: 16px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+.landing .landing-page-wrapper .auction-information .auction-details {
+  flex: 1 1 35%;
+}
+.landing .landing-page-wrapper .auction-information .auction-details h3 {
+  font-size: 32px;
+  color: #1b3034;
+}
+.landing .landing-page-wrapper .auction-information .auction-details h5 {
+  font-size: 20px;
+  color: #fdb61b;
+}
+.landing .landing-page-wrapper .auction-information .auction-details p {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+.landing .landing-page-wrapper .auction-information .auction-image {
+  flex: 1 1 60%;
+  max-width: 500px;
+  min-width: 280px;
+  max-height: 500px;
+  min-height: 280px;
+}
+.landing .landing-page-wrapper .auction-information .auction-image img {
+  width: 100%;
+  height: 100%;
+}
+.landing .landing-page-wrapper .reputation-information {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #acacac;
+  background-color: white;
+  padding: 25px 32px;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+.landing .landing-page-wrapper .reputation-information .reputation-image {
+  flex: 1 1 60%;
+  max-width: 600px;
+  min-width: 280px;
+  max-height: 600px;
+  min-height: 280px;
+}
+.landing .landing-page-wrapper .reputation-information .reputation-image img {
+  transform: scaleX(-1);
+  width: 100%;
+  height: 100%;
+}
+.landing .landing-page-wrapper .reputation-information .reputation-details {
+  flex: 1 1 35%;
+}
+.landing .landing-page-wrapper .reputation-information .reputation-details h3 {
+  font-size: 32px;
+  text-align: center;
+  color: #1b3034;
+}
+.landing .landing-page-wrapper .reputation-information .reputation-details p {
+  text-align: center;
+  font-size: 20px;
+  line-height: 1.5;
+}
+
+footer {
+  padding: 15px 32px;
+  margin: auto;
+  background-color: #1b3034;
+}
+footer .quick-links {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+footer .quick-links .links h3 {
+  color: #f2e4c0;
+  margin-bottom: 10px;
+}
+footer .quick-links .links a {
+  text-decoration: none;
+  color: #f2e4c0;
+  line-height: 2;
+  font-size: 17px;
+  transition: 300ms ease;
+}
+footer .quick-links .links a:hover {
+  color: #fdb61b;
+}
+footer .quick-links .social-media {
+  text-align: center;
+}
+footer .quick-links .social-media h3 {
+  color: #f2e4c0;
+  margin-bottom: 10px;
+}
+footer .quick-links .social-media p {
+  text-align: center;
+}
+footer .quick-links .social-media p i {
+  cursor: pointer;
+  padding: 8px;
+  font-size: 17px;
+  transition: 300ms ease;
+}
+footer .quick-links .social-media p i:hover {
+  color: #fdb61b;
+}
+footer .quick-links .social-media img {
+  height: 50px;
+}
+footer p {
+  padding: 5px;
+  color: #f2e4c0;
+  font-weight: 600;
+  text-align: center;
+}
+
+.auction-bid .auction-bid-wrapper .mybid-wrapper .mybid-header {
+  background-color: #87bd9d;
+  text-align: center;
+  padding: 8px;
+  margin-top: 16px;
+}
+.auction-bid .auction-bid-wrapper .mybid-wrapper .mybid-header h3 {
+  color: #ffffff;
+}
+.auction-bid .auction-bid-wrapper .mybid-wrapper .mybid-detailings {
+  margin: auto;
+  padding: 16px 32px;
+  min-width: 70%;
+  max-width: 80%;
+}
+.auction-bid .auction-bid-wrapper .mybid-wrapper .mybid-detailings .sorting {
+  text-align: right;
+  border-bottom: 1px solid #acacac;
+}
+.auction-bid .auction-bid-wrapper .mybid-wrapper .mybid-detailings .sorting select {
+  border: none;
+  outline: none;
+  font-size: 17px;
+  font-weight: 600;
+}
+.auction-bid .auction-bid-wrapper .mybid-wrapper .mybid-detailings .individual-bids {
+  border-bottom: 1px solid #acacac;
+  padding-top: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.auction-bid .auction-bid-wrapper .mybid-wrapper .mybid-detailings .individual-bids .image-result {
+  flex: 1 1 15%;
+}
+.auction-bid .auction-bid-wrapper .mybid-wrapper .mybid-detailings .individual-bids .image-result p {
+  font-weight: 600;
+  font-size: 17px;
+}
+.auction-bid .auction-bid-wrapper .mybid-wrapper .mybid-detailings .individual-bids .image-result img {
+  width: 100%;
+  height: 100%;
+}
+.auction-bid .auction-bid-wrapper .mybid-wrapper .mybid-detailings .individual-bids .items-details {
+  flex: 1 1 65%;
+}
+.auction-bid .auction-bid-wrapper .mybid-wrapper .mybid-detailings .individual-bids .items-details h4 {
+  font-weight: 600;
+}
+.auction-bid .auction-bid-wrapper .mybid-wrapper .mybid-detailings .individual-bids .items-details p {
+  font-size: 16px;
+  width: 100%;
+}
+.auction-bid .auction-bid-wrapper .mybid-wrapper .mybid-detailings .individual-bids .user-bids {
+  flex: 1 1 15%;
+  display: flex;
+  flex-direction: column;
+  align-items: safe;
+  justify-content: end;
+}
+.auction-bid .auction-bid-wrapper .mybid-wrapper .mybid-detailings .individual-bids .user-bids .your-bids {
+  display: flex;
+  justify-content: space-between;
+}
+.auction-bid .auction-bid-wrapper .mybid-wrapper .mybid-detailings .individual-bids .user-bids .your-bids h5 {
+  font-size: 15px;
+  font-weight: 600;
+}
+.auction-bid .auction-bid-wrapper .mybid-wrapper .mybid-detailings .individual-bids .user-bids .your-bids span {
+  text-align: right;
+  font-weight: 500;
+}
+.auction-bid .auction-bid-wrapper .mybid-wrapper .mybid-detailings .individual-bids .user-bids p {
+  text-align: right;
+}
+.auction-bid .auction-bid-wrapper .mybid-wrapper .mybid-detailings .individual-bids .user-bids p i {
+  font-size: 18px;
+}
+.auction-bid .auction-bid-wrapper .mybid-wrapper .mybid-detailings .pagination {
+  border-top: 1px solid #acacac;
+  padding: 8px;
+  padding-bottom: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+.auction-bid .auction-bid-wrapper .mybid-wrapper .mybid-detailings .pagination button {
+  background-color: transparent;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  color: #2e816e;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-weight: 600;
+  font-size: 16px;
+  transition: 300ms ease;
+}
+.auction-bid .auction-bid-wrapper .mybid-wrapper .mybid-detailings .pagination button:hover {
+  color: #87bd9d;
+}
+.auction-bid .auction-bid-wrapper .mybid-wrapper .mybid-detailings .pagination .next {
+  margin-left: 8px;
+}
+.auction-bid .auction-bid-wrapper .mybid-wrapper .mybid-detailings .pagination h3 {
+  font-size: 20px;
+}/*# sourceMappingURL=main.css.map */

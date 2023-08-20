@@ -1,2 +1,16 @@
 ###
-GET http://localhost:8080/health-check
+GET {{baseUrl}}/auctions/2/bids/stream
+
+###
+GET {{baseUrl}}/auctions/3/bids/stream
+
+###
+POST {{baseUrl}}/auctions/2/bids
+Content-Type: application/json
+
+{
+  "amount": "52.43",
+  "bidderId": 2
+}
+
+

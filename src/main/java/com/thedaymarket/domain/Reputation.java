@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Data
 @Entity
-public class Reputation extends Base {
+public class Reputation extends BaseEntity {
   @ManyToOne(fetch = FetchType.LAZY)
   private User user;
 

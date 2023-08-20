@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: headerFragment}">
+    <title id="pageTitle">Market | The-day-market</title>
+</head>
+<body>
+<header th:insert="~{fragments/header :: header(true)}"></header>
+<main class="auction-bid">
+    <section class="auction-bid-wrapper">
+        <!-- navigation for dashboard,market and my bids -->
+        <section th:replace="~{fragments/pageNav :: pageNavigation('')}">
+        </section>
+        <!-- section for auction type display  -->
+        <section class="auction-type">
+            <h4>OPEN For Business</h4>
+        </section>
+        <section class="search-result-wrapper">
+            <h5>Jewellery <i class="fa fa-chevron-right"></i> Gold</h5>
+            <section class="search-results">
+                <section class="categories">
+                    <h5>Categories</h5>
+                    <section class="categories-list">
+                        <div class="individual-list">
+                            <input
+                                    type="checkbox"
+                                    name="goldPlated"
+                                    value="goldPlated"
+                                    id="goldPlated"
+                            /><label for="goldPlated">Gold Plated</label>
+                        </div>
+                    </section>
+                </section>
+                <section class="match-found">
+                    <section class="match-found-header">
+                        <h5>Match Found(<span id="match-count">20</span>)</h5>
+                        <select name="Sort">
+                            <option value="">Sort By</option>
+                            <option value="">Bid Amount</option>
+                            <option value="">Number of Items</option>
+                            <option value="">Popularity</option>
+                        </select>
+                    </section>
+                    <section class="match-found-items">
+                        <div class="individual-items">
+                            <div class="image">
+                                <img th:src="@{/images/jewellery/gold.jpg}" alt="thumbnail"/>
+                            </div>
+                            <div class="details">
+                                <h5>Auction Title</h5>
+                                <p id="auction-type">English Auction</p>
+                                <p id="bid-amount">
+                                    <img th:src="@{/images/bid.png}" alt="auction"/>
+                                    <span>200 points</span>
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+                    <div th:replace="~{fragments/pagination :: page(id)}"></div>
+                </section>
+            </section>
+        </section>
+    </section>
+</main>
+</body>
+</html>
