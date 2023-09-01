@@ -2,6 +2,7 @@ package com.thedaymarket.utils;
 
 import com.thedaymarket.controllers.response.PagedResponse;
 import jakarta.servlet.ServletException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.util.StringUtils;
@@ -13,6 +14,7 @@ import org.springframework.web.servlet.function.ServerRequest;
 import java.io.IOException;
 import java.util.List;
 
+@Slf4j
 public final class RESTUtils {
   private RESTUtils() {}
 
@@ -22,6 +24,7 @@ public final class RESTUtils {
       validate(body, validator);
       return body;
     } catch (ServletException | IOException e) {
+      log.error("Error: ", e);
       throw ExceptionUtils.getBadRequestExceptionResponse(
           "Failed to parse request body: " + e.getMessage());
     }

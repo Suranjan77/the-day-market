@@ -8,6 +8,7 @@ import com.thedaymarket.domain.User;
 import com.thedaymarket.repository.AuctionRepository;
 import com.thedaymarket.service.AuctionService;
 import com.thedaymarket.service.CategoryService;
+import com.thedaymarket.service.StorageService;
 import com.thedaymarket.utils.ExceptionUtils;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -15,6 +16,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 @AllArgsConstructor
 @Service
@@ -22,6 +24,7 @@ public class AuctionServiceImpl implements AuctionService {
 
   private final AuctionRepository auctionRepository;
   private final CategoryService categoryService;
+  private final StorageService storageService;
 
   @Override
   public Page<Auction> getTodayAuctions(Pageable pageable) {
@@ -86,6 +89,21 @@ public class AuctionServiceImpl implements AuctionService {
     }
     auction.setScheduledDateTime(scheduleDateTime);
     auction = auctionRepository.save(auction);
+    return auction;
+  }
+
+  @Override
+  public Auction uploadAuctionImage(User seller, Long auctionId, MultipartFile file) {
+    var auction = getAuction(auctionId);
+    try {
+      var uploadResponse = storageService.upload(file);
+      auction.setImageName(uploadResponse.fileName());
+      auction.setImageUrl(uploadResponse.url());
+      auction = auctionRepository.save(auction);
+    } catch (Exception e) {
+      throw ExceptionUtils.getServerException(e.getMessage());
+    }
+
     return auction;
   }
 

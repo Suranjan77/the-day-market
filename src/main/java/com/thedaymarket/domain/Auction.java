@@ -34,4 +34,8 @@ public class Auction extends BaseEntity {
   @ManyToOne private Market assignedMarket;
 
   @ManyToOne private Category category;
+
+  private String imageName;
+
+  private String imageUrl;
 }

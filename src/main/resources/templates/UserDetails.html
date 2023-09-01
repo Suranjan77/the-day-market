@@ -4,12 +4,13 @@
     <title id="pageTitle">User Details | The-day-market</title>
 </head>
 <body>
+<script th:src="@{/js/userdetails.js}"></script>
 <main class="signupAuthentication">
     <!-- sign up Authenticate wrapper -->
     <section class="signupAuthentication-wrapper">
         <section class="signupAuth-logo">
             <img th:src="@{/images/logoicon.png}" alt="logo"/>
-            <p>Add more details displayName</p>
+            <p>Add more details <span id="full-name">...</span></p>
         </section>
         <!-- form section  -->
         <section class="signupAuth-form">

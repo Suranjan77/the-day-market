@@ -1,10 +1,12 @@
 package com.thedaymarket.controllers;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@CrossOrigin("*")
 @RequestMapping("web")
 public class ViewController {
   @GetMapping()
@@ -17,9 +19,14 @@ public class ViewController {
     return "Login";
   }
 
-  @GetMapping("/signup")
+  @GetMapping("/register")
   public String signup() {
     return "Signup";
+  }
+
+  @GetMapping("/user-details")
+  public String userDetails() {
+    return "UserDetails";
   }
 
   @GetMapping("/list-item")

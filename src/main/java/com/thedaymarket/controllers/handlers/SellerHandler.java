@@ -4,23 +4,20 @@ import com.thedaymarket.controllers.request.AuctionDetailsRequest;
 import com.thedaymarket.controllers.request.CreateAuctionRequest;
 import com.thedaymarket.service.AuctionService;
 import com.thedaymarket.service.UserService;
-import com.thedaymarket.utils.ExceptionUtils;
 import com.thedaymarket.utils.RESTUtils;
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 import org.springframework.validation.Validator;
-import org.springframework.web.server.ServerWebInputException;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.support.StandardMultipartHttpServletRequest;
 import org.springframework.web.servlet.function.ServerRequest;
 import org.springframework.web.servlet.function.ServerResponse;
 
+@Slf4j
 @AllArgsConstructor
 @Component
 public class SellerHandler {
-
-  public static final String REQUIRED_PARAMETER_SELLER_ID_MESSAGE =
-      "Required parameter sellerId [id]";
 
   private final AuctionService auctionService;
   private final UserService userService;
@@ -63,12 +60,22 @@ public class SellerHandler {
     return ServerResponse.ok().body(auction);
   }
 
-  public ServerResponse uploadPicture(ServerRequest req) {
-    //      @PathVariable("sellerId") Long sellerId,
-    //      @PathVariable("auctionId") Long auctionId,
-    //      @RequestParam("file") MultipartFile image
+  public ServerResponse uploadAuctionImage(ServerRequest req) {
+    var sellerId = Long.parseLong(RESTUtils.getPathVariable(req, "id"));
+    var seller = userService.getUser(sellerId);
+    var auctionId = Long.parseLong(RESTUtils.getPathVariable(req, "auctionId"));
 
-    return ServerResponse.ok().build();
+    var servletRequest = req.servletRequest();
+
+    if (servletRequest instanceof StandardMultipartHttpServletRequest multiPartRequest) {
+      MultipartFile image = multiPartRequest.getFile("file");
+      if (image != null) {
+        var auction = auctionService.uploadAuctionImage(seller, auctionId, image);
+        return ServerResponse.ok().body(auction);
+      }
+    }
+
+    return ServerResponse.badRequest().body("No file was uploaded");
   }
 
   public ServerResponse updateAuctionDetails(ServerRequest req) {
@@ -79,9 +86,10 @@ public class SellerHandler {
 
     var auctionDetails = RESTUtils.parseRequestBody(req, AuctionDetailsRequest.class, validator);
 
-    auctionService.updateAuctionDetails(seller, Long.parseLong(auctionId), auctionDetails);
+    var updatedAuction =
+        auctionService.updateAuctionDetails(seller, Long.parseLong(auctionId), auctionDetails);
 
-    return ServerResponse.ok().build();
+    return ServerResponse.ok().body(updatedAuction);
   }
 
   public ServerResponse deleteAuction(ServerRequest req) {

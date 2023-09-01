@@ -1,67 +1,77 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{fragments/head :: headerFragment}">
-  <title id="pageTitle">Register | The-day-market</title>
+    <title id="pageTitle">Register | The-day-market</title>
 </head>
-  <body>
-    <main class="signup">
-      <section class="signup-wrapper">
+<body>
+<script th:src="@{/js/signup.js}"></script>
+<main class="signup">
+    <section class="signup-wrapper">
         <!-- signup form logo -hero section -->
         <section class="signup-logo">
-          <img th:src="@{/images/logoicon.png}" alt="logo" />
-          <p>Create new account</p>
+            <img th:src="@{/images/logoicon.png}" alt="logo"/>
+            <p>Create new account</p>
         </section>
         <!-- signup form section -->
         <section class="signup-form">
-          <form action="#">
-            <label for="displayName">Display Name</label><br />
-            <input
-              type="text"
-              name="displayName"
-              placeholder="Enter username"
-              id="displayName"
-              required
-            /><br />
-            <label for="email">Email Address</label><br />
-            <input
-              type="email"
-              name="email"
-              placeholder="Enter email"
-              id="email"
-              required
-            /><br />
-            <label for="password">Password</label>
-            <input
-              type="password"
-              name="password"
-              placeholder="Enter password"
-              id="password"
-              required
-            /><br />
-            <label for="password">Confirm password</label>
-            <input
-              type="password"
-              name="confirmPassword"
-              placeholder="Enter confirm password"
-              id="confirmPassword"
-              required
-            /><br />
-            <input
-              type="checkbox"
-              name="agreeterms"
-              id="terms-acceptance"
-              required
-            />
-            <label for="terms-acceptance"
-              >I read and agree with <a href="#">Terms and Conditions</a></label
-            >
-            <button type="submit" class="submit-button">
-              Register
-              <!-- <a href="./UserDetails.html">Register</a> -->
-            </button>
-          </form>
+            <p id="danger">Danger Message</p>
+            <form action="" id="register-form">
+                <label for="firstName">First Name</label><br/>
+                <input
+                        type="text"
+                        name="firstName"
+                        placeholder="Enter firstname"
+                        id="firstName"
+                        required
+                /><br/>
+                <label for="lastName">Last Name</label><br/>
+                <input
+                        type="text"
+                        name="lastName"
+                        placeholder="Enter lastname"
+                        id="lastName"
+                        required
+                /><br/>
+                <label for="email">Email Address</label><br/>
+                <input
+                        type="email"
+                        name="email"
+                        placeholder="Enter email"
+                        id="email"
+                        required
+                /><br/>
+                <label for="password">Password</label>
+                <input
+                        type="password"
+                        name="password"
+                        placeholder="Enter password"
+                        id="password"
+                        required
+                /><br/>
+                <label for="password">Confirm password</label>
+                <input
+                        type="password"
+                        name="confirmPassword"
+                        placeholder="Enter confirm password"
+                        id="confirmPassword"
+                        required
+                /><br/>
+                <input
+                        type="checkbox"
+                        name="agreeterms"
+                        id="terms-acceptance"
+                        required
+                />
+                <label for="terms-acceptance"
+                >I read and agree with <a href="#">Terms and Conditions</a></label
+                >
+                <button type="submit" class="submit-button">
+                    Register
+                    <!-- <a href="./UserDetails.html">Register</a> -->
+                </button>
+            </form>
         </section>
-      </section>
-    </main>
-  </body>
+    </section>
+</main>
+</body>
 </html>

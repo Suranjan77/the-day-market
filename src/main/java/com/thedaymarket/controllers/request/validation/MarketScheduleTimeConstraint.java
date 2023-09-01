@@ -6,10 +6,10 @@ import jakarta.validation.Payload;
 import java.lang.annotation.*;
 
 @Documented
-@Constraint(validatedBy = ScheduledTimeValidator.class)
+@Constraint(validatedBy = MarketScheduleTimeValidator.class)
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ScheduledTimeConstraint {
+public @interface MarketScheduleTimeConstraint {
   String message() default "Invalid time range, It should be between 10 AM and 5 PM";
 
   Class<?>[] groups() default {};

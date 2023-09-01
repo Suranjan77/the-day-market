@@ -13,4 +13,13 @@ Content-Type: application/json
   "bidderId": 2
 }
 
+###
+POST {{baseUrl}}/sellers/5/auctions/8/image
+Content-Type: multipart/form-data; boundary=WebAppBoundary
 
+--WebAppBoundary
+Content-Disposition: form-data; name="file"; filename="auction.png"
+Content-Type: image/png
+
+< ./auction.png
+--WebAppBoundary--

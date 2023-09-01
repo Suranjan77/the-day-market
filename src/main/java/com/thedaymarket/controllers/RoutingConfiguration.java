@@ -3,32 +3,69 @@ package com.thedaymarket.controllers;
 import static org.springframework.web.servlet.function.RequestPredicates.accept;
 import static org.springframework.web.servlet.function.RouterFunctions.route;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.thedaymarket.controllers.handlers.*;
+import com.thedaymarket.utils.ExceptionUtils;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.servlet.function.*;
+
+import java.util.List;
 
 @Slf4j
 @Configuration(proxyBeanMethods = false)
+@AllArgsConstructor
 @ComponentScan(basePackages = "com.thedaymarket.controllers.handlers")
 public class RoutingConfiguration {
   private static final RequestPredicate ACCEPT_JSON = accept(MediaType.APPLICATION_JSON);
 
-  @Autowired private AuctionHandler auctionHandler;
-  @Autowired private BiddingHandler biddingHandler;
-  @Autowired private CategoriesHandler categoriesHandler;
-  @Autowired private PaymentHandler paymentHandler;
-  @Autowired private SellerHandler sellerHandler;
-  @Autowired private HealthCheckHandler healthCheckHandler;
+  private final AuctionHandler auctionHandler;
+  private final BiddingHandler biddingHandler;
+  private final CategoriesHandler categoriesHandler;
+  private final PaymentHandler paymentHandler;
+  private final SellerHandler sellerHandler;
+  private final HealthCheckHandler healthCheckHandler;
+  private final AuthHandler authHandler;
 
   @Bean
   public RouterFunction<ServerResponse> apiRouter() {
-    return route().path("/api/v1", this::apiRoutes).filter(this::logRequest).build();
+    return route()
+        .path("/api/v1", this::apiRoutes)
+        .filter(this::logRequest)
+        .onError(
+            ExceptionUtils.BusinessException.class,
+            (e, req) ->
+                EntityResponse.fromObject(new ApiError(e.getMessage(), null))
+                    .status(((ExceptionUtils.BusinessException) e).getStatusCode())
+                    .build())
+        .onError(
+            MethodArgumentNotValidException.class,
+            (e, req) -> {
+              var errors =
+                  ((MethodArgumentNotValidException) e)
+                      .getBindingResult().getFieldErrors().stream()
+                          .map(FieldError::getDefaultMessage)
+                          .toList();
+
+              return EntityResponse.fromObject(new ApiError(null, errors))
+                  .status(HttpStatus.UNPROCESSABLE_ENTITY)
+                  .build();
+            })
+        .build();
   }
+
+  @JsonInclude(JsonInclude.Include.NON_EMPTY)
+  public record ApiError(String error, List<String> errors) {}
 
   public RouterFunction<ServerResponse> apiRoutes() {
     return route()
@@ -38,6 +75,14 @@ public class RoutingConfiguration {
         .add(paymentRouter())
         .add(sellerRouter())
         .add(healthCheckRouter())
+        .add(authRouter())
+        .build();
+  }
+
+  public RouterFunction<ServerResponse> authRouter() {
+    return route()
+        .POST("/auth/login", authHandler::login)
+        .POST("/auth/register", authHandler::register)
         .build();
   }
 
@@ -79,7 +124,10 @@ public class RoutingConfiguration {
         .GET("/sellers/{id}/auctions", sellerHandler::getAuctions)
         .GET("/sellers/{id}/auctions/today", sellerHandler::getTodayAuction)
         .POST("/sellers/{id}/auctions", ACCEPT_JSON, sellerHandler::createAuction)
-        .POST("/sellers/{id}/auctions/{auctionId}/image", ACCEPT_JSON, sellerHandler::uploadPicture)
+        .POST(
+            "/sellers/{id}/auctions/{auctionId}/image",
+            accept(MediaType.MULTIPART_FORM_DATA),
+            sellerHandler::uploadAuctionImage)
         .PATCH(
             "/sellers/{id}/auctions/{auctionId}", ACCEPT_JSON, sellerHandler::updateAuctionDetails)
         .DELETE("/sellers/{id}/auctions/{auctionId}", sellerHandler::deleteAuction)

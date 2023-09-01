@@ -1794,4 +1794,9 @@ footer p {
 }
 .auction-bid .auction-bid-wrapper .mybid-wrapper .mybid-detailings .pagination h3 {
   font-size: 20px;
-}/*# sourceMappingURL=main.css.map */
+}
+
+#danger {
+  color: red;
+  padding: 10px;
+}

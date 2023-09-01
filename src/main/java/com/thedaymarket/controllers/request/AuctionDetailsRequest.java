@@ -1,6 +1,6 @@
 package com.thedaymarket.controllers.request;
 
-import com.thedaymarket.controllers.request.validation.ScheduledTimeConstraint;
+import com.thedaymarket.controllers.request.validation.MarketScheduleTimeConstraint;
 import jakarta.validation.constraints.*;
 
 import java.math.BigDecimal;
@@ -10,7 +10,7 @@ import java.time.LocalTime;
 public record AuctionDetailsRequest(
     @FutureOrPresent(message = "Scheduled date should be in future or today")
         LocalDate scheduledDate,
-    @ScheduledTimeConstraint LocalTime scheduledTime,
+    @MarketScheduleTimeConstraint LocalTime scheduledTime,
     @Min(value = 60, message = "Decrement interval must be more than or equal to a minute")
         @Max(value = 7200, message = "Decrement interval must be less than or equal to 2 hours")
         Long decrementSeconds,
