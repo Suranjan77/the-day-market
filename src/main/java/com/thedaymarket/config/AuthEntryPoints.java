@@ -1,9 +1,12 @@
 package com.thedaymarket.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.thedaymarket.controllers.response.ErrorMessage;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
@@ -26,13 +29,15 @@ public class AuthEntryPoints implements AuthenticationEntryPoint {
     response.setContentType(MediaType.APPLICATION_JSON_VALUE);
     response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 
-    final Map<String, Object> body = new HashMap<>();
-    body.put("status", HttpServletResponse.SC_UNAUTHORIZED);
-    body.put("error", "Unauthorized");
-    body.put("message", authException.getMessage());
-    body.put("path", request.getServletPath());
-
+    var errorMessage =
+        new ErrorMessage(
+            HttpServletResponse.SC_UNAUTHORIZED,
+            authException.getMessage(),
+            null,
+            request.getServletPath(),
+            LocalDateTime.now());
     final ObjectMapper mapper = new ObjectMapper();
-    mapper.writeValue(response.getOutputStream(), body);
+    mapper.registerModule(new JavaTimeModule());
+    mapper.writeValue(response.getOutputStream(), errorMessage);
   }
 }

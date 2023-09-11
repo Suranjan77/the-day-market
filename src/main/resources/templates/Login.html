@@ -4,6 +4,7 @@
     <title id="pageTitle">Login | The-day-market</title>
 </head>
 <body>
+<script th:src="@{/js/login.js}"></script>
 <!-- login form wrapper -->
 <main class="login">
     <section class="login-wrapper">
@@ -14,7 +15,7 @@
         </section>
         <!-- login form section -->
         <section class="login-form">
-            <form action="#">
+            <form action="" id="login-form">
                 <label for="email">Email Address</label><br/>
                 <input
                         type="email"
@@ -36,7 +37,7 @@
                 /><br/>
                 <input type="submit" value="Sign in" class="submit-button"/>
                 <p class="new-account">
-                    Need an account? <a th:href="@{/web/signup}">Register</a>
+                    Need an account? <a th:href="@{/web/register}">Register</a>
                 </p>
             </form>
         </section>

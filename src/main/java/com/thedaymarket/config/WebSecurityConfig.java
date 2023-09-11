@@ -2,7 +2,6 @@ package com.thedaymarket.config;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
-import com.thedaymarket.controllers.filter.JwtRequestFilter;
 import com.thedaymarket.service.TokenService;
 import com.thedaymarket.service.impl.JwtUserDetailsService;
 import lombok.AllArgsConstructor;
@@ -61,15 +60,20 @@ public class WebSecurityConfig {
             session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .authorizeHttpRequests(
             auth ->
-                auth.requestMatchers("/api/v1/auth/**")
+                auth.requestMatchers("/api/v1/auth/login", "/api/v1/auth/register")
                     .permitAll()
                     .requestMatchers(
+                        "/swagger-ui/**",
+                        "/v3/api-docs/**",
                         "/web/**",
+                        "/api/v1/image",
                         "/images/**",
                         "/jquery.js",
                         "/main.css",
                         "/main.js",
                         "/error",
+                        "/lib/**",
+                        "/favicon.ico",
                         "/js/**")
                     .permitAll()
                     .anyRequest()

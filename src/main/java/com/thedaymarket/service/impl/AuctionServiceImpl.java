@@ -2,6 +2,7 @@ package com.thedaymarket.service.impl;
 
 import com.thedaymarket.controllers.request.AuctionDetailsRequest;
 import com.thedaymarket.controllers.request.CreateAuctionRequest;
+import com.thedaymarket.controllers.request.CreateCategoryRequest;
 import com.thedaymarket.domain.Auction;
 import com.thedaymarket.domain.AuctionStatus;
 import com.thedaymarket.domain.User;
@@ -62,11 +63,14 @@ public class AuctionServiceImpl implements AuctionService {
   @Override
   public Auction createAuction(User seller, CreateAuctionRequest createAuctionRequest) {
     var auction = new Auction();
-    auction.setCategory(categoryService.getCategory(createAuctionRequest.categoryId()));
+    auction.setCategory(
+        categoryService.getOrCreate(new CreateCategoryRequest(createAuctionRequest.category())));
     auction.setDescription(createAuctionRequest.description());
     auction.setSeller(seller);
     auction.setTitle(createAuctionRequest.title());
     auction.setType(createAuctionRequest.type());
+    auction.setStatus(
+        createAuctionRequest.isDraft() ? AuctionStatus.DRAFT : AuctionStatus.SCHEDULED);
     auction = auctionRepository.save(auction);
     return auction;
   }
@@ -98,7 +102,6 @@ public class AuctionServiceImpl implements AuctionService {
     try {
       var uploadResponse = storageService.upload(file);
       auction.setImageName(uploadResponse.fileName());
-      auction.setImageUrl(uploadResponse.url());
       auction = auctionRepository.save(auction);
     } catch (Exception e) {
       throw ExceptionUtils.getServerException(e.getMessage());

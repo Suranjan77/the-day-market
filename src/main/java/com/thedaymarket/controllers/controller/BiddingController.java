@@ -1,7 +1,6 @@
-package com.thedaymarket.controllers.handlers;
+package com.thedaymarket.controllers.controller;
 
 import com.thedaymarket.controllers.request.BidRequest;
-import com.thedaymarket.utils.ExceptionUtils;
 import com.thedaymarket.utils.RESTUtils;
 import jakarta.servlet.ServletException;
 import java.io.IOException;
@@ -12,14 +11,14 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 import org.springframework.web.server.ServerWebInputException;
 import org.springframework.web.servlet.function.ServerRequest;
 import org.springframework.web.servlet.function.ServerResponse;
 
 @Slf4j
 @Component
-public class BiddingHandler {
+//todo
+public class BiddingController {
 
   private final ConcurrentHashMap<Long, CopyOnWriteArrayList<ServerResponse.SseBuilder>>
       SSE_CLIENTS_BY_AUCTION_ID = new ConcurrentHashMap<>();

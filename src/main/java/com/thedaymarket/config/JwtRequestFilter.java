@@ -1,4 +1,4 @@
-package com.thedaymarket.controllers.filter;
+package com.thedaymarket.config;
 
 import com.thedaymarket.service.TokenService;
 import jakarta.servlet.FilterChain;
@@ -34,9 +34,14 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     }
 
     final String token = header.substring(7);
-    final String username = tokenService.validateTokenAndGetUserName(token);
-
-    if (username == null) {
+    String username = null;
+    try {
+      username = tokenService.validateTokenAndGetUserName(token);
+      if (username == null) {
+        chain.doFilter(req, res);
+        return;
+      }
+    } catch (Exception e) {
       chain.doFilter(req, res);
       return;
     }

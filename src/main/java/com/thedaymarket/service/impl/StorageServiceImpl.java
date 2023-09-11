@@ -18,19 +18,18 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
+import static com.thedaymarket.utils.StorageConstants.BUCKET;
+
 @Slf4j
 @Service
 public class StorageServiceImpl implements StorageService {
 
   private final MinioClient storageClient;
-  private final String BUCKET = "thedaymarket";
-  private final String storageUrl;
 
   public StorageServiceImpl(
       @Value("${minio.storage.url}") String storageUrl,
       @Value("${minio.storage.username}") String username,
       @Value("${minio.storage.password}") String password) {
-    this.storageUrl = storageUrl;
     this.storageClient =
         MinioClient.builder().endpoint(storageUrl).credentials(username, password).build();
     initBucket();
@@ -58,9 +57,7 @@ public class StorageServiceImpl implements StorageService {
 
       storageClient.putObject(putObjectOptions);
 
-      return new UploadedObject(
-          fileName,
-          storageUrl + "/" + BUCKET + "/" + UriUtils.encode(fileName, StandardCharsets.UTF_8));
+      return new UploadedObject(fileName, BUCKET);
     }
   }
 

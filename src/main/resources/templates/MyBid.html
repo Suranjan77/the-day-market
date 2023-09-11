@@ -7,11 +7,11 @@
 <header th:insert="~{fragments/header :: header(true)}"></header>
 <main class="auction-bid">
     <section class="auction-bid-wrapper">
-        <section th:replace="~{fragments/pageNav :: pageNavigation('')}">
+        <section th:replace="~{fragments/pageNav :: pageNavigation('', 'bid')}">
         </section>
         <section class="mybid-wrapper">
             <section class="mybid-header">
-                <h3>Your Bids</h3>
+                <h3><span id="my-page-title">Your Bids</span></h3>
             </section>
             <section class="mybid-detailings">
                 <section class="sorting">

@@ -6,13 +6,15 @@
 <body>
 <header th:insert="~{fragments/header :: header(true)}"></header>
 <main class="auction-bid">
+    <script th:src="@{/lib/pagination.min.js}"></script>
+    <script th:src="@{/js/market.js}"></script>
     <section class="auction-bid-wrapper">
         <!-- navigation for dashboard,market and my bids -->
-        <section th:replace="~{fragments/pageNav :: pageNavigation('')}">
+        <section th:replace="~{fragments/pageNav :: pageNavigation('', 'market')}">
         </section>
         <!-- section for auction type display  -->
         <section class="auction-type">
-            <h4>OPEN For Business</h4>
+            <h4 id="market-status">OPEN For Business</h4>
         </section>
         <section class="search-result-wrapper">
             <h5>Jewellery <i class="fa fa-chevron-right"></i> Gold</h5>
@@ -32,7 +34,7 @@
                 </section>
                 <section class="match-found">
                     <section class="match-found-header">
-                        <h5>Match Found(<span id="match-count">20</span>)</h5>
+                        <h5>Matches Found (<span id="match-count">20</span>)</h5>
                         <select name="Sort">
                             <option value="">Sort By</option>
                             <option value="">Bid Amount</option>
@@ -40,22 +42,14 @@
                             <option value="">Popularity</option>
                         </select>
                     </section>
-                    <section class="match-found-items">
-                        <div class="individual-items">
-                            <div class="image">
-                                <img th:src="@{/images/jewellery/gold.jpg}" alt="thumbnail"/>
-                            </div>
-                            <div class="details">
-                                <h5>Auction Title</h5>
-                                <p id="auction-type">English Auction</p>
-                                <p id="bid-amount">
-                                    <img th:src="@{/images/bid.png}" alt="auction"/>
-                                    <span>200 points</span>
-                                </p>
-                            </div>
-                        </div>
+
+                    <section class="match-found-items" id="auctions">
                     </section>
-                    <div th:replace="~{fragments/pagination :: page(id)}"></div>
+                    <div class="pagination" id="pagination">
+                        <div id="pagination-nav"></div>
+                    </div>
+
+<!--                    <div th:replace="~{fragments/pagination :: page('market')}"></div>-->
                 </section>
             </section>
         </section>

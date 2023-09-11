@@ -39,6 +39,11 @@ public class ViewController {
     return "MyBid";
   }
 
+  @GetMapping("/my-listings")
+  public String myListings() {
+    return "MyListings";
+  }
+
   @GetMapping("/market")
   public String market() {
     return "MarketPlace";
@@ -54,9 +59,9 @@ public class ViewController {
     return "DutchAuctionConfiguration";
   }
 
-  @GetMapping("/english-auction")
+  @GetMapping("/auction")
   public String englishAuction() {
-    return "EnglishAuctionBid";
+    return "Auction";
   }
 
   @GetMapping("/english-auction-config")

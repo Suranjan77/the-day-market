@@ -4,6 +4,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
+import com.thedaymarket.domain.User;
 import com.thedaymarket.service.TokenService;
 import com.thedaymarket.utils.AuthConstants;
 import com.thedaymarket.utils.ExceptionUtils;
@@ -26,13 +27,13 @@ public class JwtTokenService implements TokenService {
   }
 
   @Override
-  public String generateToken(UserDetails userDetails) {
+  public String generateToken(String userName) {
     final Instant now = Instant.now();
     return JWT.create()
-        .withSubject(userDetails.getUsername())
+        .withSubject(userName)
         .withIssuer("thedaymarket")
         .withIssuedAt(now)
-        .withExpiresAt(now.plusMillis(AuthConstants.TOKEN_EXPIRY_MILLISECONDS))
+        .withExpiresAt(now.plusSeconds(AuthConstants.TOKEN_EXPIRY_SECONDS))
         .sign(this.hmac512);
   }
 

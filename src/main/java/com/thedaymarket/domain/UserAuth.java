@@ -3,6 +3,8 @@ package com.thedaymarket.domain;
 import com.thedaymarket.utils.AuthConstants;
 import jakarta.persistence.Embeddable;
 import java.time.Instant;
+import java.time.LocalDateTime;
+
 import lombok.Data;
 
 @Data
@@ -10,11 +12,11 @@ import lombok.Data;
 public class UserAuth {
   private String token;
   private String password;
-  private Instant lastLoggedInAt;
+  private LocalDateTime lastLoggedInAt;
 
   public boolean isTokenValid() {
     return lastLoggedInAt
-        .plusMillis(AuthConstants.TOKEN_EXPIRY_MILLISECONDS)
-        .isAfter(Instant.now());
+        .plusSeconds(AuthConstants.TOKEN_EXPIRY_SECONDS)
+        .isAfter(LocalDateTime.now());
   }
 }

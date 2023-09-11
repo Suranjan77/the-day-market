@@ -7,14 +7,26 @@ import org.springframework.security.core.userdetails.User;
 
 @Getter
 public class JwtUserDetails extends User {
-  private Long id;
+  private final Long id;
+  private final boolean isFirstLogin;
+  private final String firstName;
+  private final String lastName;
+  private final String profileImage;
 
   public JwtUserDetails(
       Long id,
+      boolean isFirstLogin,
       String username,
       String password,
-      Collection<? extends GrantedAuthority> authorities) {
+      Collection<? extends GrantedAuthority> authorities,
+      String firstName,
+      String lastName,
+      String profileImage) {
     super(username, password, authorities);
     this.id = id;
+    this.isFirstLogin = isFirstLogin;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.profileImage = profileImage;
   }
 }

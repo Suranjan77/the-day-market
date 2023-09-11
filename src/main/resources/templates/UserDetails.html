@@ -14,15 +14,16 @@
         </section>
         <!-- form section  -->
         <section class="signupAuth-form">
-            <form action="#">
+            <p id="danger"></p>
+            <form action="" id="userdetails-form">
                 <!-- role selection section  -->
                 <section class="signupAuth-role">
                     <!-- div for selecting buyer or seller role -->
                     <div class="role">
                         <label for="user-role">I want to</label><br/>
                         <select name="role" id="user-role">
-                            <option value="Buy">Buy</option>
-                            <option value="Sell">Sell</option>
+                            <option value="BUYER">Buy</option>
+                            <option value="SELLER">Sell</option>
                         </select>
                     </div>
                     <!-- div for choosing id photo  -->
@@ -59,17 +60,6 @@
                             id="streetname"
                             required
                     />
-                </section>
-                <!-- section for introduction information  -->
-                <section class="introduction">
-                    <label for="userIntroduction" id="introduction">Introduce yourself</label><br/>
-                    <textarea
-                            name="introduction"
-                            id="userIntroduction"
-                            cols="30"
-                            rows="7"
-                            maxlength="200"
-                    ></textarea>
                 </section>
                 <!-- submit button section  -->
                 <section class="submit">

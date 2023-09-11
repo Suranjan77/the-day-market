@@ -1,19 +1,20 @@
 package com.thedaymarket.utils;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
-import org.springframework.web.server.ResponseStatusException;
 
 public final class ExceptionUtils {
   private ExceptionUtils() {}
 
   @Getter
-  @AllArgsConstructor
   public static class BusinessException extends RuntimeException {
     private final HttpStatusCode statusCode;
-    private final String message;
+
+    public BusinessException(HttpStatusCode statusCode, String message) {
+      super(message);
+      this.statusCode = statusCode;
+    }
   }
 
   public static BusinessException getNotFoundExceptionResponse(String message) {
@@ -29,6 +30,6 @@ public final class ExceptionUtils {
   }
 
   public static BusinessException getAuthenticationException(String message) {
-    return new BusinessException(HttpStatus.UNAUTHORIZED, message);
+    return new BusinessException(HttpStatus.FORBIDDEN, message);
   }
 }

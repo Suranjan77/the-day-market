@@ -4,11 +4,13 @@ import jakarta.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 import lombok.Data;
+import org.checkerframework.common.aliasing.qual.Unique;
+import org.hibernate.annotations.NaturalId;
 
 @Entity
 @Data
 public class Category extends BaseEntity {
-  private String tag;
+  @Unique private String tag;
 
   @ManyToOne
   @JoinColumn(name = "parent_id")
@@ -16,4 +18,10 @@ public class Category extends BaseEntity {
 
   @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
   private Set<Category> children = new HashSet<>();
+
+  @PrePersist
+  @PreUpdate
+  private void prepare() {
+    this.tag = tag.toLowerCase();
+  }
 }

@@ -6,9 +6,11 @@
 <body>
 <header th:insert="~{fragments/header :: header(true)}"></header>
 <main class="auction-bid">
+    <script th:src="@{/lib/pagination.min.js}"></script>
+    <script th:src="@{/js/auction.js}"></script>
     <section class="auction-bid-wrapper">
         <!-- navigation for dashboard,market and my bids -->
-        <section th:replace="~{fragments/pageNav :: pageNavigation('')}">
+        <section th:replace="~{fragments/pageNav :: pageNavigation('', 'market')}">
         </section>
         <!-- section for auction type display  -->
         <section class="auction-type">

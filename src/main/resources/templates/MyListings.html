@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: headerFragment}">
+    <title id="pageTitle">My Bids | The-day-market</title>
+</head>
+<body>
+<header th:insert="~{fragments/header :: header(true)}"></header>
+<main class="auction-bid">
+    <script th:src="@{/lib/pagination.min.js}"></script>
+    <script th:src="@{/js/myListings.js}"></script>
+    <section class="auction-bid-wrapper">
+        <section th:replace="~{fragments/pageNav :: pageNavigation('', 'bid')}">
+        </section>
+        <section class="mybid-wrapper">
+            <section class="mybid-header">
+                <h3><span>Your Listings</span></h3>
+            </section>
+            <section class="add-listing" id="add-listing">
+                <h3><span>+ Add new listing</span></h3>
+            </section>
+            <section class="mybid-detailings">
+                <section class="sorting">
+                    <select name="sortBy" id="bid-sorting">
+                        <option value="">Sort By</option>
+                    </select>
+                </section>
+                <section class="match-found-items" id="auctions">
+                </section>
+                <div class="pagination" id="pagination">
+                    <div id="pagination-nav"></div>
+                </div>
+            </section>
+        </section>
+    </section>
+</main>
+</body>
+</html>

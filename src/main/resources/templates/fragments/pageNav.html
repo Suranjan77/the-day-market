@@ -1,20 +1,21 @@
-<section class="page-nav" th:fragment="pageNavigation(role)">
+<section class="page-nav" th:fragment="pageNavigation(role, activationId)">
     <section class="dashboard">
         <a th:href="${role == 'buyer'} ? '/web/buyer-dashboard' : '/web/seller-dashboard'">
-            <i class="fa fa-dashboard"></i>
-            <span>Dashboard</span>
+            <i th:class="${activationId == 'dashboard'} ? 'fa fa-dashboard icon-activated' : 'fa fa-dashboard'"></i>
+            <span th:class="${activationId == 'dashboard'} ? 'icon-activated' : ''">Dashboard</span>
         </a>
     </section>
     <section class="market">
         <a th:href="@{/web/market}">
-            <i class="fa fa-building"></i>
-            <span>Market</span>
+            <i th:class="${activationId == 'market'} ? 'fa fa-building icon-activated' : 'fa fa-building'"></i>
+            <span th:class="${activationId == 'market'} ? 'icon-activated' : ''">Market</span>
         </a>
     </section>
     <section class="mybid">
-        <a th:href="@{/web/my-bids}">
-            <i class="fa fa-hand-stop-o"></i>
-            <span>My Bids</span>
+        <a th:href="${role == 'buyer' ?'/web/my-bids' : '/web/my-listings'}">
+            <i th:class="${activationId == 'bid'} ? 'fa fa-hand-stop-o icon-activated' : 'fa fa-hand-stop-o'"></i>
+            <span th:class="${activationId == 'bid'} ? 'icon-activated' : ''"
+                  th:text="${role == 'buyer' ? 'My Bids' : 'My Listings'}"></span>
         </a>
     </section>
 </section>

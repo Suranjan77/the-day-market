@@ -19,9 +19,15 @@ public class User extends BaseEntity {
 
   @Embedded private UserAddress address;
 
+  private String profileImageName;
+
   @Enumerated(EnumType.STRING)
   private UserRole role;
 
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-  private List<Reputation> reputation;
+  @OneToOne(fetch = FetchType.LAZY, mappedBy = "user")
+  private Reputation reputation;
+
+  public boolean isFirstLogin() {
+    return auth.getLastLoggedInAt() == null || role == null;
+  }
 }
