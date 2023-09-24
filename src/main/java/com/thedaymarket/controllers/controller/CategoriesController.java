@@ -1,9 +1,11 @@
 package com.thedaymarket.controllers.controller;
 
 import com.thedaymarket.controllers.request.CreateCategoryRequest;
+import com.thedaymarket.controllers.response.CategoriesResponse;
 import com.thedaymarket.controllers.response.Suggestion;
 import com.thedaymarket.domain.Category;
 import com.thedaymarket.service.CategoryService;
+import com.thedaymarket.utils.RESTUtils;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.function.ServerRequest;
@@ -18,6 +20,13 @@ import java.util.stream.Collectors;
 public class CategoriesController {
 
   private final CategoryService categoryService;
+
+  @GetMapping()
+  public List<CategoriesResponse> getCategories() {
+    var pageRequest = RESTUtils.getPageRequest(0, 20);
+    var categories = categoryService.getCategories(pageRequest);
+    return categories.stream().map(CategoriesResponse::of).collect(Collectors.toList());
+  }
 
   @GetMapping("suggestions")
   public List<Suggestion> getCategorySuggestions(@RequestParam("query") String query) {

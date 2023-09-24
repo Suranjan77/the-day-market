@@ -470,6 +470,7 @@
 }
 
 @media (min-width: 320px) and (max-width: 480px) {
+
     .list-item .list-item-wrapper .list-item-form form input,
     .list-item .list-item-wrapper .list-item-form form select,
     .list-item .list-item-wrapper .list-item-form form textarea {
@@ -632,7 +633,7 @@ header nav .nav-user-details .user-details:hover .user-edit {
     width: 100%;
 }
 
-.auction-configuration .auction-configuration-wrapper .auction-form form {
+.auction-form form {
     background-color: #ffffff;
     padding: 20px 24px;
     border-radius: 8px;
@@ -641,21 +642,21 @@ header nav .nav-user-details .user-details:hover .user-edit {
     width: 100%;
 }
 
-.auction-configuration .auction-configuration-wrapper .auction-form form label {
+.auction-form form label {
     font-weight: 400;
 }
 
-.auction-configuration .auction-configuration-wrapper .auction-form form h3,
-.auction-configuration .auction-configuration-wrapper .auction-form form input {
+.auction-form form h3,
+.auction-form form input {
     margin-bottom: 10px;
 }
 
-.auction-configuration .auction-configuration-wrapper .auction-form form input {
+.auction-form form input {
     padding: 6px 8px;
     outline: none;
 }
 
-.auction-configuration .auction-configuration-wrapper .auction-form form .submit-button {
+.auction-form form .submit-button {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -663,7 +664,7 @@ header nav .nav-user-details .user-details:hover .user-edit {
     margin-top: 10px;
 }
 
-.auction-configuration .auction-configuration-wrapper .auction-form form .submit-button button {
+.auction-form form .submit-button button {
     background-color: #2e816e;
     border: 1px solid #2e816e;
     outline: none;
@@ -677,7 +678,7 @@ header nav .nav-user-details .user-details:hover .user-edit {
     width: 45%;
 }
 
-.auction-configuration .auction-configuration-wrapper .auction-form form .submit-button button:hover {
+.auction-form form .submit-button button:hover {
     background-color: #ffffff;
     color: #2e816e;
 }
@@ -879,7 +880,27 @@ header nav .nav-user-details .user-details:hover .user-edit {
 }
 
 .auction-bid .auction-bid-wrapper .bid-display .bid-details .bid-listing .list_wrapper {
-    height: 90%;
+    height: 80%;
+}
+
+.max_bid_wrapper {
+    font-weight: bolder;
+    font-size: 1.5rem;
+    background-color: #1b3034;
+    color: white;
+}
+
+.max_bid_wrapper .list {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 6px;
+}
+
+.disabled-button {
+    cursor: not-allowed !important;
+    color: #87bd9d !important;
+    background-color: white !important;
 }
 
 .auction-bid .auction-bid-wrapper .bid-display .bid-details .bid-listing .list_wrapper .list {
@@ -1059,6 +1080,26 @@ header nav .nav-user-details .user-details:hover .user-edit {
     border: #9a9a9a solid 1px;
     transition: 500ms ease;
     flex: 0 0 25%;
+}
+
+.items-details {
+    position: relative;
+}
+
+.items-details .sold-stamp {
+    position: absolute;
+    top: 40%;
+    right: 5%;
+    padding: 2vw 4vw;
+    color: red;
+    font-size: 3vw;
+    font-weight: bolder;
+    box-shadow: 0.2vw 0.2vw 0.3vw rgba(0, 0, 0, 0.2);
+    border: 0.5rem double red;
+    border-radius: 1rem;
+    -webkit-mask-image: url('/images/grunge.png');
+    -webkit-mask-size: 944px 604px;
+    mix-blend-mode: multiply;
 }
 
 .individual-items .sold-stamp {
@@ -1283,6 +1324,7 @@ header nav .nav-user-details .user-details:hover .user-edit {
 }
 
 @media (max-width: 560px) {
+
     .buypoints .buypoints-wrapper .buypoints-form form .card-validity .cvv,
     .buypoints .buypoints-wrapper .buypoints-form form .card-validity .expiry-date {
         width: 100%;
@@ -2229,7 +2271,7 @@ footer p {
     width: 50%;
 }
 
-#item-category-search{
+#item-category-search {
     width: 100%;
 }
 

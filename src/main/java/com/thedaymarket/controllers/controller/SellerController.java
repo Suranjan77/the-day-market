@@ -28,7 +28,7 @@ public class SellerController {
   private final UserService userService;
 
   @GetMapping("{id}/auctions")
-  public PagedResponse<List<AuctionShortResponse>> getAuctions(
+  public PagedResponse<AuctionShortResponse> getAuctions(
       @PathVariable("id") Long sellerId,
       @RequestParam(value = "includeDrafts", required = false, defaultValue = "false")
           Boolean includeDrafts,
@@ -41,7 +41,7 @@ public class SellerController {
   }
 
   @GetMapping("{id}/auctions/today")
-  public PagedResponse<List<AuctionShortResponse>> getTodayAuctions(
+  public PagedResponse<AuctionShortResponse> getTodayAuctions(
       @PathVariable("id") Long sellerId,
       @RequestParam(value = "includeDrafts", required = false, defaultValue = "false")
           Boolean includeDrafts,

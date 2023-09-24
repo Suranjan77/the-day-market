@@ -1,7 +1,9 @@
 package com.thedaymarket.controllers.controller;
 
 import com.thedaymarket.controllers.request.UserUpdateRequest;
+import com.thedaymarket.controllers.response.UserPointsResponse;
 import com.thedaymarket.controllers.response.UserResponse;
+import com.thedaymarket.domain.UserPoints;
 import com.thedaymarket.service.UserService;
 import com.thedaymarket.utils.ExceptionUtils;
 import com.thedaymarket.utils.JsonUtils;
@@ -37,5 +39,10 @@ public class UserController {
     }
 
     throw ExceptionUtils.getBadRequestExceptionResponse("File not uploaded.");
+  }
+
+  @GetMapping("{id}/points")
+  public UserPointsResponse points(@PathVariable("id") Long userId) {
+    return new UserPointsResponse(userService.getUser(userId).getPoints());
   }
 }

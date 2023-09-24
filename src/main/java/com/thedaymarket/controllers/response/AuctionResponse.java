@@ -15,7 +15,8 @@ public record AuctionResponse(
     Long itemCount,
     AuctionStatus status,
     LocalDateTime scheduledDateTime,
-    String imageName) {
+    String imageName,
+    CategoriesResponse categoriesResponse) {
 
   public static AuctionResponse fromAuction(Auction auction) {
     return new AuctionResponse(
@@ -29,6 +30,7 @@ public record AuctionResponse(
         auction.getItemCount(),
         auction.getStatus(),
         auction.getScheduledDateTime(),
-        auction.getImageName());
+        auction.getImageName(),
+        CategoriesResponse.of(auction.getCategory()));
   }
 }

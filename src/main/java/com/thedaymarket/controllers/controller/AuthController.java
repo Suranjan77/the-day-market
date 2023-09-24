@@ -10,6 +10,7 @@ import com.thedaymarket.service.impl.JwtUserDetails;
 import com.thedaymarket.utils.AuthConstants;
 import com.thedaymarket.utils.ExceptionUtils;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import jakarta.validation.Valid;
@@ -57,6 +58,8 @@ public class AuthController {
         userDetails.getLastName(),
         userDetails.getUsername(),
         userDetails.getProfileImage(),
+        userDetails.getPoints(),
+        userDetails.getAddress(),
         userDetails.isFirstLogin());
   }
 
@@ -75,6 +78,8 @@ public class AuthController {
         user.getLastName(),
         user.getEmail(),
         user.getProfileImageName(),
+        user.getPoints(),
+        user.getAddress(),
         user.isFirstLogin());
   }
 

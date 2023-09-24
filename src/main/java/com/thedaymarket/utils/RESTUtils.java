@@ -1,6 +1,7 @@
 package com.thedaymarket.utils;
 
 import com.thedaymarket.controllers.response.PagedResponse;
+import com.thedaymarket.controllers.response.PagedResponseWithMax;
 import jakarta.servlet.ServletException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -33,8 +34,18 @@ public final class RESTUtils {
     return PageRequest.of(page, size);
   }
 
-  public static <T> PagedResponse<List<T>> getPagedResponse(Page<T> pagedData) {
+  public static <T> PagedResponse<T> getPagedResponse(Page<T> pagedData) {
     return new PagedResponse<>(
+        pagedData.getContent(),
+        pagedData.getNumber(),
+        pagedData.getSize(),
+        pagedData.getTotalPages(),
+        pagedData.getTotalElements());
+  }
+
+  public static <T> PagedResponseWithMax<T> getPagedResponseWithMax(T max, Page<T> pagedData) {
+    return new PagedResponseWithMax<>(
+        max,
         pagedData.getContent(),
         pagedData.getNumber(),
         pagedData.getSize(),

@@ -22,8 +22,14 @@ public class CategoryServiceImpl implements CategoryService {
   }
 
   @Override
+  public List<Category> getCategories(PageRequest pageRequest) {
+    return categoryRepository.findAll(pageRequest).stream().toList();
+  }
+
+  @Override
   public List<Category> searchCategories(String query, int limit) {
-    return categoryRepository.findByTagContainingIgnoreCase(query.toLowerCase(), PageRequest.of(0, limit));
+    return categoryRepository.findByTagContainingIgnoreCase(
+        query.toLowerCase(), PageRequest.of(0, limit));
   }
 
   @Override

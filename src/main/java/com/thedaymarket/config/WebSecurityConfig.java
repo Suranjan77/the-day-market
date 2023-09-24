@@ -7,15 +7,16 @@ import com.thedaymarket.service.impl.JwtUserDetailsService;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.task.DelegatingSecurityContextAsyncTaskExecutor;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
@@ -27,6 +28,16 @@ public class WebSecurityConfig {
   private final JwtUserDetailsService userDetailsService;
   private final TokenService tokenService;
   private final AuthEntryPoints unauthorizedHandler;
+
+  @Bean
+  public DelegatingSecurityContextAsyncTaskExecutor taskExecutor() {
+    ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+    executor.setCorePoolSize(10);
+    executor.setMaxPoolSize(100);
+    executor.setQueueCapacity(50);
+    executor.setThreadNamePrefix("async-");
+    return new DelegatingSecurityContextAsyncTaskExecutor(executor);
+  }
 
   @Bean
   public JwtRequestFilter authFilter() {
@@ -56,11 +67,11 @@ public class WebSecurityConfig {
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     http.csrf(AbstractHttpConfigurer::disable)
         .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
-        .sessionManagement(
-            session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+        .sessionManagement(AbstractHttpConfigurer::disable)
         .authorizeHttpRequests(
             auth ->
-                auth.requestMatchers("/api/v1/auth/login", "/api/v1/auth/register")
+                auth.requestMatchers(
+                        "/api/v1/auth/login", "/api/v1/auth/register", "/api/v1/stream/**")
                     .permitAll()
                     .requestMatchers(
                         "/swagger-ui/**",

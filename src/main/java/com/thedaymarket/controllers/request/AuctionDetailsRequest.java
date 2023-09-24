@@ -2,7 +2,6 @@ package com.thedaymarket.controllers.request;
 
 import com.thedaymarket.controllers.request.validation.MarketScheduleTimeConstraint;
 import jakarta.validation.constraints.*;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;

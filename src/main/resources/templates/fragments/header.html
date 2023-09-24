@@ -15,16 +15,17 @@
             </button>
         </form>
     </section>
+    <script th:src="@{/js/header.js}"></script>
     <section class="nav-user-details">
-        <p><i class="fa fa-money"></i> 30,000</p>
+        <p><i class="fa fa-money"></i> <span id="user-points">30,000</span></p>
         <section class="user-details">
             <p>
-                <i class="fa fa-user"></i> Alex
+                <i class="fa fa-user"></i> <span id="header-username">Alex</span>
                 <i class="fa fa-chevron-down"></i>
             </p>
             <section class="user-edit">
-                <button>Edit Details</button>
-                <button>Logout</button>
+                <button id="edit-user">Edit Details</button>
+                <button id="logout">Logout</button>
             </section>
         </section>
     </section>

@@ -4,6 +4,8 @@ import com.thedaymarket.domain.User;
 import com.thedaymarket.domain.UserAddress;
 import com.thedaymarket.domain.UserRole;
 
+import java.math.BigDecimal;
+
 public record UserResponse(
     Long id,
     String firstName,
@@ -12,6 +14,7 @@ public record UserResponse(
     UserAddress address,
     String profileImage,
     UserRole role,
+    BigDecimal points,
     Double reputation) {
   public static UserResponse ofUser(User user) {
     return new UserResponse(
@@ -22,6 +25,7 @@ public record UserResponse(
         user.getAddress(),
         user.getProfileImageName(),
         user.getRole(),
+        user.getPoints(),
         user.getReputation() != null ? user.getReputation().getReputationPoints() : 0.0);
   }
 }

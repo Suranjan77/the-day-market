@@ -4,6 +4,8 @@ import com.thedaymarket.controllers.request.UserRegisterRequest;
 import com.thedaymarket.controllers.request.UserUpdateRequest;
 import com.thedaymarket.domain.User;
 import java.time.LocalDateTime;
+
+import com.thedaymarket.domain.UserPoints;
 import org.springframework.web.multipart.MultipartFile;
 
 public interface UserService {

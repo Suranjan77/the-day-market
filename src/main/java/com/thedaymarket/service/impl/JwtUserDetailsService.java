@@ -39,6 +39,18 @@ public class JwtUserDetailsService implements UserDetailsService {
         roles,
         user.getFirstName(),
         user.getLastName(),
-        user.getProfileImageName());
+        user.getProfileImageName(),
+        user.getPoints(),
+        user.getAddress());
+  }
+
+  public boolean isTokenValid(String token) {
+    var user =
+        userRepository
+            .findByAuthToken(token)
+            .orElseThrow(
+                () -> ExceptionUtils.getAuthenticationException(AuthConstants.AUTH_ERROR_MESSAGE));
+
+    return user.getAuth() != null && user.getAuth().isTokenValid();
   }
 }

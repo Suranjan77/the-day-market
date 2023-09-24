@@ -108,6 +108,16 @@ public class UserServiceImpl implements UserService {
   @Override
   public User updateUser(Long userId, UserUpdateRequest updateRequest) {
     var user = getUser(userId);
+    if (updateRequest.firstName() != null && !updateRequest.firstName().isBlank()) {
+      user.setFirstName(updateRequest.firstName());
+    }
+    if (updateRequest.lastName() != null && !updateRequest.lastName().isBlank()) {
+      user.setLastName(updateRequest.lastName());
+    }
+    if (updateRequest.password() != null && !updateRequest.password().isBlank()) {
+      var auth = Optional.ofNullable(user.getAuth()).orElse(new UserAuth());
+      auth.setPassword(passwordEncoder.encode(updateRequest.password()));
+    }
     user.setRole(updateRequest.role());
     user.setAddress(updateRequest.address());
     return userRepository.save(user);

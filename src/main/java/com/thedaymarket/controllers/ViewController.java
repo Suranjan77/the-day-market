@@ -49,11 +49,6 @@ public class ViewController {
     return "MarketPlace";
   }
 
-  @GetMapping("/dutch-auction")
-  public String dutchAuction() {
-    return "DutchAuctionBid";
-  }
-
   @GetMapping("/dutch-auction-config")
   public String dutchAuctionConfig() {
     return "DutchAuctionConfiguration";
@@ -67,11 +62,6 @@ public class ViewController {
   @GetMapping("/english-auction-config")
   public String englishAuctionConfig() {
     return "EnglishAuctionConfiguration";
-  }
-
-  @GetMapping("/sealed-bid-auction")
-  public String sealedBidAuction() {
-    return "SealedBidAuction";
   }
 
   @GetMapping("/sealed-bid-auction-config")
