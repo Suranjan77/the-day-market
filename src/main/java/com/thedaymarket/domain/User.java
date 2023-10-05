@@ -35,6 +35,10 @@ public class User extends BaseEntity {
     return getUserPoints() != null ? getUserPoints().getCount() : new BigDecimal("0");
   }
 
+  public Double getReputationPoints() {
+    return getReputation() != null ? getReputation().getReputationPoints() : 0.0;
+  }
+
   public boolean isFirstLogin() {
     return auth.getLastLoggedInAt() == null || role == null;
   }

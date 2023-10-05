@@ -4,11 +4,10 @@ import com.thedaymarket.controllers.request.CreateCategoryRequest;
 import com.thedaymarket.domain.Category;
 import com.thedaymarket.repository.CategoryRepository;
 import com.thedaymarket.service.CategoryService;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @AllArgsConstructor
 @Service

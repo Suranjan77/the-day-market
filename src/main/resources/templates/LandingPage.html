@@ -1,137 +1,137 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{fragments/head :: headerFragment}">
-    <title id="pageTitle">The-day-market</title>
+  <title id="pageTitle">The-day-market</title>
 </head>
 <body>
 <header>
-    <nav>
-        <section class="nav-logo">
-            <img th:src="@{/images/mainlogo.png}" alt="mainlogo"/>
-        </section>
-        <section class="user-activity">
-            <button>
-                <a th:href="@{/web/login}">Login</a>
-            </button>
-            <div class="divider"></div>
-            <button>
-                <a th:href="@{/web/register}">Sign up</a>
-            </button>
-        </section>
-    </nav>
+  <nav>
+    <section class="nav-logo">
+      <img th:src="@{/images/mainlogo.png}" alt="mainlogo"/>
+    </section>
+    <section class="user-activity">
+      <button>
+        <a th:href="@{/web/login}">Login</a>
+      </button>
+      <div class="divider"></div>
+      <button>
+        <a th:href="@{/web/register}">Sign up</a>
+      </button>
+    </section>
+  </nav>
 </header>
 <main class="landing">
-    <section class="landing-page-wrapper">
-        <!-- hero section  -->
-        <section class="hero-section">
-            <section class="hero-description">
-                <h1>
-                    Welcome to The Day<br/>
-                    Market
-                </h1>
-                <h2>Its your day</h2>
-                <p>
-                    Buy and sell in the world's leading e-auction<br/>
-                    platform today
-                </p>
-                <section class="hero-buttons">
-                    <button>Discover</button>
-                    <button>Sell Now</button>
-                </section>
-            </section>
-            <section class="hero-image">
-                <img th:src="@{/images/hero-logo.png}" alt="landing-hero-image"/>
-            </section>
+  <section class="landing-page-wrapper">
+    <!-- hero section  -->
+    <section class="hero-section">
+      <section class="hero-description">
+        <h1>
+          Welcome to The Day<br/>
+          Market
+        </h1>
+        <h2>Its your day</h2>
+        <p>
+          Buy and sell in the world's leading e-auction<br/>
+          platform today
+        </p>
+        <section class="hero-buttons">
+          <button>Discover</button>
+          <button>Sell Now</button>
         </section>
-        <!-- section for sell information at landing page -->
-        <section class="sell-information">
-            <section class="sell-image">
-                <img th:src="@{/images/sell-image.png}" alt="sell"/>
-            </section>
-            <section class="sell-details">
-                <h3>Sell Anything, From Anywhere</h3>
-                <p>
-                    Discover a world of limitless possibilities with our global
-                    marketplace. Sell anything you desire, no matter where you are.
-                    Sell your unused goods. You can sell your furniture, second-hand
-                    utensils, used phones and anything. List your items, set your
-                    prices, and connect with buyers from around the globe. Embrace the
-                    power of technology and unlock new opportunities for success. Join
-                    us now and start turning your dreams into reality.
-                </p>
-            </section>
-        </section>
-        <!-- section for auction information at landing page -->
-        <section class="auction-information">
-            <section class="auction-details">
-                <h3>Choose an Auction type fit for you</h3>
-                <h5>English Auction</h5>
-                <p>
-                    In an English auction, participants openly bid against each other,
-                    with the auctioneer starting with a low price and gradually
-                    increasing it. Bidders compete by offering higher prices until no
-                    one is willing to bid further. The highest bidder at the end of
-                    the auction wins the item or service being auctioned.
-                </p>
-                <h5>Dutch Auction</h5>
-                <p>
-                    In a Dutch auction, the auctioneer starts with a high price and
-                    progressively lowers it until a bidder accepts the price. The
-                    first bidder to accept wins the item.
-                </p>
-                <h5>Vickery Auction</h5>
-                <p>
-                    In a Vickrey auction, bidders submit sealed bids, and the highest
-                    bidder wins the item but pays the price offered by the
-                    second-highest bidder. This encourages honest bidding and ensures
-                    efficient allocation to the bidder with the highest true
-                    valuation.
-                </p>
-            </section>
-            <section class="auction-image">
-                <img th:src="@{/images/auctioneer.png}" alt="auctioneer"/>
-            </section>
-        </section>
-        <!-- section for reputation information at landing page -->
-        <section class="reputation-information">
-            <section class="reputation-image">
-                <img th:src="@{/images/reputation.png}" alt="reputation"/>
-            </section>
-            <section class="reputation-details">
-                <h3>Your reputation matters</h3>
-                <p>
-                    In bidding, your reputation matters. It impacts how others
-                    perceive your trustworthiness and reliability. A strong reputation
-                    attracts opportunities and competitive bids, while a questionable
-                    one may hinder your chances. Conducting fair and transparent
-                    transactions is key to maintaining a reputable track record and
-                    thriving in the bidding world.
-                </p>
-            </section>
-        </section>
+      </section>
+      <section class="hero-image">
+        <img th:src="@{/images/hero-logo.png}" alt="landing-hero-image"/>
+      </section>
     </section>
+    <!-- section for sell information at landing page -->
+    <section class="sell-information">
+      <section class="sell-image">
+        <img th:src="@{/images/sell-image.png}" alt="sell"/>
+      </section>
+      <section class="sell-details">
+        <h3>Sell Anything, From Anywhere</h3>
+        <p>
+          Discover a world of limitless possibilities with our global
+          marketplace. Sell anything you desire, no matter where you are.
+          Sell your unused goods. You can sell your furniture, second-hand
+          utensils, used phones and anything. List your items, set your
+          prices, and connect with buyers from around the globe. Embrace the
+          power of technology and unlock new opportunities for success. Join
+          us now and start turning your dreams into reality.
+        </p>
+      </section>
+    </section>
+    <!-- section for auction information at landing page -->
+    <section class="auction-information">
+      <section class="auction-details">
+        <h3>Choose an Auction type fit for you</h3>
+        <h5>English Auction</h5>
+        <p>
+          In an English auction, participants openly bid against each other,
+          with the auctioneer starting with a low price and gradually
+          increasing it. Bidders compete by offering higher prices until no
+          one is willing to bid further. The highest bidder at the end of
+          the auction wins the item or service being auctioned.
+        </p>
+        <h5>Dutch Auction</h5>
+        <p>
+          In a Dutch auction, the auctioneer starts with a high price and
+          progressively lowers it until a bidder accepts the price. The
+          first bidder to accept wins the item.
+        </p>
+        <h5>Vickery Auction</h5>
+        <p>
+          In a Vickrey auction, bidders submit sealed bids, and the highest
+          bidder wins the item but pays the price offered by the
+          second-highest bidder. This encourages honest bidding and ensures
+          efficient allocation to the bidder with the highest true
+          valuation.
+        </p>
+      </section>
+      <section class="auction-image">
+        <img th:src="@{/images/auctioneer.png}" alt="auctioneer"/>
+      </section>
+    </section>
+    <!-- section for reputation information at landing page -->
+    <section class="reputation-information">
+      <section class="reputation-image">
+        <img th:src="@{/images/reputation.png}" alt="reputation"/>
+      </section>
+      <section class="reputation-details">
+        <h3>Your reputation matters</h3>
+        <p>
+          In bidding, your reputation matters. It impacts how others
+          perceive your trustworthiness and reliability. A strong reputation
+          attracts opportunities and competitive bids, while a questionable
+          one may hinder your chances. Conducting fair and transparent
+          transactions is key to maintaining a reputable track record and
+          thriving in the bidding world.
+        </p>
+      </section>
+    </section>
+  </section>
 </main>
 <!-- footer section for some information  -->
 <footer>
-    <section class="quick-links">
-        <!-- quick links for transactions  -->
-        <section class="links">
-            <h3>Quick Links</h3>
-            <a href="#">Disover</a><br/>
-            <a href="#">Sell Now</a>
-        </section>
-        <!-- some social media icons  -->
-        <section class="social-media">
-            <h3>Follow Us</h3>
-            <p>
-                <i class="fa fa-facebook"></i>
-                <i class="fa fa-instagram"></i>
-                <i class="fa fa-twitter"></i>
-            </p>
-            <img th:src="@{/images/mainlogo.png}" alt="mainlogo"/>
-        </section>
+  <section class="quick-links">
+    <!-- quick links for transactions  -->
+    <section class="links">
+      <h3>Quick Links</h3>
+      <a href="#">Disover</a><br/>
+      <a href="#">Sell Now</a>
     </section>
-    <p>&copy; 2023 The Day Market. All rights reserved.</p>
+    <!-- some social media icons  -->
+    <section class="social-media">
+      <h3>Follow Us</h3>
+      <p>
+        <i class="fa fa-facebook"></i>
+        <i class="fa fa-instagram"></i>
+        <i class="fa fa-twitter"></i>
+      </p>
+      <img th:src="@{/images/mainlogo.png}" alt="mainlogo"/>
+    </section>
+  </section>
+  <p>&copy; 2023 The Day Market. All rights reserved.</p>
 </footer>
 </body>
 </html>

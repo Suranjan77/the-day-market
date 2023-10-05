@@ -2,18 +2,12 @@ package com.thedaymarket.utils;
 
 import com.thedaymarket.controllers.response.PagedResponse;
 import com.thedaymarket.controllers.response.PagedResponseWithMax;
-import jakarta.servlet.ServletException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.util.StringUtils;
-import org.springframework.validation.BeanPropertyBindingResult;
-import org.springframework.validation.Validator;
-import org.springframework.web.server.ServerWebInputException;
 import org.springframework.web.servlet.function.ServerRequest;
-
-import java.io.IOException;
-import java.util.List;
 
 @Slf4j
 public final class RESTUtils {
@@ -32,6 +26,14 @@ public final class RESTUtils {
     page = page == null ? 1 : Math.max(0, page - 1);
     size = size == null ? 50 : size;
     return PageRequest.of(page, size);
+  }
+
+  public static PageRequest getPageRequest(Integer page, Integer size, String sort) {
+    if (sort != null && !sort.isBlank()) {
+      return getPageRequest(page, size).withSort(Sort.by(sort.split(",")));
+    } else {
+      return getPageRequest(page, size);
+    }
   }
 
   public static <T> PagedResponse<T> getPagedResponse(Page<T> pagedData) {

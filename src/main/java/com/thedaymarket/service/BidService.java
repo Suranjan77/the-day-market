@@ -6,6 +6,7 @@ import com.thedaymarket.domain.Bid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 public interface BidService {

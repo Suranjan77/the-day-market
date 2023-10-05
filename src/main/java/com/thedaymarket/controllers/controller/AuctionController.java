@@ -6,19 +6,14 @@ import com.thedaymarket.domain.Auction;
 import com.thedaymarket.domain.AuctionType;
 import com.thedaymarket.service.AuctionService;
 import com.thedaymarket.service.BidService;
-import com.thedaymarket.utils.JsonUtils;
 import com.thedaymarket.utils.RESTUtils;
-import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.request.async.DeferredResult;
 
 @Slf4j
 @AllArgsConstructor
@@ -32,9 +27,12 @@ public class AuctionController {
   @GetMapping
   // todo: Search auction by the query
   public PagedResponse<List<Auction>> searchAuction(
-      @RequestParam("query") String searchQuery,
       @RequestParam("page") Integer page,
-      @RequestParam("size") Integer size) {
+      @RequestParam("size") Integer size,
+      @RequestParam(value = "query", required = false) String query,
+      @RequestParam(value = "filters", required = false) String filters,
+      @RequestParam(value = "sort", required = false) String sort) {
+
     return null;
   }
 
@@ -67,9 +65,12 @@ public class AuctionController {
 
   @GetMapping("/today")
   public PagedResponse<AuctionShortResponse> getTodayAuctions(
-      @RequestParam("page") Integer page, @RequestParam("size") Integer size) {
-    var pageRequest = RESTUtils.getPageRequest(page, size);
-    var auctionsPage = auctionService.getTodayAuctions(pageRequest);
+      @RequestParam("page") Integer page,
+      @RequestParam("size") Integer size,
+      @RequestParam(value = "filters", required = false) String filters,
+      @RequestParam(value = "sort", required = false) String sort) {
+    var pageRequest = RESTUtils.getPageRequest(page, size, sort);
+    var auctionsPage = auctionService.getTodayAuctions(pageRequest, filters);
     Page<AuctionShortResponse> auctionPageResponse =
         auctionsPage.map(AuctionShortResponse::fromAuction);
     return RESTUtils.getPagedResponse(auctionPageResponse);
@@ -81,5 +82,15 @@ public class AuctionController {
     var auction = auctionService.getAuction(auctionId);
     var bid = bidService.addBids(auction, bidRequest);
     return BidResponse.of(bid);
+  }
+
+  @DeleteMapping("{id}")
+  public void deleteAuction(@PathVariable("id") Long auctionId) {
+    auctionService.deleteAuction(auctionId);
+  }
+
+  @RequestMapping("{id}/state")
+  public DutchAuctionStateResponse getAuctionState(@PathVariable("id") Long auctionId) {
+    return DutchAuctionStateResponse.of(auctionService.getDutchAuctionState(auctionId));
   }
 }

@@ -1,6 +1,10 @@
 package com.thedaymarket.controllers.controller;
 
-import com.thedaymarket.controllers.response.StreamBidResponse;
+import com.thedaymarket.controllers.handlers.DutchAuctionStateHandler;
+import com.thedaymarket.controllers.handlers.LiveBiddingHandler;
+import com.thedaymarket.controllers.response.BidResponse;
+import com.thedaymarket.controllers.response.DutchAuctionStateResponse;
+import com.thedaymarket.controllers.response.StreamResponse;
 import com.thedaymarket.service.AuctionService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,12 +22,23 @@ public class StreamController {
 
   private final AuctionService auctionService;
   private final LiveBiddingHandler liveBiddingHandler;
+  private final DutchAuctionStateHandler dutchAuctionStateHandler;
 
   @GetMapping("auctions/{id}/bids")
-  public DeferredResult<StreamBidResponse> streamBids(@PathVariable("id") Long auctionId) {
+  public DeferredResult<StreamResponse<BidResponse>> streamBids(
+      @PathVariable("id") Long auctionId) {
     auctionService.getAuction(auctionId);
-    var client = new DeferredResult<StreamBidResponse>(30_000L); // 30 seconds timeout
+    var client = new DeferredResult<StreamResponse<BidResponse>>(30_000L);
     liveBiddingHandler.registerClient(auctionId, client);
+    return client;
+  }
+
+  @RequestMapping("auctions/{id}/state")
+  public DeferredResult<StreamResponse<DutchAuctionStateResponse>> getAuctionStateStream(
+      @PathVariable("id") Long auctionId) {
+    auctionService.getAuction(auctionId);
+    var client = new DeferredResult<StreamResponse<DutchAuctionStateResponse>>(30_000L);
+    dutchAuctionStateHandler.registerClient(auctionId, client);
     return client;
   }
 }

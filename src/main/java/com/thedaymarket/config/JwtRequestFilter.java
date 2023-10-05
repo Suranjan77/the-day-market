@@ -31,7 +31,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     }
 
     final String token = header.substring(7);
-    String username = null;
+    String username;
     try {
       username = tokenService.validateTokenAndGetUserName(token);
       if (username == null || !userDetailsService.isTokenValid(token)) {

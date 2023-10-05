@@ -13,10 +13,10 @@ function streamBids(auctionId) {
     if (streamBid.status === "COMPLETED") {
       if (auctionType !== "Sealed") {
         if (!maxBid) {
-          maxBid = streamBid.bid;
+          maxBid = streamBid.data;
         }
-        if (Number(maxBid.amount) < Number(streamBid.bid.amount)) {
-          maxBid = streamBid.bid;
+        if (Number(maxBid.amount) < Number(streamBid.data.amount)) {
+          maxBid = streamBid.data;
         }
       }
       populateBids(1, auctionId);
@@ -108,7 +108,7 @@ function populateAuction(auction) {
         `auctions/${auction.id}/bids`,
         { amount: bidAmount, bidderId: user.id },
         (bid) => {
-          console.log(`Bid id ${bid.id} and createdAt ${bid.createdAt}`);
+          refreshUserPoints(user);
         },
         true
       );

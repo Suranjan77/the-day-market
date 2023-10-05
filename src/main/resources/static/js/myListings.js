@@ -31,15 +31,25 @@ function populateAuctions(page) {
                 <span>${
                   auction.minAskPrice ? auction.minAskPrice : "-"
                 } Points</span>
+                <br>
             </p>
+            <div id="delete-publish-button">
+                <span class="material-symbols-outlined" id="delete-auction">delete</span>
+                <span class="material-symbols-outlined" id="publish-auction">publish</span>
+            </div>
        </div> </div>`
         )
         .join("");
 
-      $("#auctions").html(auctions).on('click', '.individual-items',  function() {
+      $("#auctions").html(auctions)
+      .on('click', '.individual-items',  function() {
         const auctionId = $(this).data("auction-id");
-
-      });
+        // open auction details update page
+      }).on('click', '#delete-auction', function() {
+         // delete auction
+      }).on('click', '#publish-auction', function() {
+        // publish auction
+      })
 
       initializePagination(
         auctionPage.totalSize,

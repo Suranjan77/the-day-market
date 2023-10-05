@@ -7,10 +7,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public record CategoriesResponse(
-    Long id, String tag, CategoriesResponse parent, List<CategoriesResponse> children) {
+    String tag, CategoriesResponse parent, List<CategoriesResponse> children) {
   public static CategoriesResponse of(Category category) {
     return new CategoriesResponse(
-        category.getId(),
         category.getTag(),
         category.getParent() != null ? of(category.getParent()) : null,
         category.getChildren() != null

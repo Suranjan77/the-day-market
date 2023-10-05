@@ -3,10 +3,8 @@ const backendBaseUrl = 'http://localhost:8080/api/v1';
 setInterval(refreshToken, 5 * 60 * 1000); // 10 seconds before expiry
 
 function saveUser(user) {
-  localStorage.setItem(
-      'USER',
-      JSON.stringify({...user, createdAt: Math.floor(Date.now() / 1000)}),
-  );
+  localStorage.setItem('USER',
+      JSON.stringify({...user, createdAt: Math.floor(Date.now() / 1000)}));
   const expiresInSeconds = user.expiry;
   console.log(`Token valid for ${expiresInSeconds} seconds`);
 }
@@ -29,8 +27,7 @@ function postFile(path, file, responseCallback, shouldAuthenticate) {
   formData.append('file', file);
   $.ajax({
     url: `${backendBaseUrl}/${path}`,
-    type: 'POST',
-    ...(shouldAuthenticate && {
+    type: 'POST', ...(shouldAuthenticate && {
       headers: {Authorization: `Bearer ${getAuthToken()}`},
     }),
     data: formData,
@@ -44,8 +41,7 @@ function postFile(path, file, responseCallback, shouldAuthenticate) {
 function post(path, data, responseCallback, shouldAuthenticate) {
   $.ajax({
     url: `${backendBaseUrl}/${path}`,
-    type: 'POST',
-    ...(shouldAuthenticate && {
+    type: 'POST', ...(shouldAuthenticate && {
       headers: {Authorization: `Bearer ${getAuthToken()}`},
     }),
     data: JSON.stringify(data),
@@ -58,22 +54,16 @@ function post(path, data, responseCallback, shouldAuthenticate) {
 
 function get(path, responseCallback, shouldAuthenticate) {
   $.ajax({
-    url: `${backendBaseUrl}/${path}`,
-    type: 'GET',
-    ...(shouldAuthenticate && {
+    url: `${backendBaseUrl}/${path}`, type: 'GET', ...(shouldAuthenticate && {
       headers: {Authorization: `Bearer ${getAuthToken()}`},
-    }),
-    dataType: 'json',
-    success: responseCallback,
-    error: handleApiError,
+    }), dataType: 'json', success: responseCallback, error: handleApiError,
   });
 }
 
 function put(path, data, responseCallback, shouldAuthenticate) {
   $.ajax({
     url: `${backendBaseUrl}/${path}`,
-    type: 'PUT',
-    ...(shouldAuthenticate && {
+    type: 'PUT', ...(shouldAuthenticate && {
       headers: {Authorization: `Bearer ${getAuthToken()}`},
     }),
     data: JSON.stringify(data),
@@ -87,8 +77,7 @@ function put(path, data, responseCallback, shouldAuthenticate) {
 function patch(path, data, responseCallback, shouldAuthenticate) {
   $.ajax({
     url: `${backendBaseUrl}/${path}`,
-    type: 'PATCH',
-    ...(shouldAuthenticate && {
+    type: 'PATCH', ...(shouldAuthenticate && {
       headers: {Authorization: `Bearer ${getAuthToken()}`},
     }),
     data: JSON.stringify(data),
@@ -110,18 +99,14 @@ function getAuthToken() {
 function refreshToken() {
   const user = getUser();
   if (user && user.accessToken) {
-    const isExpired =
-        Math.floor(Date.now() / 1000) >= user.createdAt + user.expiry - 20;
+    const isExpired = Math.floor(Date.now() / 1000) >= user.createdAt +
+        user.expiry - 20;
     if (true) {
       console.log('Token expired, refreshing...');
       $.ajax({
-        url: `${backendBaseUrl}/auth/refresh-token`,
-        type: 'POST',
-        headers: {
+        url: `${backendBaseUrl}/auth/refresh-token`, type: 'POST', headers: {
           Authorization: `Bearer ${user.accessToken}`,
-        },
-        success: (user) => saveUser(user),
-        error: handleApiError,
+        }, success: (user) => saveUser(user), error: handleApiError,
       });
     }
   }
@@ -132,10 +117,8 @@ function handleApiError(jqXHR, status, message) {
   console.log('Error: ', jqXHR);
   if (jqXHR.status === 401) {
     location.href = '/web/login';
-  }
-  const dangerMessage = document.getElementById('danger');
-  if (dangerMessage) {
-    dangerMessage.innerText = message;
+  } else {
+    alert(jqXHR.responseJSON.error);
   }
 }
 
@@ -147,9 +130,9 @@ function getUrlParameter(name) {
   name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
   const regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
   const results = regex.exec(location.search);
-  return results === null
-      ? ''
-      : decodeURIComponent(results[1].replace(/\+/g, ' '));
+  return results === null ?
+      '' :
+      decodeURIComponent(results[1].replace(/\+/g, ' '));
 }
 
 function maskEmail(email) {
@@ -181,13 +164,8 @@ function formatTime(date) {
   return `${hours}:${minutes}:${seconds}`;
 }
 
-function initializePagination(
-    totalSize,
-    pageSize,
-    currentPage,
-    populateFunction,
-    defaultParams,
-) {
+function initializePagination(totalSize, pageSize, currentPage,
+                              populateFunction, defaultParams) {
   $('#pagination-nav').pagination({
     dataSource: Array(totalSize).fill().map((_, index) => index + 1),
     totalNumber: totalSize,
@@ -205,4 +183,16 @@ function initializePagination(
       populateFunction(page, ...(defaultParams || []));
     },
   });
+}
+
+function getReputationIcon(reputation) {
+  switch (reputation) {
+    case 'HIGH':
+      return '/images/smiling-face.png';
+    case 'LOW':
+      return '/images/sad.png';
+    case 'NEUTRAL':
+    default:
+      return '/images/neutral.png';
+  }
 }

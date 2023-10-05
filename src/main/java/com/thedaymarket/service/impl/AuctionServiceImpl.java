@@ -3,19 +3,28 @@ package com.thedaymarket.service.impl;
 import com.thedaymarket.controllers.request.AuctionDetailsRequest;
 import com.thedaymarket.controllers.request.CreateAuctionRequest;
 import com.thedaymarket.controllers.request.CreateCategoryRequest;
-import com.thedaymarket.domain.Auction;
-import com.thedaymarket.domain.AuctionStatus;
-import com.thedaymarket.domain.User;
+import com.thedaymarket.domain.*;
 import com.thedaymarket.repository.AuctionRepository;
 import com.thedaymarket.service.AuctionService;
+import com.thedaymarket.service.BidService;
 import com.thedaymarket.service.CategoryService;
 import com.thedaymarket.service.StorageService;
+import com.thedaymarket.service.schedule.DutchAuctionStateService;
+import com.thedaymarket.utils.AuctionSearchFieldNames;
 import com.thedaymarket.utils.ExceptionUtils;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import lombok.AllArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
+import org.checkerframework.checker.units.qual.A;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -26,11 +35,12 @@ public class AuctionServiceImpl implements AuctionService {
   private final AuctionRepository auctionRepository;
   private final CategoryService categoryService;
   private final StorageService storageService;
+  private final DutchAuctionStateService dutchAuctionStateService;
 
   @Override
-  public Page<Auction> getTodayAuctions(Pageable pageable) {
-    return auctionRepository.findAllStatusNotAndScheduledAt(
-        AuctionStatus.DRAFT, LocalDate.now(), pageable);
+  public Page<Auction> getTodayAuctions(Pageable pageable, String filters) {
+    var specs = getAuctionSpecs(filters, true);
+    return auctionRepository.findAll(specs, pageable);
   }
 
   @Override
@@ -85,13 +95,12 @@ public class AuctionServiceImpl implements AuctionService {
     auction.setMinAskPrice(auctionDetailsRequest.minAskPrice());
     auction.setDecrementSeconds(auctionDetailsRequest.decrementSeconds());
     auction.setItemCount(auctionDetailsRequest.itemCount());
-    var scheduleDateTime =
-        LocalDateTime.of(
-            auctionDetailsRequest.scheduledDate(), auctionDetailsRequest.scheduledTime());
-    if (scheduleDateTime.isBefore(LocalDateTime.now()) && auctionDetailsRequest.publish()) {
+    var scheduleDate = auctionDetailsRequest.scheduledDate();
+    if ((scheduleDate.isBefore(LocalDate.now()) || scheduleDate.isEqual(LocalDate.now()))
+        && auctionDetailsRequest.publish()) {
       auction.setStatus(AuctionStatus.PUBLISHED);
     }
-    auction.setScheduledDateTime(scheduleDateTime);
+    auction.setScheduledDate(scheduleDate);
     auction = auctionRepository.save(auction);
     return auction;
   }
@@ -113,5 +122,63 @@ public class AuctionServiceImpl implements AuctionService {
   @Override
   public void deleteAuction(Long auctionId) {
     auctionRepository.deleteById(auctionId);
+  }
+
+  @Override
+  public DutchAuctionState getDutchAuctionState(Long auctionId) {
+    var auction = getAuction(auctionId);
+    if (!auction.getType().equals(AuctionType.Dutch)) {
+      throw ExceptionUtils.getNotFoundExceptionResponse(
+          "The requested auction is not Dutch Auction");
+    }
+    return dutchAuctionStateService.getAdjustedState(auction, false);
+  }
+
+  private static Specification<Auction> getAuctionSpecs(String filters, boolean isToday) {
+    Map<String, List<String>> fieldBasedFilterTable = new HashMap<>();
+    if (filters != null && !filters.isBlank()) {
+      var filterParts = filters.split(";");
+      for (var filterPart : filterParts) {
+        var part = filterPart.split("=");
+        if (part.length == 2) {
+          var field = part[0];
+          var value = part[1];
+          fieldBasedFilterTable.putIfAbsent(field, new ArrayList<>());
+          fieldBasedFilterTable.get(field).add(value);
+        }
+      }
+    }
+
+    List<AuctionSpecification> searchSpecs = new ArrayList<>();
+    fieldBasedFilterTable.forEach(
+        (field, filterValues) -> {
+          switch (field) {
+            case AuctionSearchFieldNames.CATEGORIES -> searchSpecs.add(
+                new AuctionSpecification(
+                    new AuctionSpecification.SearchCriteria("category.tag", "in", filterValues)));
+            case AuctionSearchFieldNames.AUCTION_TYPES -> searchSpecs.add(
+                new AuctionSpecification(
+                    new AuctionSpecification.SearchCriteria("type", "=", filterValues.get(0))));
+          }
+        });
+
+    if (isToday) {
+      searchSpecs.add(
+          new AuctionSpecification(
+              new AuctionSpecification.SearchCriteria("scheduledDate", "=", LocalDate.now())));
+    }
+
+    var noDraftSpec =
+        new AuctionSpecification(
+            new AuctionSpecification.SearchCriteria("status", "!", AuctionStatus.DRAFT));
+
+    var specs = Specification.where(noDraftSpec);
+
+    if (!searchSpecs.isEmpty()) {
+      for (var spec : searchSpecs) {
+        specs = specs.and(spec);
+      }
+    }
+    return specs;
   }
 }

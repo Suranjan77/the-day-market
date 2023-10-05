@@ -1,72 +1,72 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{fragments/head :: headerFragment}">
-    <title id="pageTitle">Create Auction | The-day-market</title>
+  <title id="pageTitle">Create Auction | The-day-market</title>
 </head>
 <body>
 <!-- listing item section  -->
 <main class="list-item">
-    <script th:src="@{/js/addItem.js}"></script>
-    <!-- listing item wrapper  -->
-    <section class="list-item-wrapper">
-        <!-- hero-logo section  -->
-        <section class="list-item-logo">
-            <img th:src="@{/images/logoicon.png}" alt="logo"/>
-            <p>List an item</p>
-        </section>
-        <!-- form for listing item -->
-        <section class="list-item-form">
-            <form action="" id="list-item-form">
-                <!-- listing the category of items -->
-                <div id="category-search-container">
-                    <label for="item-category-search" style="display: block">Category</label>
-                    <input
-                            type="text"
-                            name="category"
-                            placeholder="Enter category"
-                            id="item-category-search"
-                    />
-                    <div id="category-suggestions"></div>
-                </div>
-                <!-- auction title  -->
-                <label for="auctionTitle">Auction title</label>
-                <input
-                        type="text"
-                        name="auctionTitle"
-                        placeholder="Enter auction title"
-                        id="auctionTitle"
-                />
-                <!-- thumbanil image for auction  -->
-                <label for="thumbnailImage">Upload thumbnail image</label>
-                <input type="file" name="thumbnailImage" id="thumbnailImage"/>
-                <!-- type of auction for the concerned item  -->
-                <label for="auction-type">Auction type</label>
-                <select name="auction-type" id="auction-type">
-                    <option value="English">English Auction</option>
-                    <option value="Dutch">Dutch Auction</option>
-                    <option value="Sealed">Sealed-bid Auction</option>
-                </select>
-                <!-- description of auction  -->
-                <label for="auction-description"> Auction description </label>
-                <textarea
-                        name="auctionDescription"
-                        id="auction-description"
-                        cols="30"
-                        rows="5"
-                        maxlength="200"
-                ></textarea>
-                <!-- buttons for the listing the items -->
-                <section class="button">
-                    <button type="reset">Save as draft</button>
-                    <button type="submit" id="add-item-submit-btn">Continue</button>
-                </section>
-            </form>
-
-            <section class="auction-form" id="auction-config">
-            </section>
-
-        </section>
+  <script th:src="@{/js/addItem.js}"></script>
+  <!-- listing item wrapper  -->
+  <section class="list-item-wrapper">
+    <!-- hero-logo section  -->
+    <section class="list-item-logo">
+      <img th:src="@{/images/logoicon.png}" alt="logo"/>
+      <p>List an item</p>
     </section>
+    <!-- form for listing item -->
+    <section class="list-item-form">
+      <form action="" id="list-item-form">
+        <!-- listing the category of items -->
+        <div id="category-search-container">
+          <label for="item-category-search" style="display: block">Category</label>
+          <input
+            type="text"
+            name="category"
+            placeholder="Enter category"
+            id="item-category-search"
+          />
+          <div id="category-suggestions"></div>
+        </div>
+        <!-- auction title  -->
+        <label for="auctionTitle">Auction title</label>
+        <input
+          type="text"
+          name="auctionTitle"
+          placeholder="Enter auction title"
+          id="auctionTitle"
+        />
+        <!-- thumbanil image for auction  -->
+        <label for="thumbnailImage">Upload thumbnail image</label>
+        <input type="file" name="thumbnailImage" id="thumbnailImage"/>
+        <!-- type of auction for the concerned item  -->
+        <label for="auction-type">Auction type</label>
+        <select name="auction-type" id="auction-type">
+          <option value="English">English Auction</option>
+          <option value="Dutch">Dutch Auction</option>
+          <option value="Sealed">Sealed-bid Auction</option>
+        </select>
+        <!-- description of auction  -->
+        <label for="auction-description"> Auction description </label>
+        <textarea
+          name="auctionDescription"
+          id="auction-description"
+          cols="30"
+          rows="5"
+          maxlength="200"
+        ></textarea>
+        <!-- buttons for the listing the items -->
+        <section class="button">
+          <button type="reset">Save as draft</button>
+          <button type="submit" id="add-item-submit-btn">Continue</button>
+        </section>
+      </form>
+
+      <section class="auction-form" id="auction-config">
+      </section>
+
+    </section>
+  </section>
 </main>
 </body>
 </html>

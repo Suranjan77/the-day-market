@@ -5,6 +5,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -17,7 +20,7 @@ public class BaseEntity {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @CreationTimestamp private Instant createdAt;
+  @CreationTimestamp private LocalDateTime createdAt;
 
-  @UpdateTimestamp private Instant updatedAt;
+  @UpdateTimestamp private LocalDateTime updatedAt;
 }

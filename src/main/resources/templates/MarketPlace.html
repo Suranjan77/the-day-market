@@ -19,19 +19,15 @@
         <section class="search-result-wrapper">
             <section class="search-results">
                 <section class="categories">
-                    <h5>Categories</h5>
+                    <h5>Filters</h5>
                     <section class="categories-list" id="categories-list">
-
                     </section>
                 </section>
                 <section class="match-found">
                     <section class="match-found-header">
                         <h5>Matches Found (<span id="match-count">20</span>)</h5>
-                        <select name="Sort">
-                            <option value="">Sort By</option>
-                            <option value="">Bid Amount</option>
-                            <option value="">Number of Items</option>
-                            <option value="">Popularity</option>
+                        <select name="Sort" id="sort-auctions">
+                            <option value="">Sort by Reputation</option>
                         </select>
                     </section>
 
@@ -40,8 +36,6 @@
                     <div class="pagination" id="pagination">
                         <div id="pagination-nav"></div>
                     </div>
-
-<!--                    <div th:replace="~{fragments/pagination :: page('market')}"></div>-->
                 </section>
             </section>
         </section>

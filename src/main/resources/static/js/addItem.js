@@ -107,6 +107,9 @@ function proceedToNextPage(isContinue, auction) {
 
       ${auction.type === 'Dutch' ? dutchAuctionAdditionalConfig : ''}
       
+      <label for="scheduled-date">Publish on</label>
+      <input type="date" id="published-date" name="scheduled-date">
+      
       <section class="submit-button">
         <button type="submit">Save as draft</button>
         <button type="reset">Publish</button>
@@ -118,18 +121,18 @@ function proceedToNextPage(isContinue, auction) {
         append(configHTML).
         on('submit', '#auction-config-form', function(e) {
           e.preventDefault();
-          updateAuction(auction);
+          updateAuction(auction, false);
         }).
         on('reset', '#auction-config-form', function(e) {
           e.preventDefault();
-          updateAuction(auction);
+          updateAuction(auction, true);
         });
   } else {
     location.href = '/web/my-listings';
   }
 }
 
-function updateAuction(auction) {
+function updateAuction(auction, publish) {
   const user = getUser();
 
   const data = {
@@ -137,8 +140,8 @@ function updateAuction(auction) {
     itemCount: $('#itemCount').val(),
     decrementSeconds: $('#lowerPriceOnSeconds').val(),
     lowerPriceByPoints: $('#decrementFactor').val(),
-    scheduledTime: formatTime(new Date()),
-    scheduledDate: formatTime(new Date()),
+    scheduledDate: $('#published-date').val(),
+    publish
   };
 
   post(`sellers/${user.id}/auctions/${auction.id}`, data,

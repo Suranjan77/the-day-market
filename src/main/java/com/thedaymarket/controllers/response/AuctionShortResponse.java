@@ -7,7 +7,13 @@ import com.thedaymarket.domain.AuctionType;
 import java.math.BigDecimal;
 
 public record AuctionShortResponse(
-    Long id, String title, BigDecimal minAskPrice, AuctionType type, String imageName, AuctionStatus status) {
+    Long id,
+    String title,
+    BigDecimal minAskPrice,
+    AuctionType type,
+    String imageName,
+    AuctionStatus status,
+    AuctionSellerResponse seller) {
   public static AuctionShortResponse fromAuction(Auction auction) {
     return new AuctionShortResponse(
         auction.getId(),
@@ -15,6 +21,7 @@ public record AuctionShortResponse(
         auction.getMinAskPrice(),
         auction.getType(),
         auction.getImageName(),
-        auction.getStatus());
+        auction.getStatus(),
+        AuctionSellerResponse.of(auction.getSeller()));
   }
 }

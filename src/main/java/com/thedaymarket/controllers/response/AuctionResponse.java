@@ -2,6 +2,7 @@ package com.thedaymarket.controllers.response;
 
 import com.thedaymarket.domain.*;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public record AuctionResponse(
@@ -14,7 +15,7 @@ public record AuctionResponse(
     AuctionType type,
     Long itemCount,
     AuctionStatus status,
-    LocalDateTime scheduledDateTime,
+    LocalDate scheduledDate,
     String imageName,
     CategoriesResponse categoriesResponse) {
 
@@ -29,7 +30,7 @@ public record AuctionResponse(
         auction.getType(),
         auction.getItemCount(),
         auction.getStatus(),
-        auction.getScheduledDateTime(),
+        auction.getScheduledDate(),
         auction.getImageName(),
         CategoriesResponse.of(auction.getCategory()));
   }
