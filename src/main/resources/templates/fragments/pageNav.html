@@ -1,5 +1,4 @@
 <section class="page-nav" th:fragment="pageNavigation(role, activationId)">
-    <script th:src="@{/js/nav.js}"></script>
     <section class="dashboard">
         <a href="#" id="dashboard-link">
             <i th:class="${activationId == 'dashboard'} ? 'fa fa-dashboard icon-activated' : 'fa fa-dashboard'"></i>
@@ -18,4 +17,5 @@
             <span th:class="${activationId == 'bid'} ? 'icon-activated' : ''" id="bid-listing-nav"></span>
         </a>
     </section>
+    <script th:src="@{/js/nav.js}"></script>
 </section>

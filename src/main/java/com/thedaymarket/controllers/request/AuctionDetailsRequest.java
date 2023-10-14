@@ -12,6 +12,8 @@ public record AuctionDetailsRequest(
         Long decrementSeconds,
     @Max(value = 100, message = "Decrement factor must be in the range 0-100")
         Double decrementFactor,
+    @Min(value = 0, message = "Decrement limit must be greater or equal to zero")
+        BigDecimal decrementLimit,
     @Positive(message = "Ask price must be greater than 0") BigDecimal minAskPrice,
     Long itemCount,
     Long categoryId,

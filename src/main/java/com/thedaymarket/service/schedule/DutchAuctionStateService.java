@@ -6,6 +6,7 @@ import com.thedaymarket.domain.Auction;
 import com.thedaymarket.domain.DutchAuctionState;
 import com.thedaymarket.repository.DutchAuctionStateRepository;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
@@ -45,30 +46,35 @@ public class DutchAuctionStateService {
                   var auctionState = new DutchAuctionState();
                   auctionState.setAuction(auction);
                   auctionState.setTimerStartedAt(LocalTime.now());
+                  auctionState.setTimerSeconds(0L);
                   auctionState.setCurrentPoints(auction.getMinAskPrice());
                   auctionState.setExpired(false);
                   return auctionState;
                 });
 
+    if (state.isExpired()) {
+      return state;
+    }
+
     if (isMarketOpen()) {
       var exhaustedSeconds = state.getTimerStartedAt().until(LocalTime.now(), ChronoUnit.SECONDS);
 
-      var currentPoints =
-          auction
-              .getMinAskPrice()
-              .subtract(
-                  BigDecimal.valueOf(
-                      ((double) (exhaustedSeconds / auction.getDecrementSeconds()))
-                          * auction.getDecrementFactor()));
+      var currentPoints = calculateCurrentPoints(auction, exhaustedSeconds);
 
-      if (currentPoints.signum() <= 0) {
+      if (currentPoints.signum() <= 0
+          || state.getCurrentPoints().compareTo(auction.getDecrementLimit()) < 0) {
         state.setExpired(true);
+        state.setTimerSeconds(0L);
+      } else {
+        var currentTimer = calculateTimerDuration(auction, currentPoints);
+        state.setTimerSeconds(currentTimer);
+        state.setCurrentPoints(currentPoints);
+        state.setExpired(false);
       }
 
-      state.setCurrentPoints(currentPoints);
-      state.setExpired(false);
     } else {
       state.setExpired(true);
+      state.setTimerSeconds(0L);
     }
 
     if (shouldNotify) {
@@ -78,7 +84,33 @@ public class DutchAuctionStateService {
     return dutchAuctionStateRepository.save(state);
   }
 
+  private Long calculateTimerDuration(Auction auction, BigDecimal currentPoints) {
+    var startingPoints =
+        currentPoints.compareTo(auction.getMinAskPrice()) < 0
+            ? currentPoints
+            : auction.getMinAskPrice();
+    var endPoints = auction.getDecrementLimit();
+    var decrementAmount = auction.getDecrementFactor();
+    var decrementSeconds = auction.getDecrementSeconds();
+    return startingPoints
+        .subtract(endPoints)
+        .divide(new BigDecimal(decrementAmount), RoundingMode.CEILING)
+        .multiply(new BigDecimal(decrementSeconds))
+        .longValue();
+  }
+
+  private BigDecimal calculateCurrentPoints(Auction auction, long exhaustedSeconds) {
+    return auction
+        .getMinAskPrice()
+        .subtract(
+            BigDecimal.valueOf(
+                ((double) (exhaustedSeconds / auction.getDecrementSeconds()))
+                    * auction.getDecrementFactor()));
+  }
+
   private boolean isMarketOpen() {
-    return !LocalTime.now().isBefore(marketStartTime) && !LocalTime.now().isAfter(marketCloseTime);
+    // todo: Enable below logic
+    return true;
+//    return !LocalTime.now().isBefore(marketStartTime) && !LocalTime.now().isAfter(marketCloseTime);
   }
 }

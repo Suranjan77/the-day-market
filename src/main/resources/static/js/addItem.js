@@ -90,7 +90,13 @@ function proceedToNextPage(isContinue, auction) {
     <input
         type="number"
         name="lowerPricebyPoints"
-        id="lowerPriceByPoints"
+        id="decrementFactor"
+    />
+<label for="lowest-allowed">Lowest Points allowed</label>
+    <input
+        type="number"
+        name="lowest-allowed"
+        id="lowest-allowed"
     />`;
 
     const configHTML = `
@@ -141,6 +147,7 @@ function updateAuction(auction, publish) {
     decrementSeconds: $('#lowerPriceOnSeconds').val(),
     lowerPriceByPoints: $('#decrementFactor').val(),
     scheduledDate: $('#published-date').val(),
+    decrementLimit: $('#lowest-allowed').val(),
     publish
   };
 

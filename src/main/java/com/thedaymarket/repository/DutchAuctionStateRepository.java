@@ -23,4 +23,6 @@ public interface DutchAuctionStateRepository extends JpaRepository<DutchAuctionS
       "UPDATE DutchAuctionState ds SET ds.currentPoints=:currentPoints WHERE ds.auction=:auction")
   void updateAuctionState(
       @Param("currentPoints") BigDecimal currentPoints, @Param("auction") Auction auction);
+
+  boolean existsByAuction(Auction auction);
 }

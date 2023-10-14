@@ -1,11 +1,10 @@
 package com.thedaymarket.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"type", "receiverId", "rater_id"}))
 @Entity
 public class Rating extends BaseEntity {
   private Float stars;
@@ -14,4 +13,8 @@ public class Rating extends BaseEntity {
   private RatingType type;
 
   private Long receiverId;
+
+  @JoinColumn(name = "rater_id")
+  @ManyToOne
+  private User rater;
 }

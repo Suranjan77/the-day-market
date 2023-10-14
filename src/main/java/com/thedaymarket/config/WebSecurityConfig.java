@@ -85,6 +85,7 @@ public class WebSecurityConfig {
                         "/error",
                         "/lib/**",
                         "/favicon.ico",
+                        "api/v1/admin/**",
                         "/js/**")
                     .permitAll()
                     .anyRequest()

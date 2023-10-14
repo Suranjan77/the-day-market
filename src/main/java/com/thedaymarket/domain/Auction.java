@@ -17,10 +17,11 @@ public class Auction extends BaseEntity {
 
   private BigDecimal minAskPrice;
 
-  // Percentage
   private Double decrementFactor;
 
   private Long decrementSeconds;
+
+  private BigDecimal decrementLimit;
 
   @Enumerated(EnumType.STRING)
   private AuctionType type;
@@ -41,8 +42,11 @@ public class Auction extends BaseEntity {
   @OneToMany(mappedBy = "auction")
   private List<Bid> bids;
 
-  @OneToOne(mappedBy = "auction")
-  private DutchAuctionState dutchAuctionState;
+  @OneToOne
+  private Bid winningBid;
+
+  @OneToMany(mappedBy = "auction")
+  private List<DutchAuctionState> dutchAuctionState;
 
   private String imageName;
 }

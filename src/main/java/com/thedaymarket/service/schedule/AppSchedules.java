@@ -1,6 +1,7 @@
 package com.thedaymarket.service.schedule;
 
 import com.thedaymarket.repository.AuctionRepository;
+import com.thedaymarket.repository.DutchAuctionStateRepository;
 import java.time.LocalDate;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,6 +17,7 @@ public class AppSchedules {
 
   private final DutchAuctionStateService dutchAuctionStateService;
   private final AuctionRepository auctionRepository;
+  private final DutchAuctionStateRepository dutchAuctionStateRepository;
 
   /** Updates today's dutch-auction state every second. */
   @Scheduled(fixedRate = 1000)
@@ -27,13 +29,17 @@ public class AppSchedules {
     var auctionPage =
         auctionRepository.findActiveDutchAuctions(
             LocalDate.now(), PageRequest.of(index++, batchSize));
-    auctionPage.forEach(auction -> dutchAuctionStateService.getAdjustedState(auction, true));
+    auctionPage.stream()
+        .filter(dutchAuctionStateRepository::existsByAuction)
+        .forEach(auction -> dutchAuctionStateService.getAdjustedState(auction, true));
 
     while (auctionPage.hasNext()) {
       auctionPage =
           auctionRepository.findActiveDutchAuctions(
               LocalDate.now(), PageRequest.of(index++, batchSize));
-      auctionPage.forEach(auction -> dutchAuctionStateService.getAdjustedState(auction, true));
+      auctionPage.stream()
+          .filter(dutchAuctionStateRepository::existsByAuction)
+          .forEach(auction -> dutchAuctionStateService.getAdjustedState(auction, true));
     }
   }
 

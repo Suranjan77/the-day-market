@@ -196,3 +196,56 @@ function getReputationIcon(reputation) {
       return '/images/neutral.png';
   }
 }
+
+function getRatingStars(starCount, id) {
+  let openStars = '';
+  let closedStars = '';
+
+  const totalStars = Math.min(5, starCount);
+
+  for (let i = 0; i < totalStars; i++) {
+    closedStars += '<i class="fa fa-star"></i> ';
+  }
+
+  for (let j = 5 - totalStars; j > 0; j--) {
+    openStars += '<i class="fa fa-star-o"></i>';
+  }
+
+  return `
+            <p id="${id}" class="stars" data-receiver-id="${id}">
+               ${closedStars}
+               ${openStars}
+            </p>
+        `;
+}
+
+function addStarEventListener(receiverType) {
+  $('.stars').each(function() {
+    let $stars = $(this).find('i');
+    let receiverId = $(this).data("receiver-id");
+
+    $stars.each(function(index1, star) {
+      $(star).on('click', function() {
+        $stars.each(function(index2, innerStar) {
+          if (index1 >= index2) {
+            $(innerStar).attr('class', 'fa fa-star');
+          } else {
+            $(innerStar).attr('class', 'fa fa-star-o');
+          }
+        });
+
+        const activeCount = $(this).siblings('.fa-star').length + 1;
+
+        const ratingData = {
+          'raterId': getUser().id,
+          'receiverId': receiverId,
+          'stars': activeCount,
+          'type': receiverType,
+        };
+
+        post('ratings', ratingData, data => {
+        }, true);
+      });
+    });
+  });
+}

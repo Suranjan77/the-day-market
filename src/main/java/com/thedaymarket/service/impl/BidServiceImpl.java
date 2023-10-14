@@ -41,7 +41,7 @@ public class BidServiceImpl implements BidService {
   public Bid addBids(Auction auction, BidRequest bidRequest) {
     var bidder = userService.getUser(bidRequest.bidderId());
 
-    validateBidAmount(auction, bidRequest, bidder);
+    validateBid(auction, bidRequest, bidder);
 
     userPointsRepository.updateUserPointsAmount(
         bidder.getPoints().subtract(bidRequest.amount()), bidder.getUserPoints().getId());
@@ -55,7 +55,12 @@ public class BidServiceImpl implements BidService {
     return savedBid;
   }
 
-  private void validateBidAmount(Auction auction, BidRequest bidRequest, User bidder) {
+  @Override
+  public Page<Bid> getBidsFroUser(User user, PageRequest pageRequest) {
+    return bidRepository.findLatestBidsByUser(user.getId(), pageRequest);
+  }
+
+  private void validateBid(Auction auction, BidRequest bidRequest, User bidder) {
     if (bidder.getPoints().compareTo(bidRequest.amount()) < 0) {
       throw ExceptionUtils.getBadRequestExceptionResponse("Not enough points");
     }
@@ -71,6 +76,12 @@ public class BidServiceImpl implements BidService {
         if (bidRequest.amount().compareTo(auction.getMinAskPrice()) < 0) {
           throw ExceptionUtils.getBadRequestExceptionResponse(
               "Bid amount must be more than or equal to minimum asking price.");
+        }
+      }
+      case Dutch -> {
+        if (bidRepository.existsByAuctionAndUser(auction, bidder)) {
+          throw ExceptionUtils.getBadRequestExceptionResponse(
+              "Cannot bid more than once in Dutch auction");
         }
       }
     }
