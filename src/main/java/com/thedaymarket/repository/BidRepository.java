@@ -4,6 +4,8 @@ import com.thedaymarket.domain.Auction;
 import com.thedaymarket.domain.Bid;
 import com.thedaymarket.domain.User;
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,7 +19,7 @@ public interface BidRepository extends JpaRepository<Bid, Long> {
 
   Optional<Bid> findFirstByAuctionOrderByAmountDesc(Auction auction);
 
-  boolean existsByAuction(Auction auction);
+  boolean existsByAuctionAndCreatedAt(Auction auction, LocalDateTime day);
 
   boolean existsByAuctionAndUser(Auction auction, User user);
 

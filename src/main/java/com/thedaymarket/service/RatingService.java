@@ -11,5 +11,5 @@ public interface RatingService {
 
   Optional<Rating> getRatingByRater(RatingType type, User rater, Long receiverId);
 
-  Float getAverageRating(RatingType type, Long receiverId);
+  int getAverageRating(RatingType type, Long receiverId);
 }

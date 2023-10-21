@@ -4,6 +4,8 @@ import com.thedaymarket.domain.Auction;
 import com.thedaymarket.domain.AuctionStatus;
 import com.thedaymarket.domain.User;
 import java.time.LocalDate;
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -42,4 +44,7 @@ public interface AuctionRepository extends JpaRepository<Auction, Long> {
   @Modifying
   @Query("UPDATE Auction a SET a.scheduledDate=DATE(now()) WHERE id>0")
   void updateAllAuctionsDate();
+
+  @Query("SELECT COUNT(a) FROM Auction a WHERE a.seller=:seller AND a.status in :status")
+  Long getTotalAuctionByStatusIn(@Param("seller") User seller, @Param("status") List<AuctionStatus> auctionStatuses);
 }

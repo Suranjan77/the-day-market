@@ -5,10 +5,7 @@ import com.thedaymarket.controllers.request.CreateAuctionRequest;
 import com.thedaymarket.controllers.request.CreateCategoryRequest;
 import com.thedaymarket.domain.*;
 import com.thedaymarket.repository.AuctionRepository;
-import com.thedaymarket.service.AuctionService;
-import com.thedaymarket.service.BidService;
-import com.thedaymarket.service.CategoryService;
-import com.thedaymarket.service.StorageService;
+import com.thedaymarket.service.*;
 import com.thedaymarket.service.schedule.DutchAuctionStateService;
 import com.thedaymarket.utils.AuctionSearchFieldNames;
 import com.thedaymarket.utils.ExceptionUtils;
@@ -25,6 +22,7 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -132,6 +130,27 @@ public class AuctionServiceImpl implements AuctionService {
           "The requested auction is not Dutch Auction");
     }
     return dutchAuctionStateService.getAdjustedState(auction, false);
+  }
+
+  @Override
+  public AuctionStats getAuctionStatsForSeller(User seller) {
+    if (!seller.getRole().equals(UserRole.SELLER)) {
+      throw new ExceptionUtils.BusinessException(HttpStatus.BAD_REQUEST, "User is not seller");
+    }
+
+    var totalAuctions =
+        auctionRepository.getTotalAuctionByStatusIn(
+            seller,
+            List.of(
+                AuctionStatus.PUBLISHED,
+                AuctionStatus.CLOSED,
+                AuctionStatus.UNSOLD,
+                AuctionStatus.SOLD));
+
+    var totalSoldAuctions =
+        auctionRepository.getTotalAuctionByStatusIn(seller, List.of(AuctionStatus.SOLD));
+
+    return new AuctionStats(totalSoldAuctions, totalAuctions);
   }
 
   private static Specification<Auction> getAuctionSpecs(String filters, boolean isToday) {

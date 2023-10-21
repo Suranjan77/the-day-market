@@ -27,4 +27,6 @@ public interface AuctionService {
   void deleteAuction(Long auctionId);
 
   DutchAuctionState getDutchAuctionState(Long auctionId);
+
+  AuctionStats getAuctionStatsForSeller(User seller);
 }

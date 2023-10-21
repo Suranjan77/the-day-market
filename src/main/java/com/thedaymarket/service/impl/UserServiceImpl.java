@@ -2,21 +2,21 @@ package com.thedaymarket.service.impl;
 
 import com.thedaymarket.controllers.request.UserRegisterRequest;
 import com.thedaymarket.controllers.request.UserUpdateRequest;
+import com.thedaymarket.domain.Reputation;
 import com.thedaymarket.domain.User;
 import com.thedaymarket.domain.UserAuth;
+import com.thedaymarket.repository.ReputationRepository;
 import com.thedaymarket.repository.UserRepository;
 import com.thedaymarket.service.StorageService;
 import com.thedaymarket.service.UserService;
 import com.thedaymarket.utils.ExceptionUtils;
+import java.time.LocalDateTime;
+import java.util.Optional;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.util.Optional;
 
 @Slf4j
 @Service
@@ -26,6 +26,7 @@ public class UserServiceImpl implements UserService {
   private final UserRepository userRepository;
   private final PasswordEncoder passwordEncoder;
   private final StorageService storageService;
+  private final ReputationRepository reputationRepository;
 
   @Override
   public User createUser(UserRegisterRequest userRequest) {
@@ -41,7 +42,11 @@ public class UserServiceImpl implements UserService {
     var auth = new UserAuth();
     auth.setPassword(passwordEncoder.encode(userRequest.password()));
     user.setAuth(auth);
-    return userRepository.save(user);
+    var savedUser = userRepository.save(user);
+
+    initializeReputation(savedUser);
+
+    return savedUser;
   }
 
   @Override
@@ -126,5 +131,18 @@ public class UserServiceImpl implements UserService {
   @Override
   public void deleteUser(Long userId) {
     userRepository.deleteById(userId);
+  }
+
+  private void initializeReputation(User savedUser) {
+    var reputation = new Reputation();
+    reputation.setUser(savedUser);
+    reputation.setReputationPoints(25.0);
+    reputation.setTotalAuctions(0L);
+    reputation.setTotalSold(0L);
+    reputation.setSellerRating(0);
+    reputation.setAuctionRating(0);
+    reputation.setUnCalculated(true);
+
+    reputationRepository.save(reputation);
   }
 }

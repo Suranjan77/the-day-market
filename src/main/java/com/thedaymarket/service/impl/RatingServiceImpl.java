@@ -5,16 +5,18 @@ import com.thedaymarket.domain.RatingType;
 import com.thedaymarket.domain.User;
 import com.thedaymarket.repository.RatingRepository;
 import com.thedaymarket.service.RatingService;
-import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Service;
-
+import com.thedaymarket.service.events.RatingChangedEvent;
 import java.util.Optional;
+import lombok.AllArgsConstructor;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.stereotype.Service;
 
 @AllArgsConstructor
 @Service
 public class RatingServiceImpl implements RatingService {
 
   private final RatingRepository ratingRepository;
+  private final ApplicationEventPublisher eventPublisher;
 
   @Override
   public Rating addRating(Integer stars, RatingType type, User rater, Long receiverId) {
@@ -31,7 +33,11 @@ public class RatingServiceImpl implements RatingService {
 
     rating.setStars(stars.floatValue());
 
-    return ratingRepository.save(rating);
+    var savedRating = ratingRepository.save(rating);
+
+    eventPublisher.publishEvent(new RatingChangedEvent(this, savedRating));
+
+    return savedRating;
   }
 
   @Override
@@ -40,15 +46,15 @@ public class RatingServiceImpl implements RatingService {
   }
 
   @Override
-  public Float getAverageRating(RatingType type, Long receiverId) {
+  public int getAverageRating(RatingType type, Long receiverId) {
     var ratings = ratingRepository.findByTypeAndReceiverId(type, receiverId);
 
     if (!ratings.isEmpty()) {
       var totalRating = ratings.stream().map(Rating::getStars).reduce(0.0f, Float::sum);
-      var averageRating = totalRating / ratings.size();
-      return Math.min((float) Math.ceil(averageRating), 5.0f);
+      var averageRating = Math.ceil(totalRating / ratings.size());
+      return Math.min((int) averageRating, 5);
     }
 
-    return 0.0f;
+    return 0;
   }
 }

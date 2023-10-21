@@ -4,18 +4,23 @@ import com.thedaymarket.controllers.handlers.LiveBiddingHandler;
 import com.thedaymarket.controllers.request.BidRequest;
 import com.thedaymarket.controllers.response.BidResponse;
 import com.thedaymarket.domain.Auction;
+import com.thedaymarket.domain.AuctionType;
 import com.thedaymarket.domain.Bid;
 import com.thedaymarket.domain.User;
 import com.thedaymarket.repository.BidRepository;
 import com.thedaymarket.repository.UserPointsRepository;
 import com.thedaymarket.service.BidService;
 import com.thedaymarket.service.UserService;
+import com.thedaymarket.service.schedule.DutchAuctionStateService;
 import com.thedaymarket.utils.ExceptionUtils;
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Optional;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -26,6 +31,7 @@ public class BidServiceImpl implements BidService {
   private final UserService userService;
   private final UserPointsRepository userPointsRepository;
   private final LiveBiddingHandler biddingHandler;
+  private final DutchAuctionStateService dutchAuctionStateService;
 
   @Override
   public Page<Bid> getBids(Auction auction, PageRequest pageRequest) {
@@ -52,6 +58,9 @@ public class BidServiceImpl implements BidService {
     bid.setAmount(bidRequest.amount());
     var savedBid = bidRepository.save(bid);
     biddingHandler.notifyAll(auction.getId(), BidResponse.of(savedBid));
+    if(auction.getType().equals(AuctionType.Dutch)) {
+      dutchAuctionStateService.expireAuction(auction);
+    }
     return savedBid;
   }
 
@@ -79,9 +88,11 @@ public class BidServiceImpl implements BidService {
         }
       }
       case Dutch -> {
-        if (bidRepository.existsByAuctionAndUser(auction, bidder)) {
-          throw ExceptionUtils.getBadRequestExceptionResponse(
-              "Cannot bid more than once in Dutch auction");
+        var alreadyBidForToday =
+            bidRepository.existsByAuctionAndCreatedAt(auction, LocalDateTime.now());
+        if (alreadyBidForToday) {
+          throw new ExceptionUtils.BusinessException(
+              HttpStatus.NOT_ACCEPTABLE, "Auction already closed for today");
         }
       }
     }

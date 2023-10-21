@@ -37,6 +37,17 @@ public class DutchAuctionStateService {
   @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
   private LocalTime marketCloseTime;
 
+  public void expireAuction(Auction auction) {
+    var state = dutchAuctionStateRepository.findStateOnDayForAuction(LocalDate.now(), auction);
+
+    if (state.isPresent()) {
+      var stateW = state.get();
+      stateW.setExpired(true);
+      dutchAuctionStateRepository.save(stateW);
+      auctionStateHandler.notifyAll(auction.getId(), DutchAuctionStateResponse.of(stateW));
+    }
+  }
+
   public DutchAuctionState getAdjustedState(Auction auction, Boolean shouldNotify) {
     var state =
         dutchAuctionStateRepository
@@ -111,6 +122,7 @@ public class DutchAuctionStateService {
   private boolean isMarketOpen() {
     // todo: Enable below logic
     return true;
-//    return !LocalTime.now().isBefore(marketStartTime) && !LocalTime.now().isAfter(marketCloseTime);
+    //    return !LocalTime.now().isBefore(marketStartTime) &&
+    // !LocalTime.now().isAfter(marketCloseTime);
   }
 }

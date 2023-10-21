@@ -19,8 +19,8 @@ public class AppSchedules {
   private final AuctionRepository auctionRepository;
   private final DutchAuctionStateRepository dutchAuctionStateRepository;
 
-  /** Updates today's dutch-auction state every second. */
-  @Scheduled(fixedRate = 1000)
+  /** Updates today's dutch-auction state every 800 milliseconds. */
+  @Scheduled(fixedRate = 800)
   public void dutchAuctionBidUpdate() {
 
     int index = 0;
@@ -43,21 +43,21 @@ public class AppSchedules {
     }
   }
 
-  // Every day at 10 AM
-  @Scheduled(cron = "0 0 10 * * ?")
-  public void marketOpen() {}
-
-  // Every day at 5 PM
-  @Scheduled(cron = "0 0 17 * * ?")
-  public void marketClosed() {
-    //    log.debug("Closing market");
-  }
-
-  /**
-   * Creates new market every midnight and assigns Auctions scheduled for next day on that market.
-   */
-  @Scheduled(cron = "0 0 0 * * ?")
-  public void marketMaker() {
-    //    log.debug("Creating new market and assigning auctions");
-  }
+//  // Every day at 10 AM
+//  @Scheduled(cron = "0 0 10 * * ?")
+//  public void marketOpen() {}
+//
+//  // Every day at 5 PM
+//  @Scheduled(cron = "0 0 17 * * ?")
+//  public void marketClosed() {
+//    //    log.debug("Closing market");
+//  }
+//
+//  /**
+//   * Creates new market every midnight and assigns Auctions scheduled for next day on that market.
+//   */
+//  @Scheduled(cron = "0 0 0 * * ?")
+//  public void marketMaker() {
+//    //    log.debug("Creating new market and assigning auctions");
+//  }
 }
