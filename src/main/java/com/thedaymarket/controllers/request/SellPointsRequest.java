@@ -6,4 +6,4 @@ import jakarta.validation.constraints.Positive;
 import java.math.BigDecimal;
 
 public record SellPointsRequest(
-    @NotNull BankAccountDetails creditCardDetails, @Positive BigDecimal points) {}
+    @NotNull BankAccountDetails bankAccountDetails, @Positive BigDecimal points) {}

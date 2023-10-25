@@ -5,6 +5,7 @@ import com.thedaymarket.controllers.request.UserUpdateRequest;
 import com.thedaymarket.domain.Reputation;
 import com.thedaymarket.domain.User;
 import com.thedaymarket.domain.UserAuth;
+import com.thedaymarket.domain.UserRole;
 import com.thedaymarket.repository.ReputationRepository;
 import com.thedaymarket.repository.UserRepository;
 import com.thedaymarket.service.StorageService;
@@ -107,7 +108,14 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public User getSystemUser() {
-    return null;
+    var sysUser = userRepository.findByEmail("system@£@@user@system@@").orElse(new User());
+    if (sysUser.getId() == null) {
+      sysUser.setFirstName("The Day Market");
+      sysUser.setLastName("");
+      sysUser.setRole(UserRole.BUYER);
+      sysUser = userRepository.save(sysUser);
+    }
+    return sysUser;
   }
 
   @Override

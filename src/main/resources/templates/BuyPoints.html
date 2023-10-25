@@ -4,65 +4,22 @@
     <title id="pageTitle">Buy Points | The-day-market</title>
 </head>
 <body>
+<script th:src="@{/js/points.js}"></script>
 <main class="buypoints">
     <section class="buypoints-wrapper">
         <section class="buypoints-hero">
             <img th:src="@{/images/logoicon.png}" alt="logo"/>
             <p>Buy Points</p>
         </section>
-        <section class="buypoints-form">
-            <form action="#">
-                <div class="current-points">
-                    <h4>Current Points</h4>
-                    <h4>500</h4>
-                </div>
-                <label for="purchaseAmount">Purchase Amount</label>
-                <input
-                        type="number"
-                        name="purchaseAmount"
-                        placeholder="Purchase amount"
-                        id="purchaseAmount"
-                        required
-                />
-                <div class="total-amount">
-                    <h4>Total</h4>
-                    <h4>&#163;20.05</h4>
-                </div>
-                <label for="cardNumber">Card number</label>
-                <input
-                        type="number"
-                        name="cardNumber"
-                        placeholder="Card number"
-                        id="cardNumber"
-                        required
-                />
-                <section class="card-validity">
-                    <div class="cvv">
-                        <label for="cvv">CVV</label>
-                        <input
-                                type="number"
-                                name="cvv"
-                                placeholder="cvv"
-                                maxlength="4"
-                                id="cvv"
-                                required
-                        />
-                    </div>
-                    <div class="expiry-date">
-                        <label for="expiryAt">Expiry at</label>
-                        <input
-                                type="date"
-                                name="expiryAt"
-                                placeholder="MM/YY"
-                                id="expiryAt"
-                                required
-                        />
-                    </div>
+        <section class="buypoints-form" id="points-form">
+            <section id="show-buttons-section">
+                <section class="add-listing" id="sell-points">
+                    <h3><span>Sell Points</span></h3>
                 </section>
-                <section class="button">
-                    <button>Submit Payment</button>
+                <section class="add-listing" id="buy-points">
+                    <h3><span>Buy Points</span></h3>
                 </section>
-            </form>
+            </section>
         </section>
     </section>
 </main>

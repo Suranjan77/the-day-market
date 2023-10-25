@@ -24,7 +24,7 @@ public class ReputationEventsHandler {
   private final UserService userService;
 
   /**
-   * reputation = {(averageRating * W1) + (soldItems/listedItems) * W2 * 5 * normalizer + ...} * 20
+   * reputation = {(averageRating * W1) + (soldItems/listedItems) * W2 * 5 * normalizer + ...}
    * Where W1 + W2 + ... + Wn = 1.0, 0 <= averageRating <= 5, multiply by 20 because total
    * reputation is 5 due to rating's range, normalizer is a value with range 0 to 1, which should
    * grow fast when listedItems is less and grow slow when listedItems is large e.g. normalizer =

@@ -10,6 +10,7 @@ import com.thedaymarket.repository.TransactionRepository;
 import com.thedaymarket.repository.UserPointsRepository;
 import com.thedaymarket.service.PaymentService;
 import com.thedaymarket.service.UserService;
+import com.thedaymarket.utils.ExceptionUtils;
 import jakarta.transaction.Transactional;
 import java.math.BigDecimal;
 import lombok.AllArgsConstructor;
@@ -47,8 +48,11 @@ public class PaymentServiceImpl implements PaymentService {
 
   @Override
   public Transaction sellPoints(SellPointsRequest sellPoints, Long userId) {
-    var creditCardDetails = sellPoints.creditCardDetails();
+    var creditCardDetails = sellPoints.bankAccountDetails();
     var seller = userService.getUser(userId);
+    if (seller.getPoints().compareTo(sellPoints.points()) < 0) {
+      throw ExceptionUtils.getNotFoundExceptionResponse("Not enough points");
+    }
     var transactionResponse =
         paymentSimulator.createBankAccountTransaction(creditCardDetails, sellPoints.points());
     if (transactionResponse.success()) {

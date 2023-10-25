@@ -74,7 +74,12 @@ public class ViewController {
     return "BuyPoints";
   }
 
-  @GetMapping("/buyer-dashboard")
+  @GetMapping("/sell-points")
+  public String sellPoints() {
+    return "SellPoints";
+  }
+
+    @GetMapping("/buyer-dashboard")
   public String buyerDashboard() {
     return "BuyerDashboard";
   }

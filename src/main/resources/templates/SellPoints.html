@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: headerFragment}">
+    <title id="pageTitle">Buy Points | The-day-market</title>
+</head>
+<body>
+<script th:src="@{/js/points.js}"></script>
+<main class="buypoints">
+    <section class="buypoints-wrapper">
+        <section class="buypoints-hero">
+            <img th:src="@{/images/logoicon.png}" alt="logo"/>
+            <p>Buy Points</p>
+        </section>
+        <section class="buypoints-form">
+            <form action="" id="buy-points-form">
+                <div class="current-points">
+                    <h4>Current Points</h4>
+                    <h4 id="user-points">500</h4>
+                </div>
+                <label for="sellAmount">Amount to Sell</label>
+                <input
+                        type="number"
+                        name="sellAmount"
+                        placeholder="Selling amount"
+                        id="sellAmount"
+                        required
+                />
+                <div class="total-amount">
+                    <h4>You will receive</h4>
+                    <h4 id="total-pay">&#163;0.00</h4>
+                </div>
+                <label for="accountName">Account Name</label>
+                <input
+                        type="text"
+                        name="accountName"
+                        placeholder="Account Name"
+                        id="accountName"
+                        required
+                />
+                <label for="sortCode">Sort code</label>
+                <input
+                        type="number"
+                        name="sortCode"
+                        placeholder="Sort Code"
+                        id="sortCode"
+                        required
+                />
+                <label for="accountNumber">Account number</label>
+                <input
+                        type="number"
+                        name="accountNumber"
+                        placeholder="Account number"
+                        id="accountNumber"
+                        required
+                />
+                <section class="button">
+                    <button id="submit-buy-points">Submit Payment</button>
+                </section>
+            </form>
+        </section>
+    </section>
+</main>
+</body>
+</html>
