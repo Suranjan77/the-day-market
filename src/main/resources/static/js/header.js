@@ -14,7 +14,7 @@ $(document).ready(function() {
       location.href = '/web';
     });
 
-    $('#user-points').on('click', function() {
+    $('#money').on('click', function() {
         location.href = '/web/buy-points';
     })
   }

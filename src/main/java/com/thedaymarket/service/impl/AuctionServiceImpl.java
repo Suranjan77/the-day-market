@@ -5,6 +5,7 @@ import com.thedaymarket.controllers.request.CreateAuctionRequest;
 import com.thedaymarket.controllers.request.CreateCategoryRequest;
 import com.thedaymarket.domain.*;
 import com.thedaymarket.repository.AuctionRepository;
+import com.thedaymarket.repository.UserPointsRepository;
 import com.thedaymarket.service.*;
 import com.thedaymarket.service.schedule.DutchAuctionStateService;
 import com.thedaymarket.utils.AuctionSearchFieldNames;
@@ -14,11 +15,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import lombok.AllArgsConstructor;
-import org.apache.commons.lang3.StringUtils;
-import org.checkerframework.checker.units.qual.A;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -34,6 +31,8 @@ public class AuctionServiceImpl implements AuctionService {
   private final CategoryService categoryService;
   private final StorageService storageService;
   private final DutchAuctionStateService dutchAuctionStateService;
+  private final PaymentService paymentService;
+  private UserPointsRepository userPointsRepository;
 
   @Override
   public Page<Auction> getTodayAuctions(Pageable pageable, String filters) {
@@ -151,6 +150,50 @@ public class AuctionServiceImpl implements AuctionService {
         auctionRepository.getTotalAuctionByStatusIn(seller, List.of(AuctionStatus.SOLD));
 
     return new AuctionStats(totalSoldAuctions, totalAuctions);
+  }
+
+  @Override
+  public Auction confirmPurchase(User buyer, Bid bid) {
+    validateWinningBid(bid);
+
+    var auction = bid.getAuction();
+    auction.setStatus(AuctionStatus.SOLD);
+    auction = auctionRepository.save(auction);
+
+    var seller = bid.getAuction().getSeller();
+    paymentService.buyAuction(bid.getAmount(), buyer, seller, bid.getId());
+
+    userPointsRepository.updateUserPointsAmount(
+        seller.getPoints().add(bid.getAmount()), seller.getUserPoints().getId());
+
+    return auction;
+  }
+
+  @Override
+  public Auction confirmRejection(User buyer, Bid bid) {
+    validateWinningBid(bid);
+
+    var auction = bid.getAuction();
+    auction.setStatus(AuctionStatus.UNSOLD);
+    auction = auctionRepository.save(auction);
+
+    var seller = bid.getAuction().getSeller();
+    paymentService.refundBid(bid.getAmount(), buyer, seller, bid.getId());
+
+    return auction;
+  }
+
+  public void validateWinningBid(Bid bid) {
+    var auction = bid.getAuction();
+    if (!auction.getStatus().equals(AuctionStatus.CLOSED)) {
+      throw new ExceptionUtils.BusinessException(
+          HttpStatus.UNPROCESSABLE_ENTITY, "Auction not yet closed");
+    }
+
+    if (!auction.getWinningBid().equals(bid)) {
+      throw new ExceptionUtils.BusinessException(
+          HttpStatus.UNPROCESSABLE_ENTITY, "The bid is not the winning bid");
+    }
   }
 
   private static Specification<Auction> getAuctionSpecs(String filters, boolean isToday) {

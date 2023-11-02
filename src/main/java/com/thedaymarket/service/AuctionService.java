@@ -3,6 +3,7 @@ package com.thedaymarket.service;
 import com.thedaymarket.controllers.request.AuctionDetailsRequest;
 import com.thedaymarket.controllers.request.CreateAuctionRequest;
 import com.thedaymarket.domain.Auction;
+import com.thedaymarket.domain.Bid;
 import com.thedaymarket.domain.DutchAuctionState;
 import com.thedaymarket.domain.User;
 import org.springframework.data.domain.Page;
@@ -29,4 +30,7 @@ public interface AuctionService {
   DutchAuctionState getDutchAuctionState(Long auctionId);
 
   AuctionStats getAuctionStatsForSeller(User seller);
+
+  Auction confirmPurchase(User user, Bid bid);
+  Auction confirmRejection(User user, Bid bid);
 }

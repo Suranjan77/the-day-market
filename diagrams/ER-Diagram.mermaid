@@ -1,0 +1,121 @@
+erDiagram
+    auction {
+        bigint category_id FK
+        datetime created_at
+        double decrement_factor
+        decimal decrement_limit
+        bigint decrement_seconds
+        varchar description
+        bigint id PK
+        varchar image_name
+        bigint item_count
+        decimal min_ask_price
+        date scheduled_date
+        bigint seller_id FK
+        enum status
+        varchar title
+        enum type
+        datetime updated_at
+        bigint winning_bid_id FK
+    }
+
+    bid {
+        decimal amount
+        bigint auction_id FK
+        bigint bidder_id FK
+        datetime created_at
+        bigint id PK
+        datetime updated_at
+    }
+
+    category {
+        datetime created_at
+        bigint id PK
+        bigint parent_id FK
+        varchar tag
+        datetime updated_at
+    }
+
+    dutch_auction_state {
+        bigint auction_id FK
+        datetime created_at
+        decimal current_points
+        bit expired
+        bigint id PK
+        bigint timer_seconds
+        time timer_started_at
+        datetime updated_at
+    }
+
+    rating {
+        datetime created_at
+        bigint id PK
+        bigint rater_id FK
+        bigint receiver_id
+        float stars
+        enum type
+        datetime updated_at
+    }
+
+    reputation {
+        float auction_rating
+        datetime created_at
+        bigint id PK
+        double reputation_points
+        int seller_rating
+        bigint total_auctions
+        bigint total_sold
+        bit un_calculated
+        datetime updated_at
+        bigint user_id FK
+    }
+
+    transaction {
+        decimal amount
+        bigint buyer_id FK
+        datetime created_at
+        bigint id PK
+        bigint order_id
+        enum payment_method
+        bigint seller_id FK
+        enum type
+        datetime updated_at
+    }
+
+    user {
+        varchar address_line1
+        varchar city
+        datetime created_at
+        varchar email
+        varchar first_name
+        bigint id PK
+        datetime last_logged_in_at
+        varchar last_name
+        varchar password
+        varchar post_code
+        varchar profile_image_name
+        enum role
+        varchar token
+        datetime updated_at
+    }
+
+    user_points {
+        bigint belongs_to_id FK
+        decimal count
+        datetime created_at
+        bigint id PK
+        datetime updated_at
+    }
+
+    auction }o--|| bid : "winning_bid_id"
+    auction }o--|| category : "category_id"
+    auction }o--|| user : "seller_id"
+    bid }o--|| auction : "auction_id"
+    dutch_auction_state }o--|| auction : "auction_id"
+    bid }o--|| user : "bidder_id"
+    category }o--|| category : "parent_id"
+    rating }o--|| user : "rater_id"
+    reputation }o--|| user : "user_id"
+    transaction }o--|| user : "buyer_id"
+    transaction }o--|| user : "seller_id"
+    user_points }o--|| user : "belongs_to_id"

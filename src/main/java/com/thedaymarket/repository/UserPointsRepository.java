@@ -17,6 +17,6 @@ public interface UserPointsRepository extends JpaRepository<UserPoints, Long> {
   Optional<UserPoints> findByBelongsTo(User user);
 
   @Modifying
-  @Query("UPDATE UserPoints u SET u.count= :points WHERE u.id = :id")
+  @Query("UPDATE UserPoints up SET up.count= :points WHERE up.id = :id")
   void updateUserPointsAmount(@Param("points") BigDecimal points, @Param("id") Long id);
 }

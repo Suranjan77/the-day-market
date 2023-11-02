@@ -36,6 +36,7 @@ public class WebSecurityConfig {
     executor.setMaxPoolSize(100);
     executor.setQueueCapacity(50);
     executor.setThreadNamePrefix("async-");
+    executor.initialize();
     return new DelegatingSecurityContextAsyncTaskExecutor(executor);
   }
 

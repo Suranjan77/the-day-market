@@ -2,6 +2,17 @@ $(document).ready(function() {
   populateMyBids(1);
 });
 
+function showUnsoldBidButtons() {
+  return `<div class="checkout">
+            <section class="confirm-btn" id="purchase-btn">
+                <h3><span>Buy <br/>Auction</span></h3>
+            </section>
+            <section class="reject-btn" id="reject-btn">
+                <h3><span>Reject Auction</span></h3>
+            </section>
+        </div>`;
+}
+
 function populateMyBids(page) {
   get(`buyers/${getUser().id}/my-bids?page=${page}&size=6`, myBids => {
 
@@ -36,14 +47,35 @@ function populateMyBids(page) {
            
             ${bid.status === 'WON' ? getRatingStars(bid.stars, bid.id) : ''}
         </div>
+        ${bid.sold ? '' : showUnsoldBidButtons()} 
     </div>
   `);
 
     $('#my-bids').
         empty().
         append(bids).
+        on('click', '#purchase-btn', function() {
+          const bidId = $('#bid-id').val();
+          const userId = getUser().id;
+          const data = {
+            bidId, isPurchase: true,
+          };
+          post(`buyers/${userId}/my-bid-action`, data, d => {
+            console.log(d);
+          }, true);
+        }).
+        on('click', '#reject-btn', function() {
+          const bidId = $('#bid-id').val();
+          const userId = getUser().id;
+          const data = {
+            bidId, isPurchase: false,
+          };
+          post(`buyers/${userId}/my-bid-action`, data, d => {
+            console.log(d);
+          }, true);
+        }).
         ready(
-            () => addStarEventListener( 'AUCTION'));
+            () => addStarEventListener('BID'));
 
     initializePagination(
         myBids.totalSize,

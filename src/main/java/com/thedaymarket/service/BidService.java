@@ -15,4 +15,5 @@ public interface BidService {
   Optional<Bid> getMaxBid(Auction auction);
   Bid addBids(Auction auction, BidRequest bidRequest);
   Page<Bid> getBidsFroUser(User user, PageRequest pageRequest);
+  Bid getById(Long id);
 }

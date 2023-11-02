@@ -33,6 +33,8 @@ public interface AuctionRepository extends JpaRepository<Auction, Long> {
 
   Page<Auction> findAll(Specification<Auction> spec, Pageable pageable);
 
+  List<Auction> findAllByScheduledDate(LocalDate scheduledDate);
+
   @Query(
       "SELECT a FROM Auction a WHERE a.seller = :seller AND DATE(a.scheduledDate) = :scheduledAt AND a.status <> :status")
   Page<Auction> findTodayAuctionBySellerAndStatusNot(
@@ -42,9 +44,11 @@ public interface AuctionRepository extends JpaRepository<Auction, Long> {
       Pageable pageable);
 
   @Modifying
-  @Query("UPDATE Auction a SET a.scheduledDate=DATE(now()) WHERE id>0")
-  void updateAllAuctionsDate();
+  @Query("UPDATE Auction a SET a.status=:status WHERE a.scheduledDate=:scheduledDate")
+  void updateAuctionsStatus(
+      @Param("scheduledDate") LocalDate scheduledDate, @Param("status") AuctionStatus status);
 
   @Query("SELECT COUNT(a) FROM Auction a WHERE a.seller=:seller AND a.status in :status")
-  Long getTotalAuctionByStatusIn(@Param("seller") User seller, @Param("status") List<AuctionStatus> auctionStatuses);
+  Long getTotalAuctionByStatusIn(
+      @Param("seller") User seller, @Param("status") List<AuctionStatus> auctionStatuses);
 }

@@ -1,6 +1,9 @@
 package com.thedaymarket.domain;
 
 public enum TransactionType {
-    AUCTION,
-    POINTS
+    PURCHASE_AUCTION,
+    PURCHASE_POINTS,
+    SELL_POINTS,
+    BID,
+    REFUND
 }

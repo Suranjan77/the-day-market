@@ -5,6 +5,7 @@ import com.thedaymarket.domain.Reputation;
 import com.thedaymarket.domain.ReputationModifiers;
 import com.thedaymarket.repository.ReputationRepository;
 import com.thedaymarket.service.AuctionService;
+import com.thedaymarket.service.BidService;
 import com.thedaymarket.service.RatingService;
 import com.thedaymarket.service.UserService;
 import com.thedaymarket.service.events.AuctionChangeEvent;
@@ -20,6 +21,7 @@ public class ReputationEventsHandler {
 
   private final RatingService ratingService;
   private final AuctionService auctionService;
+  private final BidService bidService;
   private final ReputationRepository reputationRepository;
   private final UserService userService;
 
@@ -36,8 +38,8 @@ public class ReputationEventsHandler {
     var rating = event.getRating();
     var averageRating = ratingService.getAverageRating(rating.getType(), rating.getReceiverId());
     switch (rating.getType()) {
-      case AUCTION -> handleRatingReputationForAuction(rating, averageRating);
-      case SELLER -> handleRatingRefactorForSeller(rating, averageRating);
+      case BID -> handleRatingReputationForAuction(rating, averageRating);
+      case SELLER -> handleRatingForSeller(rating, averageRating);
     }
   }
 
@@ -60,7 +62,7 @@ public class ReputationEventsHandler {
     reputationRepository.save(reputation);
   }
 
-  private void handleRatingRefactorForSeller(Rating rating, int averageRating) {
+  private void handleRatingForSeller(Rating rating, int averageRating) {
     var seller = userService.getUser(rating.getReceiverId());
     var reputation = reputationRepository.findByUser(seller).orElse(new Reputation());
 
@@ -76,7 +78,8 @@ public class ReputationEventsHandler {
   }
 
   private void handleRatingReputationForAuction(Rating rating, int averageRating) {
-    var auction = auctionService.getAuction(rating.getReceiverId());
+    var bid = bidService.getById(rating.getReceiverId());
+    var auction = bid.getAuction();
     var seller = auction.getSeller();
 
     var reputation = reputationRepository.findByUser(seller).orElse(new Reputation());

@@ -1,8 +1,13 @@
 package com.thedaymarket.domain;
 
+/**
+ * AuctionStatus SOLD -- bought by buyer, CLOSED -- closed at the auction end and has a winner,
+ * SCHEDULED -- to be published, PUBLISHED -- published today UNSOLD -- No bidders or winner
+ * rejected, DRAFT -- Not yet ready
+ */
 public enum AuctionStatus {
-  SOLD, // A job picks up CLOSED auctions and determine winner and sets SOLD status, if no winner then UNSOLD
-  CLOSED, //At the end of the market CLOSED
+  SOLD,
+  CLOSED,
   SCHEDULED,
   PUBLISHED,
   UNSOLD,

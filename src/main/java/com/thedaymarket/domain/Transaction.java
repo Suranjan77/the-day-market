@@ -16,11 +16,11 @@ public class Transaction extends BaseEntity {
 
   private BigDecimal amount;
 
-  @ManyToOne private Auction auction;
-
   @Enumerated(EnumType.STRING)
   private TransactionType type;
 
   @Enumerated(EnumType.STRING)
   private PaymentMethod paymentMethod;
+
+  private Long orderId;
 }

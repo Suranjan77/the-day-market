@@ -24,6 +24,7 @@ public class BuyerController {
   private final UserService userService;
   private final BidService bidService;
   private final RatingService ratingService;
+  private final AuctionService auctionService;
 
   @GetMapping("{id}/my-bids")
   public PagedResponse<MyBidResponse> getLatestBids(
@@ -40,7 +41,7 @@ public class BuyerController {
               var auction = bid.getAuction();
               var rating =
                   ratingService
-                      .getRatingByRater(RatingType.AUCTION, buyer, auction.getId())
+                      .getRatingByRater(RatingType.BID, buyer, bid.getId())
                       .map(Rating::getStars)
                       .orElse(0.0f);
               var bidWon = auction.getWinningBid() != null;
@@ -61,4 +62,22 @@ public class BuyerController {
                           : MyBidStatus.LIVE));
             }));
   }
+
+  @PostMapping("{id}/my-bid-action")
+  public BidActionResponse performActionOnBid(
+      @PathVariable("id") Long buyerId, @RequestBody BidActionRequest request) {
+    var buyer = userService.getUser(buyerId);
+    var bid = bidService.getById(request.bidId());
+    if (request.isPurchase()) {
+      auctionService.confirmPurchase(buyer, bid);
+    } else {
+      auctionService.confirmRejection(buyer, bid);
+    }
+
+    return new BidActionResponse(bid.getId(), request.isPurchase);
+  }
+
+  public record BidActionRequest(Long bidId, boolean isPurchase) {}
+
+  public record BidActionResponse(Long bidId, boolean purchased) {}
 }

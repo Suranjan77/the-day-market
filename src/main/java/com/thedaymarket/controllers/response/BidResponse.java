@@ -2,7 +2,6 @@ package com.thedaymarket.controllers.response;
 
 import com.thedaymarket.domain.Bid;
 import java.math.BigDecimal;
-import java.time.Instant;
 import java.time.LocalDateTime;
 
 public record BidResponse(Long id, LocalDateTime createdAt, BigDecimal amount, UserResponse user) {
@@ -18,6 +17,6 @@ public record BidResponse(Long id, LocalDateTime createdAt, BigDecimal amount, U
         bid.getId(),
         bid.getCreatedAt(),
         hideAmount ? null : bid.getAmount(),
-        UserResponse.ofUser(bid.getUser()));
+        UserResponse.ofUser(bid.getBidder()));
   }
 }

@@ -21,7 +21,7 @@ public interface BidRepository extends JpaRepository<Bid, Long> {
 
   boolean existsByAuctionAndCreatedAt(Auction auction, LocalDateTime day);
 
-  boolean existsByAuctionAndUser(Auction auction, User user);
+  boolean existsByAuctionAndBidder(Auction auction, User user);
 
   @Query("SELECT coalesce(MAX(b.amount), 0.0) FROM Bid b WHERE b.auction=:auction")
   BigDecimal findMaxBid(@Param("auction") Auction auction);

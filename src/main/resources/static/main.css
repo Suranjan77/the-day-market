@@ -2079,6 +2079,30 @@ footer p {
     background-color: #2e816e;
 }
 
+.confirm-btn {
+    background-color: #1b3034;
+    text-align: center;
+    padding: 5px;
+    color: white;
+    border-radius: 15px;
+}
+
+.confirm-btn:hover {
+    background-color: #2e816e;
+}
+.reject-btn {
+    background-color: darkred;
+    text-align: center;
+    padding: 5px;
+    margin-top: 5px;
+    color: white;
+    border-radius: 15px;
+}
+
+.reject-btn:hover {
+    background-color: red;
+}
+
 .auction-bid .auction-bid-wrapper .mybid-wrapper .mybid-header h3 {
     color: #ffffff;
 }

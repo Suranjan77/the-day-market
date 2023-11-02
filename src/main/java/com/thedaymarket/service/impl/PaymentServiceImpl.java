@@ -2,10 +2,7 @@ package com.thedaymarket.service.impl;
 
 import com.thedaymarket.controllers.request.BuyPointsRequest;
 import com.thedaymarket.controllers.request.SellPointsRequest;
-import com.thedaymarket.domain.Transaction;
-import com.thedaymarket.domain.TransactionType;
-import com.thedaymarket.domain.User;
-import com.thedaymarket.domain.UserPoints;
+import com.thedaymarket.domain.*;
 import com.thedaymarket.repository.TransactionRepository;
 import com.thedaymarket.repository.UserPointsRepository;
 import com.thedaymarket.service.PaymentService;
@@ -27,6 +24,8 @@ public class PaymentServiceImpl implements PaymentService {
   private final TransactionRepository transactionRepository;
   private final UserPointsRepository userPointsRepository;
 
+  private static final Long POINTS_ORDER_ID = 0L;
+
   @Override
   public Transaction buyPoints(BuyPointsRequest buyPoints, Long userId) {
     var creditCardDetails = buyPoints.creditCardDetails();
@@ -36,7 +35,12 @@ public class PaymentServiceImpl implements PaymentService {
     if (transactionResponse.success()) {
       var transaction =
           createTransaction(
-              buyPoints.amount(), buyer, userService.getSystemUser(), transactionResponse);
+              buyPoints.amount(),
+              buyer,
+              userService.getSystemUser(),
+              TransactionType.PURCHASE_POINTS,
+              transactionResponse.paymentMethod(),
+              POINTS_ORDER_ID);
 
       updateUserPoints(buyPoints.amount(), buyer, true);
 
@@ -58,7 +62,12 @@ public class PaymentServiceImpl implements PaymentService {
     if (transactionResponse.success()) {
       var transaction =
           createTransaction(
-              sellPoints.points(), userService.getSystemUser(), seller, transactionResponse);
+              sellPoints.points(),
+              userService.getSystemUser(),
+              seller,
+              TransactionType.SELL_POINTS,
+              transactionResponse.paymentMethod(),
+              POINTS_ORDER_ID);
 
       updateUserPoints(sellPoints.points(), seller, false);
 
@@ -66,6 +75,34 @@ public class PaymentServiceImpl implements PaymentService {
     } else {
       throw new WebServerException("Transaction failed for user: " + userId, new Throwable());
     }
+  }
+
+  @Override
+  public Transaction buyAuction(BigDecimal amount, User buyer, User seller, Long bidId) {
+    return createTransaction(
+        amount,
+        buyer,
+        seller,
+        TransactionType.PURCHASE_AUCTION,
+        PaymentMethod.POINTS_TRANSFER,
+        bidId);
+  }
+
+  @Override
+  public Transaction refundBid(BigDecimal amount, User buyer, User seller, Long bidId) {
+    return createTransaction(
+        amount, buyer, seller, TransactionType.REFUND, PaymentMethod.POINTS_TRANSFER, bidId);
+  }
+
+  @Override
+  public Transaction refundTransaction(Transaction transaction) {
+    return createTransaction(
+        transaction.getAmount(),
+        transaction.getBuyer(),
+        transaction.getSeller(),
+        TransactionType.REFUND,
+        PaymentMethod.POINTS_TRANSFER,
+        transaction.getOrderId());
   }
 
   private void updateUserPoints(BigDecimal amount, User buyer, final boolean isAddition) {
@@ -88,15 +125,20 @@ public class PaymentServiceImpl implements PaymentService {
     userPointsRepository.save(userPoints);
   }
 
-  private Transaction createTransaction(
-      BigDecimal buyPoints, User buyer, User seller, TransactionResponse transactionResponse) {
+  public Transaction createTransaction(
+      BigDecimal amount,
+      User buyer,
+      User seller,
+      TransactionType type,
+      PaymentMethod paymentMethod,
+      Long orderId) {
     var transaction = new Transaction();
-    transaction.setAmount(buyPoints);
-    transaction.setType(TransactionType.POINTS);
+    transaction.setAmount(amount);
+    transaction.setType(type);
     transaction.setBuyer(buyer);
     transaction.setSeller(seller);
-    transaction.setAuction(null);
-    transaction.setPaymentMethod(transactionResponse.paymentMethod());
+    transaction.setOrderId(orderId);
+    transaction.setPaymentMethod(paymentMethod);
     return transactionRepository.save(transaction);
   }
 }

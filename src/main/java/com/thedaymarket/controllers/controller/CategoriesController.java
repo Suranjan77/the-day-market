@@ -3,20 +3,15 @@ package com.thedaymarket.controllers.controller;
 import com.thedaymarket.controllers.request.CreateCategoryRequest;
 import com.thedaymarket.controllers.response.CategoriesResponse;
 import com.thedaymarket.controllers.response.Suggestion;
-import com.thedaymarket.domain.AuctionStatus;
 import com.thedaymarket.domain.Category;
 import com.thedaymarket.service.CategoryService;
 import com.thedaymarket.service.impl.TitledCategoryResponse;
 import com.thedaymarket.utils.AuctionSearchFieldNames;
 import com.thedaymarket.utils.RESTUtils;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.EnumSet;
-import java.util.List;
+
+import java.util.*;
 import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -49,11 +44,8 @@ public class CategoriesController {
   }
 
   @GetMapping("sort")
-  public List<CategoriesResponse> getSort() {
-    return List.of(
-        new CategoriesResponse("High", null, null),
-        new CategoriesResponse("Neutral", null, null),
-        new CategoriesResponse("Low", null, null));
+  public List<?> getSort() {
+    return Collections.EMPTY_LIST;
   }
 
   @GetMapping("suggestions")

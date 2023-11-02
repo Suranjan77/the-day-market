@@ -6,7 +6,7 @@ import lombok.Getter;
 public enum RatingType {
   SELLER(User.class),
   BUYER(User.class),
-  AUCTION(Auction.class);
+  BID(Bid.class);
 
   private final Class<?> domainType;
 

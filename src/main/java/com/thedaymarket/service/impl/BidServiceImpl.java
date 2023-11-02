@@ -3,18 +3,15 @@ package com.thedaymarket.service.impl;
 import com.thedaymarket.controllers.handlers.LiveBiddingHandler;
 import com.thedaymarket.controllers.request.BidRequest;
 import com.thedaymarket.controllers.response.BidResponse;
-import com.thedaymarket.domain.Auction;
-import com.thedaymarket.domain.AuctionType;
-import com.thedaymarket.domain.Bid;
-import com.thedaymarket.domain.User;
+import com.thedaymarket.domain.*;
 import com.thedaymarket.repository.BidRepository;
 import com.thedaymarket.repository.UserPointsRepository;
 import com.thedaymarket.service.BidService;
+import com.thedaymarket.service.PaymentService;
 import com.thedaymarket.service.UserService;
 import com.thedaymarket.service.schedule.DutchAuctionStateService;
 import com.thedaymarket.utils.ExceptionUtils;
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import lombok.AllArgsConstructor;
@@ -32,6 +29,7 @@ public class BidServiceImpl implements BidService {
   private final UserPointsRepository userPointsRepository;
   private final LiveBiddingHandler biddingHandler;
   private final DutchAuctionStateService dutchAuctionStateService;
+  private final PaymentService paymentService;
 
   @Override
   public Page<Bid> getBids(Auction auction, PageRequest pageRequest) {
@@ -53,12 +51,21 @@ public class BidServiceImpl implements BidService {
         bidder.getPoints().subtract(bidRequest.amount()), bidder.getUserPoints().getId());
 
     var bid = new Bid();
-    bid.setUser(bidder);
+    bid.setBidder(bidder);
     bid.setAuction(auction);
     bid.setAmount(bidRequest.amount());
     var savedBid = bidRepository.save(bid);
     biddingHandler.notifyAll(auction.getId(), BidResponse.of(savedBid));
-    if(auction.getType().equals(AuctionType.Dutch)) {
+
+    paymentService.createTransaction(
+        bid.getAmount(),
+        bidder,
+        auction.getSeller(),
+        TransactionType.BID,
+        PaymentMethod.POINTS_TRANSFER,
+        savedBid.getId());
+
+    if (auction.getType().equals(AuctionType.Dutch)) {
       dutchAuctionStateService.expireAuction(auction);
     }
     return savedBid;
@@ -67,6 +74,14 @@ public class BidServiceImpl implements BidService {
   @Override
   public Page<Bid> getBidsFroUser(User user, PageRequest pageRequest) {
     return bidRepository.findLatestBidsByUser(user.getId(), pageRequest);
+  }
+
+  @Override
+  public Bid getById(Long id) {
+    return bidRepository
+        .findById(id)
+        .orElseThrow(
+            () -> ExceptionUtils.getNotFoundExceptionResponse("Bid not found for id: " + id));
   }
 
   private void validateBid(Auction auction, BidRequest bidRequest, User bidder) {

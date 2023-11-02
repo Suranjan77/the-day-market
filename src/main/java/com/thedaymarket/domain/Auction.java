@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import lombok.Data;
+import org.hibernate.annotations.OrderBy;
 
 @Data
 @Entity
@@ -35,15 +36,13 @@ public class Auction extends BaseEntity {
 
   @ManyToOne private User seller;
 
-  @ManyToOne private Market assignedMarket;
-
   @ManyToOne private Category category;
 
   @OneToMany(mappedBy = "auction")
+  @OrderBy(clause = "amount DESC")
   private List<Bid> bids;
 
-  @OneToOne
-  private Bid winningBid;
+  @OneToOne private Bid winningBid;
 
   @OneToMany(mappedBy = "auction")
   private List<DutchAuctionState> dutchAuctionState;

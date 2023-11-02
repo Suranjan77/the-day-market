@@ -112,6 +112,7 @@ public class UserServiceImpl implements UserService {
     if (sysUser.getId() == null) {
       sysUser.setFirstName("The Day Market");
       sysUser.setLastName("");
+      sysUser.setEmail("system@£@@user@system@@");
       sysUser.setRole(UserRole.BUYER);
       sysUser = userRepository.save(sysUser);
     }
