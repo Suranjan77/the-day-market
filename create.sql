@@ -44,16 +44,16 @@ INSERT INTO the_day_market.auction (id, created_at, updated_at, decrement_factor
 
 
 # for debugging
-SELECT ic.TABLE_NAME,
-       ic.COLUMN_NAME,
-       ic.DATA_TYPE,
-       ic.COLUMN_TYPE,
-       ic.COLUMN_KEY,
-       ic.EXTRA,
-       ikc.REFERENCED_TABLE_NAME,
-       ikc.REFERENCED_COLUMN_NAME
-FROM information_schema.columns ic
-         LEFT JOIN information_schema.KEY_COLUMN_USAGE ikc
-                   ON ic.COLUMN_NAME = ikc.COLUMN_NAME
-WHERE ic.table_schema = 'the_day_market'
-ORDER BY TABLE_NAME;
+# SELECT ic.TABLE_NAME,
+#        ic.COLUMN_NAME,
+#        ic.DATA_TYPE,
+#        ic.COLUMN_TYPE,
+#        ic.COLUMN_KEY,
+#        ic.EXTRA,
+#        ikc.REFERENCED_TABLE_NAME,
+#        ikc.REFERENCED_COLUMN_NAME
+# FROM information_schema.columns ic
+#          LEFT JOIN information_schema.KEY_COLUMN_USAGE ikc
+#                    ON ic.COLUMN_NAME = ikc.COLUMN_NAME
+# WHERE ic.table_schema = 'the_day_market'
+# ORDER BY TABLE_NAME;

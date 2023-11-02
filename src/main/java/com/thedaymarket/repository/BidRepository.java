@@ -36,10 +36,10 @@ public interface BidRepository extends JpaRepository<Bid, Long> {
                 b.updated_at,
                 b.amount,
                 b.auction_id,
-                b.user_id,
+                b.bidder_id,
                 ROW_NUMBER() OVER (PARTITION BY b.auction_id ORDER BY b.created_at DESC) AS rn
             FROM bid b
-            WHERE b.user_id = :userId
+            WHERE b.bidder_id = :userId
         )
 
         SELECT
@@ -48,7 +48,7 @@ public interface BidRepository extends JpaRepository<Bid, Long> {
             lb.updated_at,
             lb.amount,
             lb.auction_id,
-            lb.user_id
+            lb.bidder_id
         FROM LatestBids lb
         WHERE lb.rn = 1
     """,
@@ -59,7 +59,7 @@ public interface BidRepository extends JpaRepository<Bid, Long> {
                 b.id,
                 ROW_NUMBER() OVER (PARTITION BY b.auction_id ORDER BY b.created_at DESC) AS rn
             FROM bid b
-            WHERE b.user_id = :userId
+            WHERE b.bidder_id = :userId
         )
         SELECT COUNT(lb.id)
         FROM LatestBids lb

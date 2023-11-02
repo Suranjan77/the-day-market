@@ -16,6 +16,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @AllArgsConstructor
 @RestController
@@ -44,7 +45,24 @@ public class BuyerController {
                       .getRatingByRater(RatingType.BID, buyer, bid.getId())
                       .map(Rating::getStars)
                       .orElse(0.0f);
+
               var bidWon = auction.getWinningBid() != null;
+
+              var amIWinner = bidWon && auction.getWinningBid().getBidder().getId().equals(buyerId);
+
+              MyBidStatus bidStatus;
+
+              if (amIWinner && !auction.getStatus().equals(AuctionStatus.SOLD)) {
+                bidStatus = MyBidStatus.WON;
+              } else if (List.of(AuctionStatus.CLOSED, AuctionStatus.UNSOLD)
+                  .contains(auction.getStatus())) {
+                bidStatus = MyBidStatus.LOST;
+              } else if (auction.getStatus().equals(AuctionStatus.PUBLISHED)) {
+                bidStatus = MyBidStatus.LIVE;
+              } else {
+                bidStatus = MyBidStatus.CLOSED;
+              }
+
               return new MyBidResponse(
                   bid.getId(),
                   auction.getImageName(),
@@ -54,12 +72,8 @@ public class BuyerController {
                   bid.getAmount(),
                   bidWon ? auction.getWinningBid().getAmount() : null,
                   rating,
-                  bidWon
-                      ? MyBidStatus.WON
-                      : (List.of(AuctionStatus.CLOSED, AuctionStatus.SOLD, AuctionStatus.UNSOLD)
-                              .contains(auction.getStatus())
-                          ? MyBidStatus.LOST
-                          : MyBidStatus.LIVE));
+                  bidStatus,
+                  amIWinner);
             }));
   }
 

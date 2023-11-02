@@ -11,4 +11,5 @@ public record MyBidResponse(
     BigDecimal bidAmount,
     BigDecimal winningBidAmount,
     Float stars,
-    MyBidStatus status) {}
+    MyBidStatus status,
+    boolean amIWinner) {}

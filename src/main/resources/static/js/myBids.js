@@ -21,8 +21,8 @@ function populateMyBids(page) {
         <input id="bid-id" type="hidden" value="${bid.id}"/>
         <div class="image-result">
             ${
-        bid.status === 'WON' || bid.status === 'LIVE' ?
-            `<p> <i class = "fa fa-circle"></i> ${bid.status === 'WON' ?
+        bid.status === 'WON' || bid.status === 'LIVE' || bid.amIWinner ?
+            `<p> <i class = "fa fa-circle"></i> ${bid.status === 'WON' || bid.amIWinner ?
                 'You Won' :
                 'Live'} </p>` : ''
     }
@@ -45,9 +45,9 @@ function populateMyBids(page) {
                 <span> ${bid.status === 'LIVE' ? '---' : bid.winningBidAmount} </span>
             </div>
            
-            ${bid.status === 'WON' ? getRatingStars(bid.stars, bid.id) : ''}
+            ${bid.status === 'WON' || bid.amIWinner ? getRatingStars(bid.stars, bid.id) : ''}
         </div>
-        ${bid.sold ? '' : showUnsoldBidButtons()} 
+        ${bid.amIWinner && bid.status !== 'CLOSED' ? showUnsoldBidButtons() : ''} 
     </div>
   `);
 

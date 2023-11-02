@@ -185,14 +185,20 @@ public class AuctionServiceImpl implements AuctionService {
 
   public void validateWinningBid(Bid bid) {
     var auction = bid.getAuction();
-    if (!auction.getStatus().equals(AuctionStatus.CLOSED)) {
-      throw new ExceptionUtils.BusinessException(
-          HttpStatus.UNPROCESSABLE_ENTITY, "Auction not yet closed");
-    }
 
     if (!auction.getWinningBid().equals(bid)) {
       throw new ExceptionUtils.BusinessException(
           HttpStatus.UNPROCESSABLE_ENTITY, "The bid is not the winning bid");
+    }
+
+    if (auction.getStatus().equals(AuctionStatus.SOLD)) {
+      throw new ExceptionUtils.BusinessException(
+          HttpStatus.UNPROCESSABLE_ENTITY, "The auction is already sold");
+    }
+
+    if (!auction.getStatus().equals(AuctionStatus.CLOSED)) {
+      throw new ExceptionUtils.BusinessException(
+          HttpStatus.UNPROCESSABLE_ENTITY, "Auction not yet closed");
     }
   }
 
