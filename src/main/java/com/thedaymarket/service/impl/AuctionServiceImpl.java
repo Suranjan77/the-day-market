@@ -227,6 +227,13 @@ public class AuctionServiceImpl implements AuctionService {
             case AuctionSearchFieldNames.AUCTION_TYPES -> searchSpecs.add(
                 new AuctionSpecification(
                     new AuctionSpecification.SearchCriteria("type", "=", filterValues.get(0))));
+            case AuctionSearchFieldNames.AUCTION_TITLE -> searchSpecs.add(
+                new AuctionSpecification(
+                    new AuctionSpecification.SearchCriteria("title", ":", filterValues.get(0))));
+            case AuctionSearchFieldNames.AUCTION_DESCRIPTION -> searchSpecs.add(
+                new AuctionSpecification(
+                    new AuctionSpecification.SearchCriteria(
+                        "description", ":", filterValues.get(0))));
           }
         });
 

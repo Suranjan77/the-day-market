@@ -24,18 +24,6 @@ public class AuctionController {
   private final AuctionService auctionService;
   private final BidService bidService;
 
-  @GetMapping
-  // todo: Search auction by the query
-  public PagedResponse<List<Auction>> searchAuction(
-      @RequestParam("page") Integer page,
-      @RequestParam("size") Integer size,
-      @RequestParam(value = "query", required = false) String query,
-      @RequestParam(value = "filters", required = false) String filters,
-      @RequestParam(value = "sort", required = false) String sort) {
-
-    return null;
-  }
-
   @GetMapping("{id}/bids")
   public PagedResponseWithMax<BidResponse> getBids(
       @PathVariable("id") Long auctionId,

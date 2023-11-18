@@ -6,7 +6,7 @@ $(document).ready(function() {
     $('#header-username').empty().text(user.firstName);
 
     $('#edit-user').on('click', function() {
-      location.href='/web/user-details?profile=true';
+      location.href = '/web/user-details?profile=true';
     });
 
     $('#logout').on('click', function() {
@@ -15,8 +15,16 @@ $(document).ready(function() {
     });
 
     $('#money').on('click', function() {
-        location.href = '/web/buy-points';
-    })
+      location.href = '/web/buy-points';
+    });
+
+    $('#search-form').on('click', function() {
+      const searchQuery = $('#searchItem').val();
+      if(searchQuery !== undefined && searchQuery !== '') {
+        populateAuctions(1,
+            [`title=${searchQuery}`, `description=${searchQuery}`]);
+      }
+    });
   }
 });
 
