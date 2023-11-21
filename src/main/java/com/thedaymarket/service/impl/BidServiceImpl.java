@@ -85,6 +85,11 @@ public class BidServiceImpl implements BidService {
   }
 
   private void validateBid(Auction auction, BidRequest bidRequest, User bidder) {
+
+    if (bidder.getRole().equals(UserRole.SELLER)) {
+      throw ExceptionUtils.getAuthenticationException("Sellers are not allowed to bid");
+    }
+
     if (bidder.getPoints().compareTo(bidRequest.amount()) < 0) {
       throw ExceptionUtils.getBadRequestExceptionResponse("Not enough points");
     }

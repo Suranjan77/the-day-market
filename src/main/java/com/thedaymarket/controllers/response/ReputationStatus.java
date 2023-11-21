@@ -6,11 +6,11 @@ import java.util.function.Predicate;
 
 @Getter
 public enum ReputationStatus {
-  HIGH(p -> p >= 85.0),
-  NEUTRAL(p -> p < 85.0);
+  HIGH(p -> p >= 55.0),
+  NEUTRAL(p -> p < 55.0);
 
   private final Predicate<Double> predicate;
-  private final Double upperBound = 85.0;
+  private final Double upperBound = 55.0;
 
   ReputationStatus(Predicate<Double> predicate) {
     this.predicate = predicate;
