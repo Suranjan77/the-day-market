@@ -43,8 +43,13 @@ function populateCategories() {
 }
 
 $(document).ready(function() {
-  // const marketStatus = get("")
-  // $("#market-status").
+  get('market-live/status', (status) => {
+    if (status.status === 'CLOSED') {
+      $('#market-status').html('CLOSED for today').attr('style', 'background-color: red');
+    } else {
+      $('#market-status').html('OPEN for business').attr('style', 'background-color: #87bd9d');
+    }
+  }, true);
 
   populateAuctions(1, []);
 

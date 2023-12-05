@@ -62,6 +62,7 @@ function populateMyBids(page) {
           };
           post(`buyers/${userId}/my-bid-action`, data, d => {
             console.log(d);
+            location.reload();
           }, true);
         }).
         on('click', '#reject-btn', function() {
@@ -72,6 +73,7 @@ function populateMyBids(page) {
           };
           post(`buyers/${userId}/my-bid-action`, data, d => {
             console.log(d);
+            location.reload();
           }, true);
         }).
         ready(

@@ -90,6 +90,10 @@ public class BidServiceImpl implements BidService {
       throw ExceptionUtils.getAuthenticationException("Sellers are not allowed to bid");
     }
 
+    if(!auction.getStatus().equals(AuctionStatus.PUBLISHED)) {
+      throw ExceptionUtils.getBadRequestExceptionResponse("Auction is not accepting new bids");
+    }
+
     if (bidder.getPoints().compareTo(bidRequest.amount()) < 0) {
       throw ExceptionUtils.getBadRequestExceptionResponse("Not enough points");
     }

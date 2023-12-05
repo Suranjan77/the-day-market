@@ -15,6 +15,19 @@ public class LiveMarketStatusController {
   private final ConcurrentLinkedQueue<DeferredResult<LiveMarketStatus>> LIVE_MARKET_STATUS_CLIENT =
       new ConcurrentLinkedQueue<>();
 
+  private volatile MarketStatus marketStatus = MarketStatus.OPEN;
+
+  public void setMarketStatus(MarketStatus status) {
+    synchronized (LiveMarketStatusController.class) {
+      this.marketStatus = status;
+    }
+  }
+
+  @GetMapping("status")
+  public LiveMarketStatus status() {
+    return new LiveMarketStatus(marketStatus);
+  }
+
   @GetMapping
   public DeferredResult<LiveMarketStatus> registerClient() {
     var output = new DeferredResult<LiveMarketStatus>(30_000L);

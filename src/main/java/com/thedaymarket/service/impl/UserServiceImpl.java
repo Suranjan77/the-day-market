@@ -2,15 +2,15 @@ package com.thedaymarket.service.impl;
 
 import com.thedaymarket.controllers.request.UserRegisterRequest;
 import com.thedaymarket.controllers.request.UserUpdateRequest;
-import com.thedaymarket.domain.Reputation;
-import com.thedaymarket.domain.User;
-import com.thedaymarket.domain.UserAuth;
-import com.thedaymarket.domain.UserRole;
+import com.thedaymarket.domain.*;
 import com.thedaymarket.repository.ReputationRepository;
+import com.thedaymarket.repository.UserPointsRepository;
 import com.thedaymarket.repository.UserRepository;
 import com.thedaymarket.service.StorageService;
 import com.thedaymarket.service.UserService;
 import com.thedaymarket.utils.ExceptionUtils;
+
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import lombok.AllArgsConstructor;
@@ -28,6 +28,7 @@ public class UserServiceImpl implements UserService {
   private final PasswordEncoder passwordEncoder;
   private final StorageService storageService;
   private final ReputationRepository reputationRepository;
+  private final UserPointsRepository userPointsRepository;
 
   @Override
   public User createUser(UserRegisterRequest userRequest) {
@@ -134,7 +135,16 @@ public class UserServiceImpl implements UserService {
     }
     user.setRole(updateRequest.role());
     user.setAddress(updateRequest.address());
-    return userRepository.save(user);
+    var savedUser = userRepository.save(user);
+
+    if (updateRequest.role().equals(UserRole.SELLER)) {
+      var userPoints = new UserPoints();
+      userPoints.setBelongsTo(savedUser);
+      userPoints.setCount(new BigDecimal("0.0"));
+      userPointsRepository.save(userPoints);
+    }
+
+    return savedUser;
   }
 
   @Override

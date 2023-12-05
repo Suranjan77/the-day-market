@@ -1,9 +1,7 @@
 package com.thedaymarket.service;
 
-import com.thedaymarket.domain.Auction;
-import com.thedaymarket.domain.AuctionStatus;
-import com.thedaymarket.domain.Bid;
-import com.thedaymarket.domain.TransactionType;
+import com.thedaymarket.controllers.controller.LiveMarketStatusController;
+import com.thedaymarket.domain.*;
 import com.thedaymarket.repository.AuctionRepository;
 import java.time.LocalDate;
 import java.util.Comparator;
@@ -26,6 +24,7 @@ public class AdminService {
   private final TransactionRepository transactionRepository;
   private final PaymentService paymentService;
   private final UserPointsRepository userPointsRepository;
+  private final LiveMarketStatusController marketStatusController;
 
   @Async
   @Transactional
@@ -37,6 +36,7 @@ public class AdminService {
               a.setStatus(AuctionStatus.PUBLISHED);
               auctionRepository.save(a);
             });
+    marketStatusController.setMarketStatus(MarketStatus.OPEN);
   }
 
   @Async
@@ -46,6 +46,8 @@ public class AdminService {
         auctionRepository.findAllByScheduledDate(LocalDate.now()).stream()
             .filter(a -> !a.getStatus().equals(AuctionStatus.DRAFT))
             .toList();
+
+    marketStatusController.setMarketStatus(MarketStatus.CLOSED);
 
     for (Auction auction : todayAuctions) {
       Optional<Bid> winningBid = determineWinner(auction);

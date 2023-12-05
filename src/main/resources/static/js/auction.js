@@ -40,7 +40,7 @@ function updateBasedOnAuctionState(auctionState, isFirstTime) {
   }
   setDutchTimer(currentTimer);
   if (auctionState.expired) {
-    clearInterval(auctionStateIntervalId)
+    clearInterval(auctionStateIntervalId);
     $('#dutch-timer').empty().text('EXPIRED').attr('style', 'color: red');
     $('#bidAmount').val(auctionState.currentPoints);
     $('#place-bid-btn').
@@ -101,13 +101,14 @@ function populateAuction(auction) {
                                       id="bidAmount"
                                       ${
           auctionType === 'Dutch' ||
-          auction.status === 'SOLD'
+          auction.status === 'SOLD' ||
+          auction.status === 'CLOSED'
               ? 'disabled'
               : ''
       }
                               />
                               <button type="submit" ${
-          auction.status === 'SOLD'
+          auction.status === 'SOLD' || auction.status === 'CLOSED'
               ? 'class="disabled-button" disabled'
               : ''
       } id="place-bid-btn">Place a bid</button>
@@ -142,7 +143,7 @@ function populateAuction(auction) {
 }
 
 function setDutchTimer(timer) {
-  if(Number(timer) <= 0) {
+  if (Number(timer) <= 0) {
     timer = 0;
   }
   let hours = Math.floor(timer / 3600);

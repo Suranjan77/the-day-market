@@ -11,8 +11,10 @@ import com.thedaymarket.service.AuctionService;
 import com.thedaymarket.service.BidService;
 import com.thedaymarket.service.RatingService;
 import com.thedaymarket.service.UserService;
+import com.thedaymarket.service.events.AuctionChangeEvent;
 import com.thedaymarket.utils.RESTUtils;
 import lombok.AllArgsConstructor;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,6 +28,7 @@ public class BuyerController {
   private final BidService bidService;
   private final RatingService ratingService;
   private final AuctionService auctionService;
+  private final ApplicationEventPublisher applicationEventPublisher;
 
   @GetMapping("{id}/my-bids")
   public PagedResponse<MyBidResponse> getLatestBids(
@@ -87,6 +90,8 @@ public class BuyerController {
     } else {
       auctionService.confirmRejection(buyer, bid);
     }
+
+    applicationEventPublisher.publishEvent(new AuctionChangeEvent(this, bid.getAuction()));
 
     return new BidActionResponse(bid.getId(), request.isPurchase);
   }
