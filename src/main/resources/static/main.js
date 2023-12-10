@@ -1,4 +1,4 @@
-const backendBaseUrl = 'http://localhost:8080/api/v1';
+const backendBaseUrl = `http://${window.location.host}/api/v1`;
 
 setInterval(refreshToken, 5 * 60 * 1000); // 10 seconds before expiry
 
