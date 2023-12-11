@@ -17,12 +17,13 @@ function populateMyBids(page) {
   get(`buyers/${getUser().id}/my-bids?page=${page}&size=6`, myBids => {
 
     let bids = myBids.data.map(bid => `
-        <div class="individual-bids">
+        <div class="individual-bids" data-auction-id="${bid.auctionId}">
         <input id="bid-id" type="hidden" value="${bid.id}"/>
         <div class="image-result">
             ${
         bid.status === 'WON' || bid.status === 'LIVE' || bid.amIWinner ?
-            `<p> <i class = "fa fa-circle"></i> ${bid.status === 'WON' || bid.amIWinner ?
+            `<p> <i class = "fa fa-circle"></i> ${bid.status === 'WON' ||
+            bid.amIWinner ?
                 'You Won' :
                 'Live'} </p>` : ''
     }
@@ -45,15 +46,23 @@ function populateMyBids(page) {
                 <span> ${bid.status === 'LIVE' ? '---' : bid.winningBidAmount} </span>
             </div>
            
-            ${bid.status === 'WON' || bid.amIWinner ? getRatingStars(bid.stars, bid.id) : ''}
+            ${bid.status === 'WON' || bid.amIWinner ?
+        getRatingStars(bid.stars, bid.id) :
+        ''}
         </div>
-        ${bid.amIWinner && bid.status !== 'CLOSED' ? showUnsoldBidButtons() : ''} 
+        ${bid.amIWinner && bid.status !== 'CLOSED' ?
+        showUnsoldBidButtons() :
+        ''} 
     </div>
   `);
 
     $('#my-bids').
         empty().
         append(bids).
+        on('click', '.individual-bids', function() {
+          const auctionId = $(this).data('auction-id');
+          location.href = `/web/auction?auctionId=${auctionId}`;
+        }).
         on('click', '#purchase-btn', function() {
           const bidId = $('#bid-id').val();
           const userId = getUser().id;
